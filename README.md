@@ -1,2 +1,2 @@
 # SpawnOfVulkan
-Generated C# wrapper for the Vulkan API
+Generated C# wrapper for the Vulkan API using SixtenLabs.Spawn code generator.
