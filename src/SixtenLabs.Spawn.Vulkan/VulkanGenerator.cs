@@ -30,7 +30,7 @@ namespace SixtenLabs.Spawn.Vulkan
 
 		public void Initialize()
 		{
-			Spawn.Initialize(@"C:\Users\pglas\Documents\GitHub\SixtenLabs\Spawn\Spawn.sln");
+			Spawn.Initialize(@"C:\Users\pglas\Documents\GitHub\SixtenLabs\SpawnOfVulkan\SpawnOfVulkan.sln");
 			SpawnSpec.ProcessRegistry();
 			SetupGeneratedComments();
 			Console.WriteLine("Spawn Vulkan Generator Initialized, processing has begun.");
@@ -85,8 +85,8 @@ namespace SixtenLabs.Spawn.Vulkan
 		{
 			foreach (var creator in Creators.Where(x => !x.Off))
 			{
-				creator.TargetSolution = "SixtenLabs.Spawn.Vulkan.Target";
-				creator.TargetNamespace = "SixtenLabs.Spawn.Vulkan.Target";
+				creator.TargetSolution = "SixtenLabs.SpawnOfVulkan";
+				creator.TargetNamespace = "SixtenLabs.SpawnOfVulkan";
 				creator.GeneratedComments.AddRange(GeneratedComments);
 				Console.WriteLine($"Creating {creator.TypeName} files.");
 				var count = creator.Create();

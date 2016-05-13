@@ -1,10 +1,13 @@
-﻿using SimpleInjector;
+﻿using AutoMapper;
+using SimpleInjector;
 using SixtenLabs.Spawn;
 using SixtenLabs.Spawn.CSharp;
 using SixtenLabs.Spawn.Utility;
 using SixtenLabs.Spawn.Vulkan;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Linq;
+using System;
 
 namespace SixtenLabs.Vulkan.Generator
 {
@@ -14,6 +17,24 @@ namespace SixtenLabs.Vulkan.Generator
 		{
 		}
 
+		private void RegisterAutomapper()
+		{
+			var profileTypeInstances = SimpleContainer.GetTypesToRegister(typeof(Profile), Assemblies).Select(t => (Profile)Activator.CreateInstance(t));
+
+			var config = new MapperConfiguration(cfg =>
+			{
+				foreach (var profile in profileTypeInstances)
+				{
+					cfg.AddProfile(profile);
+				}
+			});
+
+			SimpleContainer.RegisterSingleton<MapperConfiguration>(config);
+			SimpleContainer.Register<IMapper>(() => config.CreateMapper(SimpleContainer.GetInstance));
+
+			Mapper.AssertConfigurationIsValid();
+		}
+
 		private void Register()
 		{
 			SimpleContainer = new Container();
@@ -21,9 +42,10 @@ namespace SixtenLabs.Vulkan.Generator
 			SimpleContainer.RegisterSingleton<ISpawnService, SpawnService>();
 			SimpleContainer.RegisterSingleton<IGeneratorSettings, VulkanSettings>();
 			SimpleContainer.RegisterSingleton<XmlFileLoader<registry>>();
-			SimpleContainer.RegisterSingleton<VulkanGenerator>();
-			SimpleContainer.RegisterSingleton<VulkanSpec>();
+			SimpleContainer.Register<VulkanGenerator>();
+			SimpleContainer.RegisterSingleton<ISpawnSpec<registry>, VulkanSpec>();
 			SimpleContainer.RegisterSingleton<ICodeGenerator, CSharpGenerator>();
+			SimpleContainer.RegisterSingleton<IXmlSerializer, SpawnXmlSerializer>();
 
 			var creatorTypes = SimpleContainer.GetTypesToRegister(typeof(ICreator), Assemblies);
 
@@ -31,6 +53,8 @@ namespace SixtenLabs.Vulkan.Generator
 			{
 				SimpleContainer.RegisterSingleton(creatorType, creatorType);
 			}
+
+			RegisterAutomapper();
 
 			SimpleContainer.RegisterCollection<ICreator>(Assemblies);
 		}
