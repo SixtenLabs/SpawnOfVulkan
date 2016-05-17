@@ -1,6 +1,5 @@
 ﻿using Xunit;
 using FluentAssertions;
-using NSubstitute;
 
 using AutoMapper;
 using System.Linq;
