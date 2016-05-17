@@ -1,6 +1,4 @@
-﻿using SixtenLabs.Spawn.Utility;
-
-namespace SixtenLabs.Spawn.Vulkan
+﻿namespace SixtenLabs.Spawn.Vulkan
 {
 	public class VulkanSpec : SpawnSpec<registry>
 	{

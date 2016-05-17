@@ -2,7 +2,6 @@
 using SimpleInjector;
 using SixtenLabs.Spawn;
 using SixtenLabs.Spawn.CSharp;
-using SixtenLabs.Spawn.Utility;
 using SixtenLabs.Spawn.Vulkan;
 using System.Collections.Generic;
 using System.Reflection;
@@ -45,7 +44,7 @@ namespace SixtenLabs.Vulkan.Generator
 			SimpleContainer.Register<VulkanGenerator>();
 			SimpleContainer.RegisterSingleton<ISpawnSpec<registry>, VulkanSpec>();
 			SimpleContainer.RegisterSingleton<ICodeGenerator, CSharpGenerator>();
-			SimpleContainer.RegisterSingleton<IXmlSerializer, SpawnXmlSerializer>();
+			SimpleContainer.RegisterSingleton<IWebClientFactory, WebClientFactory>();
 
 			var creatorTypes = SimpleContainer.GetTypesToRegister(typeof(ICreator), Assemblies);
 

@@ -1,6 +1,4 @@
-﻿using SixtenLabs.Spawn.Utility;
-
-namespace SixtenLabs.Spawn.Vulkan
+﻿namespace SixtenLabs.Spawn.Vulkan
 {
 	/// <summary>
 	/// The code generation is controlled from this settings class.

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using SixtenLabs.Spawn.CSharp;
-using SixtenLabs.Spawn.Utility;
 using System.Linq;
 
 namespace SixtenLabs.Spawn.Vulkan

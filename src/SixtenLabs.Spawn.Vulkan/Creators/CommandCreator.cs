@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using SixtenLabs.Spawn.Utility;
 using System;
 
 namespace SixtenLabs.Spawn.Vulkan

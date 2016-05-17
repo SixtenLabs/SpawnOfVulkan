@@ -1,5 +1,4 @@
-﻿using SixtenLabs.Spawn.Utility;
-using AutoMapper;
+﻿using AutoMapper;
 using SixtenLabs.Spawn.CSharp;
 
 namespace SixtenLabs.Spawn.Vulkan.Creators

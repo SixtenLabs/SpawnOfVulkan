@@ -3,11 +3,8 @@ using FluentAssertions;
 using NSubstitute;
 
 using AutoMapper;
-using System.Xml.Linq;
-using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-using SixtenLabs.Spawn.Utility;
 using SixtenLabs.Spawn.CSharp;
 
 namespace SixtenLabs.Spawn.Vulkan.Tests
@@ -20,7 +17,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 		public ConstantMapperTests()
 		{
-			FileLoader = new XmlFileLoader<registry>(Settings);
+			FileLoader = new XmlFileLoader<registry>(Settings, new WebClientFactory());
 
 			var config = new MapperConfiguration(cfg =>
 			{
