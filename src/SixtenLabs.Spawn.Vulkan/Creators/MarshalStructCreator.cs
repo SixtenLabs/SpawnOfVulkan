@@ -9,7 +9,7 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 		public MarshalStructCreator(ICodeGenerator generator, ISpawnSpec<registry> spawnSpec)
 			: base(generator, spawnSpec, 40)
 		{
-			//Off = true;
+			Off = true;
 		}
 
 		public override int Rewrite()

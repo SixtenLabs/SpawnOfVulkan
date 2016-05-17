@@ -27,7 +27,7 @@ namespace SixtenLabs.Spawn.Vulkan
 			GeneratedComments.Add(string.Empty);
 		}
 
-		public void Initialize()
+		private void Initialize()
 		{
 			Spawn.Initialize(@"C:\Users\pglas\Documents\GitHub\SixtenLabs\SpawnOfVulkan\SpawnOfVulkan.sln");
 			SpawnSpec.ProcessRegistry();
@@ -35,7 +35,7 @@ namespace SixtenLabs.Spawn.Vulkan
 			Console.WriteLine("Spawn Vulkan Generator Initialized, processing has begun.");
 		}
 
-		public void MapTypes()
+		private void MapTypes()
 		{
 			foreach (var regType in SpawnSpec.SpecTree.types)
 			{
@@ -58,7 +58,7 @@ namespace SixtenLabs.Spawn.Vulkan
 			Console.WriteLine($"Mapped {SpawnSpec.SpecTypeCount} types.");
 		}
 
-		public void Rewrite()
+		private void Rewrite()
 		{
 			var orderedCreators = Creators.Where(x => !x.Off).OrderBy(x => x.Order);
 
@@ -70,7 +70,7 @@ namespace SixtenLabs.Spawn.Vulkan
 			}
 		}
 
-		public void Build()
+		private void Build()
 		{
 			foreach (var creator in Creators.Where(x => !x.Off).OrderBy(x => x.Order))
 			{
@@ -80,7 +80,7 @@ namespace SixtenLabs.Spawn.Vulkan
 			}
 		}
 
-		public void Generate()
+		private void Generate()
 		{
 			foreach (var creator in Creators.Where(x => !x.Off))
 			{

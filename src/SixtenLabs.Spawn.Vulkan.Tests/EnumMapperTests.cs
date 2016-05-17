@@ -86,6 +86,24 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 			map.Members.Should().HaveCount(4);
 		}
 
+		[Fact]
+		public void MapAccessFlagsEnum()
+		{
+			var vk = SubjectUnderTest();
+
+			var type = vk.enums.Where(x => x.name == "VkAccessFlagBits").FirstOrDefault();
+
+			var map = AMapper.Map<EnumDefinition>(type);
+
+			map.SpecName.Should().Be("VkAccessFlagBits");
+			//map.TranslatedName.Should().Be("QueueFlags");
+			map.HasFlags.Should().BeTrue();
+			map.Members.Should().HaveCount(17);
+
+			map.Members[0].Value.Should().Be("0x1");
+			map.Members[1].Value.Should().Be("0x2");
+		}
+
 		private IMapper AMapper { get; }
 	}
 }

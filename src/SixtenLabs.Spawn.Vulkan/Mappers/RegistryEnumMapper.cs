@@ -33,13 +33,25 @@ namespace SixtenLabs.Spawn.Vulkan
 			CreateMap<registryEnumsEnum, EnumMemberDefinition>()
 				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(m => m.name))
 				.ForMember(dest => dest.Comments, opt => opt.MapFrom(m => AddComment(m.comment)))
-				.ForMember(dest => dest.Value, opt => opt.MapFrom(m => m.bitposSpecified ? Convert.ToString(m.bitpos) : m.value));
+				.ForMember(dest => dest.Value, opt => opt.MapFrom(m => ProcessEnumValue(m)));
 		}
 
 		protected override void Configure()
 		{
 			ConfigureEnumMapping();
 			ConfigureApiConstantsMapping();
+		}
+
+		private string ProcessEnumValue(registryEnumsEnum enumValue)
+		{
+			if(enumValue.bitposSpecified)
+			{
+				return enumValue.bitpos.FormatFlagValue();
+			}
+			else
+			{
+				return enumValue.value;
+			}
 		}
 
 		private LiteralDefinition ProcessFieldReturnValue(registryEnumsEnum returnValue)

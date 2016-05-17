@@ -16,11 +16,7 @@ namespace SixtenLabs.Vulkan.Generator
 		{
 			var generator = Bootstrapper.GetRoot();
 
-			generator.Initialize();
-			generator.MapTypes();
-			generator.Rewrite();
-			generator.Build();
-			generator.Generate();
+			generator.Start();
 		}
 
 		private static VulkanBootstrapper Bootstrapper { get; } = new VulkanBootstrapper();

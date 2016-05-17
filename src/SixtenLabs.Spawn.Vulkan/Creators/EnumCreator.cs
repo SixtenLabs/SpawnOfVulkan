@@ -4,9 +4,6 @@ using SixtenLabs.Spawn.CSharp;
 
 namespace SixtenLabs.Spawn.Vulkan
 {
-	/// <summary>
-	/// TODO : handle extensions. Handle Not real enums (or are they handled from typemapper already, I think so)
-	/// </summary>
 	public class EnumCreator : BaseCreator<registry, EnumDefinition>
 	{
 		public EnumCreator(ICodeGenerator generator, ISpawnSpec<registry> spawnSpec)

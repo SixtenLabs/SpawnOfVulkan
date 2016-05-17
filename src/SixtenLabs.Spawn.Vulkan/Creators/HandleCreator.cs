@@ -9,7 +9,6 @@ namespace SixtenLabs.Spawn.Vulkan
 		public HandleCreator(ICodeGenerator generator, ISpawnSpec<registry> spawnSpec)
 			: base(generator, spawnSpec, 20)
 		{
-			//Off = true;
 		}
 
 		public override int Rewrite()

@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SixtenLabs.Spawn.Vulkan
 {
 	public static class Extensions
 	{
+		public static string FormatFlagValue(this byte position)
+		{
+			return string.Format("0x{0:X}", 1 << position);
+		}
+
 		public static string FirstLetterToLowercase(this string word)
 		{
 			return char.ToLowerInvariant(word[0]) + word.Substring(1);
