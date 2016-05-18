@@ -6,9 +6,8 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 	public class NativeMethodsCreator : BaseCreator<registry, MethodDefinition>
 	{
 		public NativeMethodsCreator(ICodeGenerator generator, ISpawnSpec<registry> spawnSpec)
-			: base(generator, spawnSpec, 30)
+			: base(generator, spawnSpec, "Interop Creator", 30)
 		{
-			Off = true;
 		}
 
 		public override int Build(IMapper mapper)
@@ -59,7 +58,7 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 
 			var output = new OutputDefinition() { FileName = "NativeMethods" };
 			output.TargetSolution = TargetSolution;
-			output.AddNamespace($"{TargetNamespace}.Interop");
+			output.AddNamespace($"{TargetNamespace}");
 			output.OutputDirectory = "Interop";
 			
 			foreach (var commentLine in GeneratedComments)

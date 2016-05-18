@@ -7,7 +7,7 @@ namespace SixtenLabs.Spawn.Vulkan
 	public class ConstantsCreator : BaseCreator<registry, ClassDefinition>
 	{
 		public ConstantsCreator(ICodeGenerator generator, ISpawnSpec<registry> spawnSpec)
-			: base(generator, spawnSpec, 9)
+			: base(generator, spawnSpec, "Constants Creator", 9)
 		{
 		}
 

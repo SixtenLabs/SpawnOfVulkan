@@ -64,9 +64,9 @@ namespace SixtenLabs.Spawn.Vulkan
 
 			foreach (var creator in orderedCreators)
 			{
-				Console.WriteLine($"Rewriting {creator.TypeName} files.");
+				Console.WriteLine($"Rewriting {creator.Name} files.");
 				var count = creator.Rewrite();
-				Console.WriteLine($"Rewrote {count} {creator.TypeName} files.");
+				Console.WriteLine($"Rewrote {count} {creator.Name} files.");
 			}
 		}
 
@@ -74,9 +74,9 @@ namespace SixtenLabs.Spawn.Vulkan
 		{
 			foreach (var creator in Creators.Where(x => !x.Off).OrderBy(x => x.Order))
 			{
-				Console.WriteLine($"Building {creator.TypeName} definition files.");
+				Console.WriteLine($"Building {creator.Name} definition files.");
 				var count = creator.Build(Mapper);
-				Console.WriteLine($"Building {count} {creator.TypeName} definition files.");
+				Console.WriteLine($"Building {count} {creator.Name} definition files.");
 			}
 		}
 
@@ -87,9 +87,9 @@ namespace SixtenLabs.Spawn.Vulkan
 				creator.TargetSolution = "SixtenLabs.SpawnOfVulkan";
 				creator.TargetNamespace = "SixtenLabs.SpawnOfVulkan";
 				creator.GeneratedComments.AddRange(GeneratedComments);
-				Console.WriteLine($"Creating {creator.TypeName} files.");
+				Console.WriteLine($"Creating {creator.Name} files.");
 				var count = creator.Create();
-				Console.WriteLine($"Created {count} {creator.TypeName} files.");
+				Console.WriteLine($"Created {count} {creator.Name} files.");
 			}
 		}
 

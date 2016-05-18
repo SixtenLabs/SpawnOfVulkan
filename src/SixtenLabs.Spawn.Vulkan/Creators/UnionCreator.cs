@@ -7,9 +7,8 @@ namespace SixtenLabs.Spawn.Vulkan
 	public class UnionCreator : BaseCreator<registry, StructDefinition>
 	{
 		public UnionCreator(ICodeGenerator generator, ISpawnSpec<registry> spawnSpec)
-			: base(generator, spawnSpec, 40)
+			: base(generator, spawnSpec, "Union Creator", 40)
 		{
-			Off = true;
 		}
 
 		public override int Rewrite()

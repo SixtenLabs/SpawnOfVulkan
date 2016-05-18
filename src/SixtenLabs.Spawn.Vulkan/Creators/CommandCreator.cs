@@ -21,7 +21,7 @@ namespace SixtenLabs.Spawn.Vulkan
 	//		{
 	//			var codes = successCodes.Split(',');
 
-	//			foreach(var code in codes)
+	//			foreach (var code in codes)
 	//			{
 	//				importDefinition.AddSuccessCodes(code);
 	//			}

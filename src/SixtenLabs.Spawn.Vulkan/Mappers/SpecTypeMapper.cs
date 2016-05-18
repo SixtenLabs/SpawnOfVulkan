@@ -5,14 +5,17 @@ using System.Linq;
 
 namespace SixtenLabs.Spawn.Vulkan
 {
-	/// <summary>
-	/// TODO : Handle extensions...
-	/// </summary>
 	public class SpecTypeMapper : Profile
 	{
 		protected override void Configure()
 		{
 			CreateMap<registryType, SpecTypeDefinition>()
+				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => MapName(src)))
+				.ForMember(dest => dest.Children, opt => opt.Condition(m => m.Items != null))
+				.ForMember(dest => dest.Children, opt => opt.MapFrom(m => m.Items.Where(x => x.GetType() == typeof(registryTypeMember))))
+				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src)));
+
+			CreateMap<registryTypeMember, SpecTypeDefinition>()
 				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => MapName(src)))
 				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src)));
 
@@ -23,6 +26,24 @@ namespace SixtenLabs.Spawn.Vulkan
 			CreateMap<registryCommand, SpecTypeDefinition>()
 				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => MapName(src)))
 				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src)));
+		}
+
+		private string MapName(registryTypeMember rc)
+		{
+			string name = null;
+
+			name = rc.name;
+
+			return name;
+		}
+
+		private string MapTranslatedName(registryTypeMember rc)
+		{
+			string name = null;
+
+			name = rc.name.TranslateVulkanName();
+
+			return name;
 		}
 
 		private string MapName(registryCommand rc)

@@ -7,7 +7,7 @@ namespace SixtenLabs.Spawn.Vulkan
 	public class HandleCreator : BaseCreator<registry, StructDefinition>
 	{
 		public HandleCreator(ICodeGenerator generator, ISpawnSpec<registry> spawnSpec)
-			: base(generator, spawnSpec, 20)
+			: base(generator, spawnSpec, "Handle Creator", 20)
 		{
 		}
 

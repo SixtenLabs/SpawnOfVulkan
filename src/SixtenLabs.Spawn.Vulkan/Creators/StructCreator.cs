@@ -2,14 +2,14 @@
 using SixtenLabs.Spawn.CSharp;
 using System.Linq;
 
-namespace SixtenLabs.Spawn.Vulkan
+namespace SixtenLabs.Spawn.Vulkan.Creators
 {
 	public class StructCreator : BaseCreator<registry, StructDefinition>
 	{
 		public StructCreator(ICodeGenerator generator, ISpawnSpec<registry> spawnSpec)
-			: base(generator, spawnSpec, 40)
+			: base(generator, spawnSpec, "Struct Creator", 40)
 		{
-			Off = true;
+			//Off = true;
 		}
 
 		public override int Rewrite()
@@ -20,6 +20,16 @@ namespace SixtenLabs.Spawn.Vulkan
 			{
 				structDefinition.TranslatedName = VulkanSpec.GetTranslatedName(structDefinition.SpecName);
 
+				if (structDefinition.NeedsMarshalling)
+				{
+					structDefinition.AddModifier(SyntaxKindDto.UnsafeKeyword);
+					structDefinition.AddModifier(SyntaxKindDto.InternalKeyword);
+				}
+				else
+				{
+					structDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
+				}
+
 				if (!string.IsNullOrEmpty(structDefinition.SpecReturnType))
 				{
 					structDefinition.TranslatedReturnType = VulkanSpec.GetTranslatedName(structDefinition.SpecReturnType);
@@ -27,9 +37,9 @@ namespace SixtenLabs.Spawn.Vulkan
 
 				foreach (var fieldDefinition in structDefinition.Fields)
 				{
-					fieldDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
+					fieldDefinition.AddModifier(SyntaxKindDto.InternalKeyword);
 
-					if (fieldDefinition.ReturnTypeIsArray)
+					if (fieldDefinition.ReturnTypeIsArray && structDefinition.SpecName != "VkImageBlit" && structDefinition.SpecName != "VkPhysicalDeviceMemoryProperties")
 					{
 						fieldDefinition.AddModifier(SyntaxKindDto.UnsafeKeyword);
 						fieldDefinition.AddModifier(SyntaxKindDto.FixedKeyword);
@@ -39,7 +49,7 @@ namespace SixtenLabs.Spawn.Vulkan
 
 						string arraySize = null;
 
-						if(field != null)
+						if (field != null)
 						{
 							arraySize = field.value;
 						}
@@ -54,6 +64,7 @@ namespace SixtenLabs.Spawn.Vulkan
 					else
 					{
 						fieldDefinition.TranslatedReturnType = VulkanSpec.GetTranslatedName(fieldDefinition.SpecReturnType);
+						fieldDefinition.TranslatedName = VulkanSpec.GetTranslatedChildName(structDefinition.SpecName, fieldDefinition.SpecName);
 					}
 				}
 
@@ -84,21 +95,24 @@ namespace SixtenLabs.Spawn.Vulkan
 			{
 				var output = new OutputDefinition() { FileName = structDefinition.TranslatedName };
 				output.TargetSolution = TargetSolution;
-				output.AddNamespace(TargetNamespace);
-				output.OutputDirectory = "Structs";
-				output.AddStandardUsingDirective("System");
 
-				structDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
+				if (structDefinition.NeedsMarshalling)
+				{
+					output.AddNamespace($"{TargetNamespace}");
+					output.OutputDirectory = "Interop";
+				}
+				else
+				{
+					output.AddNamespace(TargetNamespace);
+					output.OutputDirectory = "Structs";
+				}
+
+				output.AddStandardUsingDirective("System");
 
 				foreach (var commentLine in GeneratedComments)
 				{
 					output.CommentLines.Add(commentLine);
 				}
-
-				//foreach (var commentLine in structDefinition.Comments)
-				//{
-				//	output.CommentLines.Add(commentLine);
-				//}
 
 				(Generator as CSharpGenerator).GenerateStruct(output, structDefinition);
 				count++;

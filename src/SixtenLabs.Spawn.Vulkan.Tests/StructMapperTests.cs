@@ -143,6 +143,35 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 			//map.Fields[3].TranslatedReturnType.Should().Be("Offset3D");
 		}
 
+		[Fact]
+		public void MapVkDebugMarkerObjectNameInfoEXT()
+		{
+			var vk = SubjectUnderTest();
+
+			var type = vk.types.Where(x => x.category == "struct" && x.name == "VkDebugMarkerObjectNameInfoEXT").FirstOrDefault();
+
+			var map = AMapper.Map<StructDefinition>(type);
+
+			map.SpecName.Should().Be("VkDebugMarkerObjectNameInfoEXT");
+			map.SpecReturnType.Should().BeNull();
+			map.Fields.Should().HaveCount(5);
+
+			map.Fields[0].SpecName.Should().Be("sType");
+			map.Fields[0].SpecReturnType.Should().Be("VkStructureType");
+
+			map.Fields[1].SpecName.Should().Be("pNext");
+			map.Fields[1].SpecReturnType.Should().Be("void");
+
+			map.Fields[2].SpecName.Should().Be("objectType");
+			map.Fields[2].SpecReturnType.Should().Be("VkDebugReportObjectTypeEXT");
+
+			map.Fields[3].SpecName.Should().Be("object");
+			map.Fields[3].SpecReturnType.Should().Be("uint64_t");
+
+			map.Fields[4].SpecName.Should().Be("pObjectName");
+			map.Fields[4].SpecReturnType.Should().Be("char");
+		}
+
 		private IMapper AMapper { get; }
 	}
 }

@@ -97,12 +97,12 @@
       <HintPath>..\..\packages\NSubstitute.1.10.0.0\lib\net45\NSubstitute.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SixtenLabs.Spawn, Version=1.0.48.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\..\packages\SixtenLabs.Spawn.1.0.48\lib\net461\SixtenLabs.Spawn.dll</HintPath>
+    <Reference Include="SixtenLabs.Spawn, Version=1.0.50.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\..\packages\SixtenLabs.Spawn.1.0.50\lib\net461\SixtenLabs.Spawn.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SixtenLabs.Spawn.CSharp, Version=1.0.48.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\..\packages\SixtenLabs.Spawn.CSharp.1.0.48\lib\net461\SixtenLabs.Spawn.CSharp.dll</HintPath>
+    <Reference Include="SixtenLabs.Spawn.CSharp, Version=1.0.50.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\..\packages\SixtenLabs.Spawn.CSharp.1.0.50\lib\net461\SixtenLabs.Spawn.CSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -163,11 +163,12 @@
     <Compile Include="EnumMapperTests.cs" />
     <Compile Include="ExtensionTests.cs" />
     <Compile Include="HandleMapperTests.cs" />
-    <Compile Include="InteropMapperTests.cs" />
+    <Compile Include="RegistryCommandMapperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecTypeMapperTests.cs" />
     <Compile Include="StructMapperTests.cs" />
-    <Compile Include="UnionMapperTests.cs" />
+    <Compile Include="VulkanGeneratorTests.cs" />
+    <Compile Include="VulkanSpecTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SixtenLabs.Spawn.Vulkan\SixtenLabs.Spawn.Vulkan.csproj">

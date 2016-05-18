@@ -9,13 +9,13 @@ using SixtenLabs.Spawn.CSharp;
 
 namespace SixtenLabs.Spawn.Vulkan.Tests
 {
-	public class InteropMapperTests
+	public class RegistryCommandMapperTests
 	{
 		private XmlFileLoader<registry> FileLoader { get; set; }
 
 		private VulkanSettings Settings { get; } = new VulkanSettings();
 
-		public InteropMapperTests()
+		public RegistryCommandMapperTests()
 		{
 			FileLoader = new XmlFileLoader<registry>(Settings, new WebClientFactory());
 

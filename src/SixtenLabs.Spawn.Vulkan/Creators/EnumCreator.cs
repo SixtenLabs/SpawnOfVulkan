@@ -7,7 +7,7 @@ namespace SixtenLabs.Spawn.Vulkan
 	public class EnumCreator : BaseCreator<registry, EnumDefinition>
 	{
 		public EnumCreator(ICodeGenerator generator, ISpawnSpec<registry> spawnSpec)
-			: base(generator, spawnSpec, 10)
+			: base(generator, spawnSpec, "Enum Creator", 10)
 		{
 		}
 

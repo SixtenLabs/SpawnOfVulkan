@@ -169,6 +169,24 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		}
 
 		[Fact]
+		public void structx_Types_Process()
+		{
+			var vk = SubjectUnderTest();
+
+			var types = vk.types.Where(x => x.category == "struct");
+
+			var maps = GetMapsFromTypes(types);
+
+			var typeDef = maps.Where(x => x.SpecName == "VkDebugMarkerObjectNameInfoEXT").FirstOrDefault();
+
+			typeDef.SpecName.Should().Be("VkDebugMarkerObjectNameInfoEXT");
+			typeDef.TranslatedName.Should().Be("DebugMarkerObjectNameInfoExt");
+			typeDef.Children.Should().HaveCount(5);
+
+			maps.Should().HaveCount(129);
+		}
+
+		[Fact]
 		public void union_Types_Process()
 		{
 			var vk = SubjectUnderTest();
@@ -221,6 +239,20 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 			var maps = GetMapsFromTypes(types);
 
 			maps.Should().HaveCount(623);
+		}
+
+		[Fact]
+		public void Command_Types_Process()
+		{
+			var vk = SubjectUnderTest();
+
+			var types = vk.commands;
+
+			types.Should().HaveCount(174);
+
+			var maps = GetMapsFromTypes(types);
+
+			maps.Should().HaveCount(174);
 		}
 
 		private IList<SpecTypeDefinition> GetMapsFromTypes<T>(IEnumerable<T> types) where T : class

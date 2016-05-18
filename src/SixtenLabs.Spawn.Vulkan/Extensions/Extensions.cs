@@ -38,6 +38,11 @@ namespace SixtenLabs.Spawn.Vulkan
 				name = name.ConvertToTitleCase('_');
 			}
 
+			if(name == "object")
+			{
+				name = "Handle";
+			}
+
 			foreach (var nameCorrection in NameCorrections)
 			{
 				if (name.Contains(nameCorrection.Key))
