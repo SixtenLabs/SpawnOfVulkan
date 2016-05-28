@@ -6,9 +6,9 @@ namespace SixtenLabs.SpawnOfVulkan
     {
         internal StructureType sType;
         internal IntPtr pNext;
-        internal char pApplicationName;
+        internal string pApplicationName;
         internal uint applicationVersion;
-        internal char pEngineName;
+        internal string pEngineName;
         internal uint engineVersion;
         internal uint apiVersion;
     }

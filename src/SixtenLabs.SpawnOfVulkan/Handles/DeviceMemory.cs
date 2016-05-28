@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    public struct DeviceMemory
+    public class DeviceMemory
     {
     }
 }

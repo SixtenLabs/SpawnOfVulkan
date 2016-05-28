@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    unsafe internal struct PresentInfoKhr
+    unsafe public struct PresentInfoKhr
     {
         internal StructureType sType;
         internal IntPtr pNext;

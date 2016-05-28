@@ -2,38 +2,25 @@
 using FluentAssertions;
 using NSubstitute;
 
-using AutoMapper;
 using System.Linq;
 using System.Collections.Generic;
 using SixtenLabs.Spawn.CSharp;
+using SixtenLabs.Spawn.Vulkan.Spec;
 
 namespace SixtenLabs.Spawn.Vulkan.Tests
 {
-	public class HandleMapperTests
+	public class HandleMapperTests : IClassFixture<SpecFixture>
 	{
-		private XmlFileLoader<registry> FileLoader { get; set; }
-
-		private VulkanSettings Settings { get; } = new VulkanSettings();
-
-		public HandleMapperTests()
+		public HandleMapperTests(SpecFixture fixture)
 		{
-			FileLoader = new XmlFileLoader<registry>(Settings, new WebClientFactory());
-
-			var config = new MapperConfiguration(cfg =>
-			{
-				cfg.AddProfile(new RegistryTypeMapper());
-			});
-
-			Mapper.AssertConfigurationIsValid();
-
-			AMapper = config.CreateMapper();
+			Fixture = fixture;
 		}
 
-		private registry SubjectUnderTest()
-		{
-			FileLoader.LoadRegistry();
+		private SpecFixture Fixture { get; set; }
 
-			return FileLoader.Registry;
+		private VkRegistry SubjectUnderTest()
+		{
+			return Fixture.VkRegistry;
 		}
 
 		[Fact]
@@ -41,7 +28,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var types = vk.types.Where(x => x.category == "handle");
+			var types = vk.Handles;
 
 			types.Should().HaveCount(30);
 
@@ -49,7 +36,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			foreach (var type in types)
 			{
-				var map = AMapper.Map<StructDefinition>(type);
+				var map = Fixture.SpecMapper.Map<StructDefinition>(type);
 				maps.Add(map);
 			}
 
@@ -61,9 +48,9 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var type = vk.types.Where(x => x.category == "handle" && (string)x.Items[1] == "VkInstance").FirstOrDefault();
+			var type = vk.Handles.Where(x => x.Name == "VkInstance").FirstOrDefault();
 
-			var map = AMapper.Map<StructDefinition>(type);
+			var map = Fixture.SpecMapper.Map<StructDefinition>(type);
 
 			map.SpecName.Should().Be("VkInstance");
 			map.SpecDerivedType.Should().BeNull();
@@ -87,14 +74,12 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var type = vk.types.Where(x => x.category == "handle" && (string)x.Items[1] == "VkCommandBuffer").FirstOrDefault();
+			var type = vk.Handles.Where(x => x.Name == "VkCommandBuffer").FirstOrDefault();
 
-			var map = AMapper.Map<StructDefinition>(type);
-			 
+			var map = Fixture.SpecMapper.Map<StructDefinition>(type);
+
 			map.SpecName.Should().Be("VkCommandBuffer");
 			map.SpecDerivedType.Should().Be("VkCommandPool");
 		}
-
-		private IMapper AMapper { get; }
 	}
 }

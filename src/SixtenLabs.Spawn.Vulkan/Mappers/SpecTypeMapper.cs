@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SixtenLabs.Spawn.Vulkan.Spec;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,149 +10,124 @@ namespace SixtenLabs.Spawn.Vulkan
 	{
 		protected override void Configure()
 		{
-			CreateMap<registryType, SpecTypeDefinition>()
-				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => MapName(src)))
-				.ForMember(dest => dest.Children, opt => opt.Condition(m => m.Items != null))
-				.ForMember(dest => dest.Children, opt => opt.MapFrom(m => m.Items.Where(x => x.GetType() == typeof(registryTypeMember))))
-				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src)));
+			CreateMap<VkTypeBaseType, SpecTypeDefinition>()
+				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
+				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src.Name)));
 
-			CreateMap<registryTypeMember, SpecTypeDefinition>()
-				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => MapName(src)))
-				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src)));
+			CreateMap<VkTypeRequires, SpecTypeDefinition>()
+				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
+				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src.Name)));
 
-			CreateMap<registryEnumsEnum, SpecTypeDefinition>()
-				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => MapName(src)))
-				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src)));
+			CreateMap<VkTypeBitmask, SpecTypeDefinition>()
+				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
+				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src.Name)));
 
-			CreateMap<registryCommand, SpecTypeDefinition>()
-				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => MapName(src)))
-				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src)));
+			CreateMap<VkCommand, SpecTypeDefinition>()
+				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
+				.ForMember(dest => dest.Children, opt => opt.MapFrom(m => m.Parameters))
+				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src.Name)));
+
+			CreateMap<VkCommandParameter, SpecTypeDefinition>()
+				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
+				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src.Name)));
+
+			CreateMap<VkTypeDefine, SpecTypeDefinition>()
+				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
+				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src.Name)));
+
+			CreateMap<VkTypeEnum, SpecTypeDefinition>()
+				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
+				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src.Name)));
+
+			CreateMap<VkTypeFuncPointer, SpecTypeDefinition>()
+				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
+				.ForMember(dest => dest.Children, opt => opt.MapFrom(m => m.Parameters))
+				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src.Name)));
+
+			CreateMap<VkTypeFuncPointerParameter, SpecTypeDefinition>()
+				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
+				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src.Name)));
+
+			CreateMap<VkTypeInclude, SpecTypeDefinition>()
+				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
+				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src.Name)));
+
+			CreateMap<VkTypeUnion, SpecTypeDefinition>()
+				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
+				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src.Name)));
+
+			CreateMap<VkEnumValue, SpecTypeDefinition>()
+				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
+				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src.Name)));
+
+			CreateMap<VkTypeStruct, SpecTypeDefinition>()
+				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
+				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src.Name)));
+
+			CreateMap<VkTypeStructMember, SpecTypeDefinition>()
+				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
+				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src.Name)));
+
+			CreateMap<VkTypeHandle, SpecTypeDefinition>()
+				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
+				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src.Name)));
 		}
 
-		private string MapName(registryTypeMember rc)
+		private string MapTranslatedName(string specName)
 		{
 			string name = null;
 
-			name = rc.name;
+			name = specName.TranslateVulkanName();
 
 			return name;
 		}
 
-		private string MapTranslatedName(registryTypeMember rc)
-		{
-			string name = null;
+		//private string MapTranslatedName(registryType rt)
+		//{
+		//	string name = null;
 
-			name = rc.name.TranslateVulkanName();
+		//	if (Requires.Contains(rt.requires))
+		//	{
+		//		name = CToCSharpTypes[rt.name];
+		//	}
+		//	else if (rt.category == "basetype")
+		//	{
+		//		name = CToCSharpTypes[rt.Items[0] as string];
+		//	}
+		//	else if (rt.category == "bitmask" && !string.IsNullOrEmpty(rt.requires))
+		//	{
+		//		// Real Enum
+		//		name = (rt.Items[1] as string).TranslateVulkanName();
+		//	}
+		//	else if (rt.category == "bitmask" && string.IsNullOrEmpty(rt.requires))
+		//	{
+		//		// Not real enum.
+		//		name = CToCSharpTypes[rt.Items[0] as string];
+		//	}
+		//	else if (rt.category == "handle")
+		//	{
+		//		name = (rt.Items[1] as string).TranslateVulkanName();
+		//	}
+		//	else if (rt.category == "funcpointer")
+		//	{
+		//		//name = (rt.Items[0] as string).TranslateVulkanName();
+		//		name = "IntPtr";
+		//	}
+		//	else if (rt.category == "enum" || rt.category == "struct" || rt.category == "union")
+		//	{
+		//		name = rt.name.TranslateVulkanName();
+		//	}
+		//	else if (rt.category == "include" || rt.category == "define")
+		//	{
+		//		name = string.IsNullOrEmpty(rt.name) ? rt.Items[0] as string : rt.name;
+		//	}
+		//	else
+		//	{
+		//		name = "";
+		//	}
 
-			return name;
-		}
-
-		private string MapName(registryCommand rc)
-		{
-			string name = null;
-
-			name = rc.proto.name;
-
-			return name;
-		}
-
-		private string MapTranslatedName(registryCommand rc)
-		{
-			string name = null;
-
-			name = rc.proto.name.TranslateVulkanName();
-
-			return name;
-		}
-
-		private string MapName(registryEnumsEnum ree)
-		{
-			string name = null;
-
-			name = ree.name;
-
-			return name;
-		}
-
-		private string MapTranslatedName(registryEnumsEnum ree)
-		{
-			string name = null;
-
-			name = ree.name.TranslateVulkanName();
-
-			return name;
-		}
-
-		private string MapName(registryType rt)
-		{
-			string name = null;
-
-			if (rt.category == "basetype" || rt.category == "bitmask" || rt.category == "handle")
-			{
-				name = rt.Items[1] as string;
-			}
-			else if (rt.category == "enum" || rt.category == "struct" || rt.category == "union" || Requires.Contains(rt.requires) || (rt.category == "define" && !string.IsNullOrEmpty(rt.name)))
-			{
-				name = rt.name;
-			}
-			else if (rt.category == "funcpointer")
-			{
-				name = rt.Items[0] as string;
-			}
-			else if (rt.category == "include" || rt.category == "define")
-			{
-				name = string.IsNullOrEmpty(rt.name) ? rt.Items[0] as string : rt.name;
-			}
-
-			return name;
-		}
-
-		private string MapTranslatedName(registryType rt)
-		{
-			string name = null;
-
-			if (Requires.Contains(rt.requires))
-			{
-				name = CToCSharpTypes[rt.name];
-			}
-			else if (rt.category == "basetype")
-			{
-				name = CToCSharpTypes[rt.Items[0] as string];
-			}
-			else if (rt.category == "bitmask" && !string.IsNullOrEmpty(rt.requires))
-			{
-				// Real Enum
-				name = (rt.Items[1] as string).TranslateVulkanName();
-			}
-			else if (rt.category == "bitmask" && string.IsNullOrEmpty(rt.requires))
-			{
-				// Not real enum.
-				name = CToCSharpTypes[rt.Items[0] as string];
-			}
-			else if (rt.category == "handle")
-			{
-				name = (rt.Items[1] as string).TranslateVulkanName();
-			}
-			else if (rt.category == "funcpointer")
-			{
-				//name = (rt.Items[0] as string).TranslateVulkanName();
-				name = "IntPtr";
-			}
-			else if (rt.category == "enum" || rt.category == "struct" || rt.category == "union")
-			{
-				name = rt.name.TranslateVulkanName();
-			}
-			else if (rt.category == "include" || rt.category == "define")
-			{
-				name = string.IsNullOrEmpty(rt.name) ? rt.Items[0] as string : rt.name;
-			}
-			else
-			{
-				name = "";
-			}
-
-			return name;
-		}
+		//	return name;
+		//}
 
 		private IList<string> Requires { get; } = new List<string>()
 		{
@@ -170,7 +146,7 @@ namespace SixtenLabs.Spawn.Vulkan
 		private IDictionary<string, string> CToCSharpTypes { get; } = new Dictionary<string, string>()
 		{
 			{ "void", "IntPtr" },
-			{ "char", "char" }, // Should this be string?
+			{ "char", "string" }, // Should this be string?
 			{ "float", "float" },
 			{ "uint8_t", "byte" },
 			{ "uint32_t", "uint" },

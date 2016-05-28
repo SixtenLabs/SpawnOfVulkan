@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    unsafe internal struct PhysicalDeviceMemoryProperties
+    unsafe public struct PhysicalDeviceMemoryProperties
     {
         internal uint memoryTypeCount;
         internal MemoryType memoryTypes;

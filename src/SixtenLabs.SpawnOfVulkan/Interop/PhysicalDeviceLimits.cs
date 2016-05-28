@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    unsafe internal struct PhysicalDeviceLimits
+    unsafe public struct PhysicalDeviceLimits
     {
         internal uint maxImageDimension1D;
         internal uint maxImageDimension2D;

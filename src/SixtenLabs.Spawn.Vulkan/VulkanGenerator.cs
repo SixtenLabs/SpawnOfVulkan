@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SixtenLabs.Spawn.Vulkan.Spec;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace SixtenLabs.Spawn.Vulkan
 {
 	public class VulkanGenerator
 	{
-		public VulkanGenerator(IEnumerable<ICreator> creators, ISpawnService spawn, ISpawnSpec<registry> spawnSpec, IMapper mapper)
+		public VulkanGenerator(IEnumerable<ICreator> creators, ISpawnService spawn, ISpawnSpec<VkRegistry> spawnSpec, IMapper mapper)
 		{
 			Creators = creators;
 			Spawn = spawn;
@@ -37,21 +38,21 @@ namespace SixtenLabs.Spawn.Vulkan
 
 		private void MapTypes()
 		{
-			foreach (var regType in SpawnSpec.SpecTree.types)
+			foreach (var regType in SpawnSpec.SpecTree.TypeStructs)
 			{
-				var specTypeDefinition = Mapper.Map<registryType, SpecTypeDefinition>(regType);
+				var specTypeDefinition = Mapper.Map<VkTypeStruct, SpecTypeDefinition>(regType);
 				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
 			}
 
-			foreach (var enumValueType in SpawnSpec.SpecTree.enums.SelectMany(x => x.@enum))
+			foreach (var enumValueType in SpawnSpec.SpecTree.Enums.SelectMany(x => x.Values))
 			{
-				var specTypeDefinition = Mapper.Map<registryEnumsEnum, SpecTypeDefinition>(enumValueType);
+				var specTypeDefinition = Mapper.Map<VkEnumValue, SpecTypeDefinition>(enumValueType);
 				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
 			}
 
-			foreach (var regCommand in SpawnSpec.SpecTree.commands)
+			foreach (var regCommand in SpawnSpec.SpecTree.Commands)
 			{
-				var specTypeDefinition = Mapper.Map<registryCommand, SpecTypeDefinition>(regCommand);
+				var specTypeDefinition = Mapper.Map<VkCommand, SpecTypeDefinition>(regCommand);
 				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
 			}
 
@@ -108,7 +109,7 @@ namespace SixtenLabs.Spawn.Vulkan
 
 		private ISpawnService Spawn { get; }
 
-		private ISpawnSpec<registry> SpawnSpec { get; }
+		private ISpawnSpec<VkRegistry> SpawnSpec { get; }
 
 		private List<string> GeneratedComments { get; } = new List<string>();
 

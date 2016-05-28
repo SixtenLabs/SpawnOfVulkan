@@ -163,12 +163,30 @@
     <Compile Include="EnumMapperTests.cs" />
     <Compile Include="ExtensionTests.cs" />
     <Compile Include="HandleMapperTests.cs" />
+    <Compile Include="Spec\SpecFixture.cs" />
     <Compile Include="RegistryCommandMapperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecTypeMapperTests.cs" />
+    <Compile Include="Spec\VkCommandMapTests.cs" />
+    <Compile Include="Spec\VkConstantsMapTests.cs" />
+    <Compile Include="Spec\VkEnumMapTests.cs" />
+    <Compile Include="Spec\VkExtensionsMapTests.cs" />
+    <Compile Include="Spec\VkFeatureMapTests.cs" />
+    <Compile Include="Spec\VkIncludeMapTests.cs" />
+    <Compile Include="Spec\VkTagMapTests.cs" />
+    <Compile Include="Spec\VkTypeBaseTypeMapTests.cs" />
+    <Compile Include="Spec\VkTypeBitmaskMapTests.cs" />
+    <Compile Include="Spec\VkTypeDefineMapTests.cs" />
+    <Compile Include="Spec\VkTypeEnumMapTests.cs" />
+    <Compile Include="Spec\VkTypeFuncPointerMapTests.cs" />
+    <Compile Include="Spec\VkTypeHandleMapTests.cs" />
+    <Compile Include="Spec\VkTypeRequiresMapTests.cs" />
+    <Compile Include="Spec\VkTypeStructMapTests.cs" />
+    <Compile Include="Spec\VkVendorIdMapTests.cs" />
     <Compile Include="StructMapperTests.cs" />
     <Compile Include="VulkanGeneratorTests.cs" />
     <Compile Include="VulkanSpecTests.cs" />
+    <Compile Include="Spec\VkRegistryMapTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SixtenLabs.Spawn.Vulkan\SixtenLabs.Spawn.Vulkan.csproj">
@@ -188,6 +206,7 @@
     <Content Include="..\SixtenLabs.Spawn.Vulkan\Spec\vk.xml">
       <Link>Spec\vk.xml</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

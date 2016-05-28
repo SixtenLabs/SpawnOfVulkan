@@ -8,6 +8,6 @@ namespace SixtenLabs.SpawnOfVulkan
         internal IntPtr pNext;
         internal DebugReportObjectTypeExt objectType;
         internal ulong Handle;
-        internal char pObjectName;
+        internal string pObjectName;
     }
 }

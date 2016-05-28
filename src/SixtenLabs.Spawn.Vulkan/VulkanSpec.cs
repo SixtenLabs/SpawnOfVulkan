@@ -1,8 +1,10 @@
-﻿namespace SixtenLabs.Spawn.Vulkan
+﻿using SixtenLabs.Spawn.Vulkan.Spec;
+
+namespace SixtenLabs.Spawn.Vulkan
 {
-	public class VulkanSpec : SpawnSpec<registry>
+	public class VulkanSpec : SpawnSpec<VkRegistry>
 	{
-		public VulkanSpec(XmlFileLoader<registry> xmlFileLoader)
+		public VulkanSpec(XmlFileLoader<VkRegistry> xmlFileLoader)
 			: base(xmlFileLoader)
 		{
 		}

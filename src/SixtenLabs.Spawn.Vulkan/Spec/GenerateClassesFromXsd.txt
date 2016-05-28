@@ -1,7 +1,0 @@
-﻿Command line to this directory and run
-
-xsd vk.xsd /c
-
-this will generate vk.cs classes (registry)
-
-If needed you also can regenerate the xsd from the xml menu, Create Schema with the vk.xml file open in VS.

@@ -114,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Creators\CommandCreator.cs" />
+    <Compile Include="Creators\CommandDelegateCreator.cs" />
     <Compile Include="Creators\ConstantsCreator.cs" />
     <Compile Include="Creators\EnumCreator.cs" />
     <Compile Include="Creators\FeatureCreator.cs" />
@@ -122,14 +123,50 @@
     <Compile Include="Creators\StructCreator.cs" />
     <Compile Include="Creators\UnionCreator.cs" />
     <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Extensions\XmlExtensions.cs" />
     <Compile Include="Mappers\RegistryCommandMapper.cs" />
     <Compile Include="Mappers\RegistryEnumMapper.cs" />
+    <Compile Include="Mappers\RegistryFeatureMapper.cs" />
     <Compile Include="Mappers\RegistryTypeMapper.cs" />
     <Compile Include="Mappers\SpecTypeMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Spec\vk.cs">
-      <DependentUpon>vk.xsd</DependentUpon>
-    </Compile>
+    <Compile Include="Spec\VkApiRequire.cs" />
+    <Compile Include="Spec\VkApiRequireMember.cs" />
+    <Compile Include="Spec\VkCommand.cs" />
+    <Compile Include="Spec\VkConstants.cs" />
+    <Compile Include="Spec\VkConstantValue.cs" />
+    <Compile Include="Spec\VkEnum.cs" />
+    <Compile Include="Spec\VkEnumValue.cs" />
+    <Compile Include="Spec\VkCommandParameter.cs" />
+    <Compile Include="Spec\VkExtension.cs" />
+    <Compile Include="Spec\VkExtensionCommand.cs" />
+    <Compile Include="Spec\VkExtensionEnum.cs" />
+    <Compile Include="Spec\VkExtensionType.cs" />
+    <Compile Include="Spec\VkExtensionUsage.cs" />
+    <Compile Include="Spec\VkFeature.cs" />
+    <Compile Include="Spec\VkFeatureRequire.cs" />
+    <Compile Include="Spec\VkFeatureRequireCommand.cs" />
+    <Compile Include="Spec\VkFeatureRequireEnum.cs" />
+    <Compile Include="Spec\VkFeatureRequireType.cs" />
+    <Compile Include="Spec\VkTypeEnum.cs" />
+    <Compile Include="Spec\VkTypeFuncPointer.cs" />
+    <Compile Include="Spec\VkTypeFuncPointerParameter.cs" />
+    <Compile Include="Spec\VkTypeHandle.cs" />
+    <Compile Include="Spec\VkInclude.cs" />
+    <Compile Include="Spec\VkRegistry.cs" />
+    <Compile Include="Mappers\VkSpecMapper.cs" />
+    <Compile Include="Spec\VkTag.cs" />
+    <Compile Include="Spec\VkTypeBaseType.cs" />
+    <Compile Include="Spec\VkTypeBitmask.cs" />
+    <Compile Include="Spec\VkTypeDefine.cs" />
+    <Compile Include="Spec\VkTypeMember.cs" />
+    <Compile Include="Spec\VkTypeRequires.cs" />
+    <Compile Include="Spec\VkTypeStruct.cs" />
+    <Compile Include="Spec\VkTypeStructMember.cs" />
+    <Compile Include="Spec\VkTypeUnion.cs" />
+    <Compile Include="Spec\VkTypeUnionMember.cs" />
+    <Compile Include="Spec\VkUsage.cs" />
+    <Compile Include="Spec\VkVendorId.cs" />
     <Compile Include="VulkanGenerator.cs" />
     <Compile Include="VulkanSettings.cs" />
     <Compile Include="VulkanSpec.cs" />
@@ -137,16 +174,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Spec\vk.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Spec\GenerateClassesFromXsd.txt" />
     <Content Include="Spec\vk.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

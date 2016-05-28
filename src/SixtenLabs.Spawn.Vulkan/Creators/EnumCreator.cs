@@ -1,23 +1,24 @@
 ﻿using System.Linq;
 using AutoMapper;
 using SixtenLabs.Spawn.CSharp;
+using SixtenLabs.Spawn.Vulkan.Spec;
 
 namespace SixtenLabs.Spawn.Vulkan
 {
-	public class EnumCreator : BaseCreator<registry, EnumDefinition>
+	public class EnumCreator : BaseCreator<VkRegistry, EnumDefinition>
 	{
-		public EnumCreator(ICodeGenerator generator, ISpawnSpec<registry> spawnSpec)
+		public EnumCreator(ICodeGenerator generator, ISpawnSpec<VkRegistry> spawnSpec)
 			: base(generator, spawnSpec, "Enum Creator", 10)
 		{
 		}
 
 		public override int Build(IMapper mapper)
 		{
-			var registryEnums = VulkanSpec.SpecTree.enums.Where(x => x.name != "API Constants");
+			var registryEnums = VulkanSpec.SpecTree.Enums;
 
 			foreach(var registryEnum in registryEnums)
 			{
-				var enumDefinition = mapper.Map<registryEnums, EnumDefinition>(registryEnum);
+				var enumDefinition = mapper.Map<VkEnum, EnumDefinition>(registryEnum);
 				Definitions.Add(enumDefinition);
 			}
 

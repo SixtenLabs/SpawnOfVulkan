@@ -6,56 +6,33 @@ using AutoMapper;
 using System.Linq;
 using System.Collections.Generic;
 using SixtenLabs.Spawn.CSharp;
+using SixtenLabs.Spawn.Vulkan.Spec;
 
 namespace SixtenLabs.Spawn.Vulkan.Tests
 {
-	public class ConstantMapperTests
+	public class ConstantMapperTests : IClassFixture<SpecFixture>
 	{
-		private XmlFileLoader<registry> FileLoader { get; set; }
-
-		private VulkanSettings Settings { get; } = new VulkanSettings();
-
-		public ConstantMapperTests()
+		public ConstantMapperTests(SpecFixture fixture)
 		{
-			FileLoader = new XmlFileLoader<registry>(Settings, new WebClientFactory());
-
-			var config = new MapperConfiguration(cfg =>
-			{
-				cfg.AddProfile(new RegistryEnumMapper());
-			});
-
-			Mapper.AssertConfigurationIsValid();
-
-			AMapper = config.CreateMapper();
+			Fixture = fixture;
 		}
 
-		private registry SubjectUnderTest()
-		{
-			FileLoader.LoadRegistry();
+		private SpecFixture Fixture { get; set; }
 
-			return FileLoader.Registry;
+		private VkConstants SubjectUnderTest()
+		{
+			return Fixture.VkRegistry.Constants;
 		}
 
 		[Fact]
 		public void Constants()
 		{
-			var vk = SubjectUnderTest();
+			var subject = SubjectUnderTest();
 
-			var types = vk.enums.Where(x => x.name == "API Constants");
+			var map = Fixture.SpecMapper.Map<ClassDefinition>(subject);
 
-			types.Should().HaveCount(1);
-
-			var maps = new List<ClassDefinition>();
-
-			foreach (var type in types)
-			{
-				var map = AMapper.Map<ClassDefinition>(type);
-				maps.Add(map);
-			}
-
-			maps.Should().HaveCount(1);
+			map.Should().NotBeNull();
+			map.Fields.Should().HaveCount(15);
 		}
-
-		private IMapper AMapper { get; }
 	}
 }

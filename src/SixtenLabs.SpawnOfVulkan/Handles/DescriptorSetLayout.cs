@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    public struct DescriptorSetLayout
+    public class DescriptorSetLayout
     {
     }
 }

@@ -156,14 +156,15 @@
     <Compile Include="Interop\ImageBlit.cs" />
     <Compile Include="Interop\LayerProperties.cs" />
     <Compile Include="Interop\MirSurfaceCreateInfoKhr.cs" />
-    <Compile Include="Interop\NativeMethods.cs" />
     <Compile Include="Interop\PhysicalDeviceLimits.cs" />
     <Compile Include="Interop\PhysicalDeviceMemoryProperties.cs" />
     <Compile Include="Interop\PhysicalDeviceProperties.cs" />
     <Compile Include="Interop\PipelineColorBlendStateCreateInfo.cs" />
     <Compile Include="Interop\PresentInfoKhr.cs" />
+    <Compile Include="Interop\VkDelegates.cs" />
     <Compile Include="Interop\XcbSurfaceCreateInfoKhr.cs" />
     <Compile Include="Interop\XlibSurfaceCreateInfoKhr.cs" />
+    <Compile Include="NativeLibrary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Structs\ApplicationInfo.cs" />
     <Compile Include="Structs\AttachmentDescription.cs" />
@@ -281,6 +282,7 @@
     <Compile Include="Structs\WriteDescriptorSet.cs" />
     <Compile Include="Unions\ClearColorValue.cs" />
     <Compile Include="Unions\ClearValue.cs" />
+    <Compile Include="Vk.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

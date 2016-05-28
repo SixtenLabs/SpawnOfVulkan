@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    public struct ImageView
+    public class ImageView
     {
     }
 }

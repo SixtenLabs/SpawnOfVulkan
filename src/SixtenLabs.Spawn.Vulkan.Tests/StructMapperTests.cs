@@ -5,34 +5,22 @@ using AutoMapper;
 using System.Linq;
 using System.Collections.Generic;
 using SixtenLabs.Spawn.CSharp;
+using SixtenLabs.Spawn.Vulkan.Spec;
 
 namespace SixtenLabs.Spawn.Vulkan.Tests
 {
-	public class StructMapperTests
+	public class StructMapperTests : IClassFixture<SpecFixture>
 	{
-		private XmlFileLoader<registry> FileLoader { get; set; }
-
-		private VulkanSettings Settings { get; } = new VulkanSettings();
-
-		public StructMapperTests()
+		public StructMapperTests(SpecFixture fixture)
 		{
-			FileLoader = new XmlFileLoader<registry>(Settings, new WebClientFactory());
-
-			var config = new MapperConfiguration(cfg =>
-			{
-				cfg.AddProfile(new RegistryTypeMapper());
-			});
-
-			Mapper.AssertConfigurationIsValid();
-
-			AMapper = config.CreateMapper();
+			Fixture = fixture;
 		}
 
-		private registry SubjectUnderTest()
-		{
-			FileLoader.LoadRegistry();
+		private SpecFixture Fixture { get; set; }
 
-			return FileLoader.Registry;
+		private VkRegistry SubjectUnderTest()
+		{
+			return Fixture.VkRegistry;
 		}
 
 		[Fact]
@@ -40,7 +28,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var types = vk.types.Where(x => x.category == "struct");
+			var types = vk.TypeStructs;
 
 			types.Should().HaveCount(129);
 
@@ -48,7 +36,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			foreach (var type in types)
 			{
-				var map = AMapper.Map<StructDefinition>(type);
+				var map = Fixture.SpecMapper.Map<StructDefinition>(type);
 				maps.Add(map);
 			}
 
@@ -60,9 +48,9 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var type = vk.types.Where(x => x.category == "struct" && x.name == "VkOffset2D").FirstOrDefault();
+			var type = vk.TypeStructs.Where(x => x.Name == "VkOffset2D").FirstOrDefault();
 
-			var map = AMapper.Map<StructDefinition>(type);
+			var map = Fixture.SpecMapper.Map<StructDefinition>(type);
 
 			map.SpecName.Should().Be("VkOffset2D");
 			map.Fields.Should().HaveCount(2);
@@ -73,9 +61,9 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var type = vk.types.Where(x => x.category == "struct" && x.name == "VkPhysicalDeviceProperties").FirstOrDefault();
+			var type = vk.TypeStructs.Where(x => x.Name == "VkPhysicalDeviceProperties").FirstOrDefault();
 
-			var map = AMapper.Map<StructDefinition>(type);
+			var map = Fixture.SpecMapper.Map<StructDefinition>(type);
 
 			map.SpecName.Should().Be("VkPhysicalDeviceProperties");
 			map.Fields.Should().HaveCount(9);
@@ -86,9 +74,9 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var type = vk.types.Where(x => x.category == "struct" && x.name == "VkViewport").FirstOrDefault();
+			var type = vk.TypeStructs.Where(x => x.Name == "VkViewport").FirstOrDefault();
 
-			var map = AMapper.Map<StructDefinition>(type);
+			var map = Fixture.SpecMapper.Map<StructDefinition>(type);
 
 			map.SpecName.Should().Be("VkViewport");
 			map.SpecReturnType.Should().BeNull();
@@ -106,9 +94,9 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var type = vk.types.Where(x => x.category == "struct" && x.name == "VkImageBlit").FirstOrDefault();
+			var type = vk.TypeStructs.Where(x => x.Name == "VkImageBlit").FirstOrDefault();
 
-			var map = AMapper.Map<StructDefinition>(type);
+			var map = Fixture.SpecMapper.Map<StructDefinition>(type);
 
 			map.SpecName.Should().Be("VkImageBlit");
 			map.SpecReturnType.Should().BeNull();
@@ -117,7 +105,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 			map.Fields[0].SpecName.Should().Be("srcSubresource");
 			map.Fields[0].SpecReturnType.Should().Be("VkImageSubresourceLayers");
 			map.Fields[0].ReturnTypeIsArray.Should().BeFalse();
-			
+
 			// We return the SpecType if we have not created a translated type.
 			//map.Fields[0].TranslatedReturnType.Should().BeNull("ImageSubresourceLayers");
 
@@ -148,9 +136,9 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var type = vk.types.Where(x => x.category == "struct" && x.name == "VkDebugMarkerObjectNameInfoEXT").FirstOrDefault();
+			var type = vk.TypeStructs.Where(x => x.Name == "VkDebugMarkerObjectNameInfoEXT").FirstOrDefault();
 
-			var map = AMapper.Map<StructDefinition>(type);
+			var map = Fixture.SpecMapper.Map<StructDefinition>(type);
 
 			map.SpecName.Should().Be("VkDebugMarkerObjectNameInfoEXT");
 			map.SpecReturnType.Should().BeNull();
@@ -171,7 +159,5 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 			map.Fields[4].SpecName.Should().Be("pObjectName");
 			map.Fields[4].SpecReturnType.Should().Be("char");
 		}
-
-		private IMapper AMapper { get; }
 	}
 }

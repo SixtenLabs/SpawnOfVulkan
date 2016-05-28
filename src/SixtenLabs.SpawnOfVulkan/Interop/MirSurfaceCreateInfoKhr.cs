@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    unsafe internal struct MirSurfaceCreateInfoKhr
+    unsafe public struct MirSurfaceCreateInfoKhr
     {
         internal StructureType sType;
         internal IntPtr pNext;

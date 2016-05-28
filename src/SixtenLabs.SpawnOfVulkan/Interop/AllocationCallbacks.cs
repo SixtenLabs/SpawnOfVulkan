@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    unsafe internal struct AllocationCallbacks
+    unsafe public struct AllocationCallbacks
     {
         internal IntPtr pUserData;
         internal IntPtr pfnAllocation;

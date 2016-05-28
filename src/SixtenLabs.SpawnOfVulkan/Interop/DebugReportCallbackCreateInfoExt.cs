@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    unsafe internal struct DebugReportCallbackCreateInfoExt
+    unsafe public struct DebugReportCallbackCreateInfoExt
     {
         internal StructureType sType;
         internal IntPtr pNext;

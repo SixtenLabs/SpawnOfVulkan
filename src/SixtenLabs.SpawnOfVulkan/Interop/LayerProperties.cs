@@ -2,11 +2,11 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    unsafe internal struct LayerProperties
+    unsafe public struct LayerProperties
     {
-        internal unsafe fixed char layerName[256];
+        internal string layerName;
         internal uint specVersion;
         internal uint implementationVersion;
-        internal unsafe fixed char description[256];
+        internal string description;
     }
 }

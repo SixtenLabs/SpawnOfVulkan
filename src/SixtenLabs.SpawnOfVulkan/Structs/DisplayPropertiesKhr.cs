@@ -5,7 +5,7 @@ namespace SixtenLabs.SpawnOfVulkan
     public struct DisplayPropertiesKhr
     {
         internal DisplayKhr display;
-        internal char displayName;
+        internal string displayName;
         internal Extent2D physicalDimensions;
         internal Extent2D physicalResolution;
         internal SurfaceTransformFlagsKhr supportedTransforms;

@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    unsafe internal struct PipelineColorBlendStateCreateInfo
+    unsafe public struct PipelineColorBlendStateCreateInfo
     {
         internal StructureType sType;
         internal IntPtr pNext;

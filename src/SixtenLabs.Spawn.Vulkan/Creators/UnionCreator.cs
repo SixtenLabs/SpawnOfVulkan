@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using SixtenLabs.Spawn.CSharp;
+using SixtenLabs.Spawn.Vulkan.Spec;
 using System.Linq;
 
 namespace SixtenLabs.Spawn.Vulkan
 {
-	public class UnionCreator : BaseCreator<registry, StructDefinition>
+	public class UnionCreator : BaseCreator<VkRegistry, StructDefinition>
 	{
-		public UnionCreator(ICodeGenerator generator, ISpawnSpec<registry> spawnSpec)
+		public UnionCreator(ICodeGenerator generator, ISpawnSpec<VkRegistry> spawnSpec)
 			: base(generator, spawnSpec, "Union Creator", 40)
 		{
 		}
@@ -47,11 +48,11 @@ namespace SixtenLabs.Spawn.Vulkan
 
 		public override int Build(IMapper mapper)
 		{
-			var registryStructs = VulkanSpec.SpecTree.types.Where(x => x.category == "union");
+			var registryStructs = VulkanSpec.SpecTree.TypeUnions;
 
 			foreach (var registryEnum in registryStructs)
 			{
-				var structDefinition = mapper.Map<registryType, StructDefinition>(registryEnum);
+				var structDefinition = mapper.Map<VkTypeUnion, StructDefinition>(registryEnum);
 				Definitions.Add(structDefinition);
 			}
 

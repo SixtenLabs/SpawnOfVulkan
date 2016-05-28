@@ -1,22 +1,24 @@
 ﻿using AutoMapper;
 using SixtenLabs.Spawn.CSharp;
+using SixtenLabs.Spawn.Vulkan.Spec;
 
 namespace SixtenLabs.Spawn.Vulkan.Creators
 {
-	public class NativeMethodsCreator : BaseCreator<registry, MethodDefinition>
+	public class NativeMethodsCreator : BaseCreator<VkRegistry, MethodDefinition>
 	{
-		public NativeMethodsCreator(ICodeGenerator generator, ISpawnSpec<registry> spawnSpec)
+		public NativeMethodsCreator(ICodeGenerator generator, ISpawnSpec<VkRegistry> spawnSpec)
 			: base(generator, spawnSpec, "Interop Creator", 30)
 		{
+			Off = true;
 		}
 
 		public override int Build(IMapper mapper)
 		{
-			var registryCommands = VulkanSpec.SpecTree.commands;
+			var registryCommands = VulkanSpec.SpecTree.Commands;
 
 			foreach (var registryEnum in registryCommands)
 			{
-				var commandDefinition = mapper.Map<registryCommand, MethodDefinition>(registryEnum);
+				var commandDefinition = mapper.Map<VkCommand, MethodDefinition>(registryEnum);
 				Definitions.Add(commandDefinition);
 			}
 

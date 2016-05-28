@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    public struct Sampler
+    public class Sampler
     {
     }
 }

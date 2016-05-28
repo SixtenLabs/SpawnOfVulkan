@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using SixtenLabs.Spawn.CSharp;
+using SixtenLabs.Spawn.Vulkan.Spec;
 using System.Linq;
 
 namespace SixtenLabs.Spawn.Vulkan.Creators
 {
-	public class StructCreator : BaseCreator<registry, StructDefinition>
+	public class StructCreator : BaseCreator<VkRegistry, StructDefinition>
 	{
-		public StructCreator(ICodeGenerator generator, ISpawnSpec<registry> spawnSpec)
+		public StructCreator(ICodeGenerator generator, ISpawnSpec<VkRegistry> spawnSpec)
 			: base(generator, spawnSpec, "Struct Creator", 40)
 		{
 			//Off = true;
@@ -23,7 +24,7 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 				if (structDefinition.NeedsMarshalling)
 				{
 					structDefinition.AddModifier(SyntaxKindDto.UnsafeKeyword);
-					structDefinition.AddModifier(SyntaxKindDto.InternalKeyword);
+					structDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
 				}
 				else
 				{
@@ -44,14 +45,14 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 						fieldDefinition.AddModifier(SyntaxKindDto.UnsafeKeyword);
 						fieldDefinition.AddModifier(SyntaxKindDto.FixedKeyword);
 
-						var structx = VulkanSpec.SpecTree.enums.Where(x => x.name == "API Constants").FirstOrDefault();
-						var field = structx.@enum.Where(x => x.name == fieldDefinition.Tag).FirstOrDefault();
+						var structx = VulkanSpec.SpecTree.Constants;
+						var field = structx.Values.Where(x => x.Name == fieldDefinition.Tag).FirstOrDefault();
 
 						string arraySize = null;
 
 						if (field != null)
 						{
-							arraySize = field.value;
+							arraySize = field.Value;
 						}
 						else
 						{
@@ -76,11 +77,11 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 
 		public override int Build(IMapper mapper)
 		{
-			var registryStructs = VulkanSpec.SpecTree.types.Where(x => x.category == "struct");
+			var registryStructs = VulkanSpec.SpecTree.TypeStructs;
 
 			foreach (var registryType in registryStructs)
 			{
-				var structDefinition = mapper.Map<registryType, StructDefinition>(registryType);
+				var structDefinition = mapper.Map<VkTypeStruct, StructDefinition>(registryType);
 				Definitions.Add(structDefinition);
 			}
 

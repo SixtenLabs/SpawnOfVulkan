@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    public struct DisplayKhr
+    public class DisplayKhr
     {
     }
 }

@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using SixtenLabs.Spawn.CSharp;
+using SixtenLabs.Spawn.Vulkan.Spec;
 using System.Linq;
 
 namespace SixtenLabs.Spawn.Vulkan
 {
-	public class HandleCreator : BaseCreator<registry, StructDefinition>
+	public class HandleCreator : BaseCreator<VkRegistry, ClassDefinition>
 	{
-		public HandleCreator(ICodeGenerator generator, ISpawnSpec<registry> spawnSpec)
+		public HandleCreator(ICodeGenerator generator, ISpawnSpec<VkRegistry> spawnSpec)
 			: base(generator, spawnSpec, "Handle Creator", 20)
 		{
 		}
@@ -28,11 +29,11 @@ namespace SixtenLabs.Spawn.Vulkan
 
 		public override int Build(IMapper mapper)
 		{
-			var registryHandles = VulkanSpec.SpecTree.types.Where(x => x.category == "handle");
+			var registryHandles = VulkanSpec.SpecTree.Handles;
 
 			foreach (var registryHandle in registryHandles)
 			{
-				var structDefinition = mapper.Map<registryType, StructDefinition>(registryHandle);
+				var structDefinition = mapper.Map<VkTypeHandle, ClassDefinition>(registryHandle);
 				Definitions.Add(structDefinition);
 			}
 
@@ -64,7 +65,7 @@ namespace SixtenLabs.Spawn.Vulkan
 
 				output.AddStandardUsingDirective("System");
 
-				(Generator as CSharpGenerator).GenerateStruct(output, structDefinition);
+				(Generator as CSharpGenerator).GenerateClass(output, structDefinition);
 				count++;
 			}
 

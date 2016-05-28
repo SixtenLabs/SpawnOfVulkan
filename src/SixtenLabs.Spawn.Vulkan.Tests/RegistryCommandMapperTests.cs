@@ -2,38 +2,25 @@
 using FluentAssertions;
 using NSubstitute;
 
-using AutoMapper;
 using System.Linq;
 using System.Collections.Generic;
 using SixtenLabs.Spawn.CSharp;
+using SixtenLabs.Spawn.Vulkan.Spec;
 
 namespace SixtenLabs.Spawn.Vulkan.Tests
 {
-	public class RegistryCommandMapperTests
+	public class RegistryCommandMapperTests : IClassFixture<SpecFixture>
 	{
-		private XmlFileLoader<registry> FileLoader { get; set; }
-
-		private VulkanSettings Settings { get; } = new VulkanSettings();
-
-		public RegistryCommandMapperTests()
+		public RegistryCommandMapperTests(SpecFixture fixture)
 		{
-			FileLoader = new XmlFileLoader<registry>(Settings, new WebClientFactory());
-
-			var config = new MapperConfiguration(cfg =>
-			{
-				cfg.AddProfile(new RegistryCommandMapper());
-			});
-
-			Mapper.AssertConfigurationIsValid();
-
-			AMapper = config.CreateMapper();
+			Fixture = fixture;
 		}
 
-		private registry SubjectUnderTest()
-		{
-			FileLoader.LoadRegistry();
+		private SpecFixture Fixture { get; set; }
 
-			return FileLoader.Registry;
+		private VkRegistry SubjectUnderTest()
+		{
+			return Fixture.VkRegistry;
 		}
 
 		[Fact]
@@ -41,7 +28,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var commands = vk.commands;
+			var commands = vk.Commands;
 
 			commands.Should().HaveCount(174);
 
@@ -49,7 +36,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			foreach (var type in commands)
 			{
-				var map = AMapper.Map<MethodDefinition>(type);
+				var map = Fixture.SpecMapper.Map<MethodDefinition>(type);
 				maps.Add(map);
 			}
 
@@ -61,9 +48,9 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var type = vk.commands.Where(x => x.proto.name == "vkCreateInstance").FirstOrDefault();
+			var type = vk.Commands.Where(x => x.Name == "vkCreateInstance").FirstOrDefault();
 
-			var map = AMapper.Map<MethodDefinition>(type);
+			var map = Fixture.SpecMapper.Map<MethodDefinition>(type);
 
 			map.SpecName.Should().Be("vkCreateInstance");
 			map.SpecReturnType.Should().Be("VkResult");
@@ -87,7 +74,5 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 			//map.Parameters[2].IsOptional.Should().BeFalse();
 			//map.Parameters[2].IsPointer.Should().BeTrue();
 		}
-
-		private IMapper AMapper { get; }
 	}
 }

@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    public struct RenderPass
+    public class RenderPass
     {
     }
 }

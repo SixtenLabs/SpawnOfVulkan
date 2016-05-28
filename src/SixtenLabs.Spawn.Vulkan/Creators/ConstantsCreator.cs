@@ -1,34 +1,32 @@
 ﻿using AutoMapper;
 using SixtenLabs.Spawn.CSharp;
+using SixtenLabs.Spawn.Vulkan.Spec;
 using System.Linq;
 
 namespace SixtenLabs.Spawn.Vulkan
 {
-	public class ConstantsCreator : BaseCreator<registry, ClassDefinition>
+	public class ConstantsCreator : BaseCreator<VkRegistry, ClassDefinition>
 	{
-		public ConstantsCreator(ICodeGenerator generator, ISpawnSpec<registry> spawnSpec)
+		public ConstantsCreator(ICodeGenerator generator, ISpawnSpec<VkRegistry> spawnSpec)
 			: base(generator, spawnSpec, "Constants Creator", 9)
 		{
 		}
 
 		public override int Build(IMapper mapper)
 		{
-			var registryConstants = VulkanSpec.SpecTree.enums.Where(x => x.name == "API Constants");
+			var registryConstants = VulkanSpec.SpecTree.Constants;
 
-			foreach (var registryConstant in registryConstants)
-			{
-				var classDefinition = mapper.Map<registryEnums, ClassDefinition>(registryConstant);
+			var classDefinition = mapper.Map<VkConstants, ClassDefinition>(VulkanSpec.SpecTree.Constants);
 
-				classDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
-				classDefinition.AddModifier(SyntaxKindDto.StaticKeyword);
-				classDefinition.SpecName = registryConstant.name;
-				
-				// This is hardcoded for this single enum exception.
-				classDefinition.TranslatedName = "ApiConstants";
+			classDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
+			classDefinition.AddModifier(SyntaxKindDto.StaticKeyword);
+			classDefinition.SpecName = VulkanSpec.SpecTree.Constants.Name;
+			
+			// This is hardcoded for this single enum exception.
+			classDefinition.TranslatedName = "ApiConstants";
 
-				Definitions.Add(classDefinition);
-			}
-
+			Definitions.Add(classDefinition);
+	
 			return Definitions.Count;
 		}
 

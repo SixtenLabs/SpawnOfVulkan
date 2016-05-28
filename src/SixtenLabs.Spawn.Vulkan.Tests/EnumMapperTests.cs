@@ -2,38 +2,25 @@
 using FluentAssertions;
 using NSubstitute;
 
-using AutoMapper;
 using System.Linq;
 using System.Collections.Generic;
 using SixtenLabs.Spawn.CSharp;
+using SixtenLabs.Spawn.Vulkan.Spec;
 
 namespace SixtenLabs.Spawn.Vulkan.Tests
 {
-	public class EnumMapperTests
+	public class EnumMapperTests : IClassFixture<SpecFixture>
 	{
-		private XmlFileLoader<registry> FileLoader { get; set; }
-
-		private VulkanSettings Settings { get; } = new VulkanSettings();
-
-		public EnumMapperTests()
+		public EnumMapperTests(SpecFixture fixture)
 		{
-			FileLoader = new XmlFileLoader<registry>(Settings, new WebClientFactory());
-
-			var config = new MapperConfiguration(cfg =>
-			{
-				cfg.AddProfile(new RegistryEnumMapper());
-			});
-
-			Mapper.AssertConfigurationIsValid();
-
-			AMapper = config.CreateMapper();
+			Fixture = fixture;
 		}
 
-		private registry SubjectUnderTest()
-		{
-			FileLoader.LoadRegistry();
+		private SpecFixture Fixture { get; set; }
 
-			return FileLoader.Registry;
+		private VkRegistry SubjectUnderTest()
+		{
+			return Fixture.VkRegistry;
 		}
 
 		[Fact]
@@ -41,7 +28,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var types = vk.enums.Where(x => x.name != "API Constants");
+			var types = vk.Enums;
 
 			types.Should().HaveCount(74);
 
@@ -49,7 +36,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			foreach (var type in types)
 			{
-				var map = AMapper.Map<EnumDefinition>(type);
+				var map = Fixture.SpecMapper.Map<EnumDefinition>(type);
 				maps.Add(map);
 			}
 
@@ -61,9 +48,9 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var type = vk.enums.Where(x => x.name == "VkImageLayout").FirstOrDefault();
+			var type = vk.Enums.Where(x => x.Name == "VkImageLayout").FirstOrDefault();
 
-			var map = AMapper.Map<EnumDefinition>(type);
+			var map = Fixture.SpecMapper.Map<EnumDefinition>(type);
 
 			map.SpecName.Should().Be("VkImageLayout");
 			//map.TranslatedName.Should().Be("ImageLayout");
@@ -76,9 +63,9 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var type = vk.enums.Where(x => x.name == "VkQueueFlagBits").FirstOrDefault();
+			var type = vk.Enums.Where(x => x.Name == "VkQueueFlagBits").FirstOrDefault();
 
-			var map = AMapper.Map<EnumDefinition>(type);
+			var map = Fixture.SpecMapper.Map<EnumDefinition>(type);
 
 			map.SpecName.Should().Be("VkQueueFlagBits");
 			//map.TranslatedName.Should().Be("QueueFlags");
@@ -91,9 +78,9 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var type = vk.enums.Where(x => x.name == "VkAccessFlagBits").FirstOrDefault();
+			var type = vk.Enums.Where(x => x.Name == "VkAccessFlagBits").FirstOrDefault();
 
-			var map = AMapper.Map<EnumDefinition>(type);
+			var map = Fixture.SpecMapper.Map<EnumDefinition>(type);
 
 			map.SpecName.Should().Be("VkAccessFlagBits");
 			//map.TranslatedName.Should().Be("QueueFlags");
@@ -103,7 +90,5 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 			map.Members[0].Value.Should().Be("0x1");
 			map.Members[1].Value.Should().Be("0x2");
 		}
-
-		private IMapper AMapper { get; }
 	}
 }

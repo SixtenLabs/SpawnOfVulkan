@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
 using System;
+using SixtenLabs.Spawn.Vulkan.Spec;
 
 namespace SixtenLabs.Vulkan.Generator
 {
@@ -40,9 +41,9 @@ namespace SixtenLabs.Vulkan.Generator
 
 			SimpleContainer.RegisterSingleton<ISpawnService, SpawnService>();
 			SimpleContainer.RegisterSingleton<IGeneratorSettings, VulkanSettings>();
-			SimpleContainer.RegisterSingleton<XmlFileLoader<registry>>();
+			SimpleContainer.RegisterSingleton<XmlFileLoader<VkRegistry>>();
 			SimpleContainer.Register<VulkanGenerator>();
-			SimpleContainer.RegisterSingleton<ISpawnSpec<registry>, VulkanSpec>();
+			SimpleContainer.RegisterSingleton<ISpawnSpec<VkRegistry>, VulkanSpec>();
 			SimpleContainer.RegisterSingleton<ICodeGenerator, CSharpGenerator>();
 			SimpleContainer.RegisterSingleton<IWebClientFactory, WebClientFactory>();
 

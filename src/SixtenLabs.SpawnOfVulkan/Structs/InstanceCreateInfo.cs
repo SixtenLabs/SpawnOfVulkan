@@ -9,8 +9,8 @@ namespace SixtenLabs.SpawnOfVulkan
         internal uint flags;
         internal ApplicationInfo pApplicationInfo;
         internal uint enabledLayerCount;
-        internal char ppEnabledLayerNames;
+        internal string ppEnabledLayerNames;
         internal uint enabledExtensionCount;
-        internal char ppEnabledExtensionNames;
+        internal string ppEnabledExtensionNames;
     }
 }

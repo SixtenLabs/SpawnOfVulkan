@@ -2,11 +2,11 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    unsafe internal struct DebugMarkerMarkerInfoExt
+    unsafe public struct DebugMarkerMarkerInfoExt
     {
         internal StructureType sType;
         internal IntPtr pNext;
-        internal char pMarkerName;
+        internal string pMarkerName;
         internal unsafe fixed float color[4];
     }
 }

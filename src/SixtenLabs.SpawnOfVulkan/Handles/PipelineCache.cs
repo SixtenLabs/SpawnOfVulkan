@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    public struct PipelineCache
+    public class PipelineCache
     {
     }
 }

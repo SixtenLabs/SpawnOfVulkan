@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SixtenLabs.Spawn.CSharp;
+using SixtenLabs.Spawn.Vulkan.Spec;
 using System;
 
 namespace SixtenLabs.Spawn.Vulkan
@@ -12,12 +13,12 @@ namespace SixtenLabs.Spawn.Vulkan
 		/// </summary>
 		private void ConfigureApiConstantsMapping()
 		{
-			CreateMap<registryEnums, ClassDefinition>()
-				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(m => m.name))
-				.ForMember(dest => dest.Fields, opt => opt.MapFrom(m => m.@enum));
+			CreateMap<VkConstants, ClassDefinition>()
+				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(m => m.Name))
+				.ForMember(dest => dest.Fields, opt => opt.MapFrom(m => m.Values));
 
-			CreateMap<registryEnumsEnum, FieldDefinition>()
-				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(m => m.name))
+			CreateMap<VkConstantValue, FieldDefinition>()
+				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(m => m.Name))
 				.ForMember(dest => dest.SpecReturnType, opt => opt.MapFrom(m => ProcessReturnType(m)))
 				.ForMember(dest => dest.TranslatedReturnType, opt => opt.MapFrom(m => ProcessReturnType(m)))
 				.ForMember(dest => dest.DefaultValue, opt => opt.MapFrom(m => ProcessFieldReturnValue(m)));
@@ -25,14 +26,14 @@ namespace SixtenLabs.Spawn.Vulkan
 
 		private void ConfigureEnumMapping()
 		{
-			CreateMap<registryEnums, EnumDefinition>()
-				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(m => m.name))
-				.ForMember(dest => dest.HasFlags, opt => opt.MapFrom(m => m.type == "bitmask"))
-				.ForMember(dest => dest.Members, opt => opt.MapFrom(m => m.@enum));
+			CreateMap<VkEnum, EnumDefinition>()
+				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(m => m.Name))
+				.ForMember(dest => dest.HasFlags, opt => opt.MapFrom(m => m.IsFlags))
+				.ForMember(dest => dest.Members, opt => opt.MapFrom(m => m.Values));
 
-			CreateMap<registryEnumsEnum, EnumMemberDefinition>()
-				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(m => m.name))
-				.ForMember(dest => dest.Comments, opt => opt.MapFrom(m => AddComment(m.comment)))
+			CreateMap<VkEnumValue, EnumMemberDefinition>()
+				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(m => m.Name))
+				.ForMember(dest => dest.Comments, opt => opt.MapFrom(m => AddComment(m.Comment)))
 				.ForMember(dest => dest.Value, opt => opt.MapFrom(m => ProcessEnumValue(m)));
 		}
 
@@ -42,60 +43,60 @@ namespace SixtenLabs.Spawn.Vulkan
 			ConfigureApiConstantsMapping();
 		}
 
-		private string ProcessEnumValue(registryEnumsEnum enumValue)
+		private string ProcessEnumValue(VkEnumValue enumValue)
 		{
-			if(enumValue.bitposSpecified)
+			if(!string.IsNullOrEmpty(enumValue.BitPos))
 			{
-				return enumValue.bitpos.FormatFlagValue();
+				return enumValue.BitPos.FormatFlagValue();
 			}
 			else
 			{
-				return enumValue.value;
+				return enumValue.Value;
 			}
 		}
 
-		private LiteralDefinition ProcessFieldReturnValue(registryEnumsEnum returnValue)
+		private LiteralDefinition ProcessFieldReturnValue(VkConstantValue returnValue)
 		{
 			LiteralDefinition value = null;
 
-			if (!string.IsNullOrEmpty(returnValue.value))
+			if (!string.IsNullOrEmpty(returnValue.Value))
 			{
-				if (returnValue.value.Contains("f"))
+				if (returnValue.Value.Contains("f"))
 				{
-					value = new LiteralDefinition() { Value = returnValue.value.Replace("f", ""), LiteralType = typeof(float) };
+					value = new LiteralDefinition() { Value = returnValue.Value.Replace("f", ""), LiteralType = typeof(float) };
 				}
-				else if (returnValue.value.Contains("(~0U)"))
+				else if (returnValue.Value.Contains("(~0U)"))
 				{
 					value = new LiteralDefinition() { Value = "uint.MaxValue", LiteralType = typeof(uint) };
 				}
-				else if (returnValue.value.Contains("(~0ULL)"))
+				else if (returnValue.Value.Contains("(~0ULL)"))
 				{
 					value = new LiteralDefinition() { Value = "ulong.MaxValue", LiteralType = typeof(ulong) };
 				}
 				else
 				{
-					value = new LiteralDefinition() { Value = returnValue.value, LiteralType = typeof(int) };
+					value = new LiteralDefinition() { Value = returnValue.Value, LiteralType = typeof(int) };
 				}
 			}
 
 			return value;
 		}
 
-		private string ProcessReturnType(registryEnumsEnum ree)
+		private string ProcessReturnType(VkConstantValue ree)
 		{
 			string type = null;
 
-			if (!string.IsNullOrEmpty(ree.value))
+			if (!string.IsNullOrEmpty(ree.Value))
 			{
-				if (ree.value.Contains("f"))
+				if (ree.Value.Contains("f"))
 				{
 					type = "float";
 				}
-				else if (ree.value.Contains("(~0U)"))
+				else if (ree.Value.Contains("(~0U)"))
 				{
 					type = "uint";
 				}
-				else if (ree.value.Contains("(~0ULL)"))
+				else if (ree.Value.Contains("(~0ULL)"))
 				{
 					type = "ulong";
 				}

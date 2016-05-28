@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    public struct SwapchainKhr
+    public class SwapchainKhr
     {
     }
 }

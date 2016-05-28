@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    unsafe internal struct XlibSurfaceCreateInfoKhr
+    unsafe public struct XlibSurfaceCreateInfoKhr
     {
         internal StructureType sType;
         internal IntPtr pNext;

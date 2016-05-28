@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    unsafe internal struct AndroidSurfaceCreateInfoKhr
+    unsafe public struct AndroidSurfaceCreateInfoKhr
     {
         internal StructureType sType;
         internal IntPtr pNext;

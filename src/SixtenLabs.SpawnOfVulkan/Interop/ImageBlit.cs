@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    unsafe internal struct ImageBlit
+    unsafe public struct ImageBlit
     {
         internal ImageSubresourceLayers srcSubresource;
         internal Offset3D srcOffsets;

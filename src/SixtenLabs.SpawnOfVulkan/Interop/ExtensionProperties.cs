@@ -2,9 +2,9 @@
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-    unsafe internal struct ExtensionProperties
+    unsafe public struct ExtensionProperties
     {
-        internal unsafe fixed char extensionName[256];
+        internal string extensionName;
         internal uint specVersion;
     }
 }

@@ -10,9 +10,9 @@ namespace SixtenLabs.SpawnOfVulkan
         internal uint queueCreateInfoCount;
         internal DeviceQueueCreateInfo pQueueCreateInfos;
         internal uint enabledLayerCount;
-        internal char ppEnabledLayerNames;
+        internal string ppEnabledLayerNames;
         internal uint enabledExtensionCount;
-        internal char ppEnabledExtensionNames;
+        internal string ppEnabledExtensionNames;
         internal PhysicalDeviceFeatures pEnabledFeatures;
     }
 }

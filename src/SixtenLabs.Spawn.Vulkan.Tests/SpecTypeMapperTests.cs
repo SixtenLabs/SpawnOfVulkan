@@ -7,89 +7,77 @@ using System.Xml.Linq;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using SixtenLabs.Spawn.Vulkan.Spec;
 
 namespace SixtenLabs.Spawn.Vulkan.Tests
 {
-	public class SpecTypeMapperTests
+	public class SpecTypeMapperTests : IClassFixture<SpecFixture>
 	{
-		private XmlFileLoader<registry> FileLoader { get; set; }
-
-		private VulkanSettings Settings { get; } = new VulkanSettings();
-
-		public SpecTypeMapperTests()
+		public SpecTypeMapperTests(SpecFixture fixture)
 		{
-			FileLoader = new XmlFileLoader<registry>(Settings, new WebClientFactory());
-
-			var config = new MapperConfiguration(cfg =>
-			{
-				cfg.AddProfile(new SpecTypeMapper());
-			});
-
-			Mapper.AssertConfigurationIsValid();
-
-			AMapper = config.CreateMapper();
+			Fixture = fixture;
 		}
 
-		private registry SubjectUnderTest()
-		{
-			FileLoader.LoadRegistry();
+		private SpecFixture Fixture { get; set; }
 
-			return FileLoader.Registry;
+		private VkRegistry SubjectUnderTest()
+		{
+			return Fixture.VkRegistry;
 		}
 
-		[Fact]
-		public void all_Types_Process()
-		{
-			var vk = SubjectUnderTest();
+		//[Fact]
+		//public void all_Types_Process()
+		//{
+		//	var vk = SubjectUnderTest();
 
-			var types = vk.types;
+		//	var types = vk.types;
 
-			types.Should().HaveCount(377);
+		//	types.Should().HaveCount(377);
 
-			var maps = GetMapsFromTypes(types);
+		//	var maps = GetMapsFromTypes(types);
 
-			maps.Should().HaveCount(377);
-			var nullTranslatedNameMaps = maps.Where(x => x.TranslatedName == null);
-			nullTranslatedNameMaps.Count(x => x.TranslatedName == null).Should().Be(0);
+		//	maps.Should().HaveCount(377);
+		//	var nullTranslatedNameMaps = maps.Where(x => x.TranslatedName == null);
+		//	nullTranslatedNameMaps.Count(x => x.TranslatedName == null).Should().Be(0);
 
-			var nullSpecNameMaps = maps.Where(x => x.SpecName == null);
-			nullSpecNameMaps.Count(x => x.SpecName == null).Should().Be(0);
-		}
+		//	var nullSpecNameMaps = maps.Where(x => x.SpecName == null);
+		//	nullSpecNameMaps.Count(x => x.SpecName == null).Should().Be(0);
+		//}
 
-		[Fact]
-		public void vkPlatform_Types_Process()
-		{
-			var vk = SubjectUnderTest();
+		//[Fact]
+		//public void vkPlatform_Types_Process()
+		//{
+		//	var vk = SubjectUnderTest();
 
-			var types = vk.types.Where(x => x.requires == "vk_platform");
-			
-			types.Should().HaveCount(8);
+		//	var types = vk.Requires;
 
-			var maps = GetMapsFromTypes(types);
+		//	types.Should().HaveCount(8);
 
-			maps.Should().HaveCount(8);
-		}
+		//	var maps = GetMapsFromTypes(types);
 
-		[Fact]
-		public void requiresNotEnums_Types_Process()
-		{
-			var vk = SubjectUnderTest();
+		//	maps.Should().HaveCount(8);
+		//}
 
-			var types = vk.types.Where(x => !string.IsNullOrEmpty(x.requires) && !x.requires.Contains("Bits"));
+		//[Fact]
+		//public void requiresNotEnums_Types_Process()
+		//{
+		//	var vk = SubjectUnderTest();
 
-			types.Should().HaveCount(21);
+		//	var types = vk.types.Where(x => !string.IsNullOrEmpty(x.requires) && !x.requires.Contains("Bits"));
 
-			var maps = GetMapsFromTypes(types);
+		//	types.Should().HaveCount(21);
 
-			maps.Should().HaveCount(21);
-		}
+		//	var maps = GetMapsFromTypes(types);
+
+		//	maps.Should().HaveCount(21);
+		//}
 
 		[Fact]
 		public void basetype_Types_Process()
 		{
 			var vk = SubjectUnderTest();
 
-			var types = vk.types.Where(x => x.category == "basetype");
+			var types = vk.BaseTypes;
 
 			types.Should().HaveCount(4);
 
@@ -103,7 +91,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var types = vk.types.Where(x => x.category == "bitmask");
+			var types = vk.Bitmasks;
 
 			types.Should().HaveCount(71);
 
@@ -117,7 +105,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var types = vk.types.Where(x => x.category == "handle");
+			var types = vk.Handles;
 
 			types.Should().HaveCount(30);
 
@@ -131,7 +119,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var types = vk.types.Where(x => x.category == "enum");
+			var types = vk.TypeEnums;
 
 			types.Should().HaveCount(95);
 
@@ -145,7 +133,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var types = vk.types.Where(x => x.category == "funcpointer");
+			var types = vk.TypeFuncPointers;
 
 			types.Should().HaveCount(7);
 
@@ -159,7 +147,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var types = vk.types.Where(x => x.category == "struct");
+			var types = vk.TypeStructs;
 
 			types.Should().HaveCount(129);
 
@@ -168,30 +156,30 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 			maps.Should().HaveCount(129);
 		}
 
-		[Fact]
-		public void structx_Types_Process()
-		{
-			var vk = SubjectUnderTest();
+		//[Fact]
+		//public void structx_Types_Process()
+		//{
+		//	var vk = SubjectUnderTest();
 
-			var types = vk.types.Where(x => x.category == "struct");
+		//	var types = vk.TypeStructs;
 
-			var maps = GetMapsFromTypes(types);
+		//	var maps = GetMapsFromTypes(types);
 
-			var typeDef = maps.Where(x => x.SpecName == "VkDebugMarkerObjectNameInfoEXT").FirstOrDefault();
+		//	var typeDef = maps.Where(x => x.SpecName == "VkDebugMarkerObjectNameInfoEXT").FirstOrDefault();
 
-			typeDef.SpecName.Should().Be("VkDebugMarkerObjectNameInfoEXT");
-			typeDef.TranslatedName.Should().Be("DebugMarkerObjectNameInfoExt");
-			typeDef.Children.Should().HaveCount(5);
+		//	typeDef.SpecName.Should().Be("VkDebugMarkerObjectNameInfoEXT");
+		//	typeDef.TranslatedName.Should().Be("DebugMarkerObjectNameInfoExt");
+		//	typeDef.Children.Should().HaveCount(5);
 
-			maps.Should().HaveCount(129);
-		}
+		//	maps.Should().HaveCount(129);
+		//}
 
 		[Fact]
 		public void union_Types_Process()
 		{
 			var vk = SubjectUnderTest();
 
-			var types = vk.types.Where(x => x.category == "union");
+			var types = vk.TypeUnions;
 
 			types.Should().HaveCount(2);
 
@@ -205,7 +193,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var types = vk.types.Where(x => x.category == "include");
+			var types = vk.Includes;
 
 			types.Should().HaveCount(8);
 
@@ -219,7 +207,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var types = vk.types.Where(x => x.category == "define");
+			var types = vk.Defines;
 
 			types.Should().HaveCount(10);
 
@@ -233,9 +221,9 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var types = vk.enums.Where(x => x.name != "API Constants").SelectMany(x => x.@enum);
+			var types = vk.Enums.SelectMany(x => x.Values);
 			types.Should().HaveCount(623);
-		
+
 			var maps = GetMapsFromTypes(types);
 
 			maps.Should().HaveCount(623);
@@ -246,7 +234,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			var vk = SubjectUnderTest();
 
-			var types = vk.commands;
+			var types = vk.Commands;
 
 			types.Should().HaveCount(174);
 
@@ -261,13 +249,11 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			foreach (var type in types)
 			{
-				var map = AMapper.Map<SpecTypeDefinition>(type);
+				var map = Fixture.SpecMapper.Map<SpecTypeDefinition>(type);
 				maps.Add(map);
 			}
 
 			return maps;
 		}
-
-		private IMapper AMapper { get; }
 	}
 }
