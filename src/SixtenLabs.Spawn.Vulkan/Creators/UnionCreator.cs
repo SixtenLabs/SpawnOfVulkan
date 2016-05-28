@@ -10,6 +10,7 @@ namespace SixtenLabs.Spawn.Vulkan
 		public UnionCreator(ICodeGenerator generator, ISpawnSpec<VkRegistry> spawnSpec)
 			: base(generator, spawnSpec, "Union Creator", 40)
 		{
+			Off = true;
 		}
 
 		public override int Rewrite()

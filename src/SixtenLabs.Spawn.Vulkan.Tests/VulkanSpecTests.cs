@@ -2,6 +2,7 @@
 using FluentAssertions;
 using NSubstitute;
 using SixtenLabs.Spawn.Vulkan.Spec;
+using AutoMapper;
 
 namespace SixtenLabs.Spawn.Vulkan.Tests
 {
@@ -11,7 +12,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		{
 			MockSettings = Substitute.For<IGeneratorSettings>();
 			MockWebClientFactory = Substitute.For<IWebClientFactory>();
-			MockFileLoader = Substitute.For<XmlFileLoader<VkRegistry>>(MockSettings, MockWebClientFactory);
+			MockFileLoader = Substitute.For<XmlFileLoader>(MockSettings, MockWebClientFactory);
 
 			return new VulkanSpec(MockFileLoader);
 		}
@@ -24,7 +25,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 			subject.Should().NotBeNull();
 		}
 
-		private XmlFileLoader<VkRegistry> MockFileLoader { get; set; }
+		private XmlFileLoader MockFileLoader { get; set; }
 
 		private IGeneratorSettings MockSettings { get; set; }
 

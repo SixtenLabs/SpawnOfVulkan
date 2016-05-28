@@ -36,57 +36,58 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		//	MockMapper.Received(MockRegistry.types.Length).Map<registryType, SpecTypeDefinition>(Arg.Any<registryType>());
 		//}
 
-		[Fact]
-		public void Start_Initialize_SpawnInitializeCalled()
-		{
-			var subject = SubjectUnderTest();
+		//[Fact]
+		//public void Start_Initialize_SpawnInitializeCalled()
+		//{
+		//	var subject = SubjectUnderTest();
 
-			MockSpawnSpec.SpecTree.Returns(MockRegistry);
+		//	MockSpawnSpec.SpecTree.Returns(MockRegistry);
 
-			subject.Start();
+		//	subject.Start();
 
-			MockSpawnService.Received(1).Initialize(Arg.Is(@"C:\Users\pglas\Documents\GitHub\SixtenLabs\SpawnOfVulkan\SpawnOfVulkan.sln"));
-		}
+		//	MockSpawnService.Received(1).Initialize(Arg.Is(@"C:\Users\pglas\Documents\GitHub\SixtenLabs\SpawnOfVulkan\SpawnOfVulkan.sln"));
+		//}
 
-		[Fact]
-		public void Start_Initialize_SpawnSpecProcessRegistryCalled()
-		{
-			var subject = SubjectUnderTest();
+		//[Fact]
+		//public void Start_Initialize_SpawnSpecProcessRegistryCalled()
+		//{
+		//	var subject = SubjectUnderTest();
 
-			MockSpawnSpec.SpecTree.Returns(MockRegistry);
+		//	MockSpawnSpec.SpecTree.Returns(MockRegistry);
 
-			subject.Start();
+		//	subject.Start();
 
-			MockSpawnSpec.Received(1).ProcessRegistry();
-		}
+		//	MockSpawnSpec.Received(1).ProcessRegistry();
+		//}
 
-		[Fact]
-		public void Start_MapEnums_CalledOnceForEachType()
-		{
-			var subject = SubjectUnderTest();
+		//[Fact]
+		//public void Start_MapEnums_CalledOnceForEachType()
+		//{
+		//	var subject = SubjectUnderTest();
 
-			MockSpawnSpec.SpecTree.Returns(MockRegistry);
+		//	MockSpawnSpec.SpecTree.Returns(MockRegistry);
 
-			subject.Start();
+		//	subject.Start();
 
-			MockMapper.Received(MockRegistry.Enums.Count).Map<VkEnumValue, SpecTypeDefinition>(Arg.Any<VkEnumValue>());
-		}
+		//	MockMapper.Received(MockRegistry.Enums.Count).Map<VkEnumValue, SpecTypeDefinition>(Arg.Any<VkEnumValue>());
+		//}
 
-		[Fact]
-		public void Start_MapCommands_CalledOnceForEachType()
-		{
-			var subject = SubjectUnderTest();
+		//[Fact]
+		//public void Start_MapCommands_CalledOnceForEachType()
+		//{
+		//	var subject = SubjectUnderTest();
 
-			MockSpawnSpec.SpecTree.Returns(MockRegistry);
+		//	MockSpawnSpec.SpecTree.Returns(MockRegistry);
 
-			subject.Start();
+		//	subject.Start();
 
-			MockMapper.Received(MockRegistry.Commands.Count).Map<VkEnumValue, SpecTypeDefinition>(Arg.Any<VkEnumValue>());
-		}
+		//	MockMapper.Received(MockRegistry.Commands.Count).Map<VkEnumValue, SpecTypeDefinition>(Arg.Any<VkEnumValue>());
+		//}
 
 		private void CreateMockRegistry()
 		{
 			MockRegistry = Substitute.For<VkRegistry>();
+			//MockRegistry.Constants.Returns(new VkConstant());
 			//MockRegistry. = new registryType[] { new registryType() { name = "blah" } };
 			//MockRegistry.enums = new registryEnums[] { new registryEnums() { name = "blah", @enum = new registryEnumsEnum[] { new registryEnumsEnum() { name = "blah" } }  } };
 			//MockRegistry.commands = new registryCommand[] { new registryCommand() { proto = new registryCommandProto() { name = "blah" } } };

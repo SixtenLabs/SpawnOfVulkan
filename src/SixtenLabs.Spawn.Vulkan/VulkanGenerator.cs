@@ -31,13 +31,26 @@ namespace SixtenLabs.Spawn.Vulkan
 		private void Initialize()
 		{
 			Spawn.Initialize(@"C:\Users\pglas\Documents\GitHub\SixtenLabs\SpawnOfVulkan\SpawnOfVulkan.sln");
+			
+			// Merge these two methods into one in Spawn (rename to initialize)			
 			SpawnSpec.ProcessRegistry();
+			SpawnSpec.CreateSpecTree(Mapper);
+
 			SetupGeneratedComments();
 			Console.WriteLine("Spawn Vulkan Generator Initialized, processing has begun.");
 		}
 
 		private void MapTypes()
 		{
+			var constSpecTypeDefinition = Mapper.Map<VkConstant, SpecTypeDefinition>(SpawnSpec.SpecTree.Constants);
+			SpawnSpec.AddSpecTypeDefinition(constSpecTypeDefinition);
+
+			foreach (var regType in SpawnSpec.SpecTree.Constants.Values)
+			{
+				var specTypeDefinition = Mapper.Map<VkConstantValue, SpecTypeDefinition>(regType);
+				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
+			}
+
 			foreach (var regType in SpawnSpec.SpecTree.TypeStructs)
 			{
 				var specTypeDefinition = Mapper.Map<VkTypeStruct, SpecTypeDefinition>(regType);

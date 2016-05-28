@@ -41,7 +41,7 @@ namespace SixtenLabs.Vulkan.Generator
 
 			SimpleContainer.RegisterSingleton<ISpawnService, SpawnService>();
 			SimpleContainer.RegisterSingleton<IGeneratorSettings, VulkanSettings>();
-			SimpleContainer.RegisterSingleton<XmlFileLoader<VkRegistry>>();
+			SimpleContainer.RegisterSingleton<XmlFileLoader>();
 			SimpleContainer.Register<VulkanGenerator>();
 			SimpleContainer.RegisterSingleton<ISpawnSpec<VkRegistry>, VulkanSpec>();
 			SimpleContainer.RegisterSingleton<ICodeGenerator, CSharpGenerator>();

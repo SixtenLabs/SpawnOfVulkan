@@ -10,6 +10,7 @@ namespace SixtenLabs.Spawn.Vulkan
 		public EnumCreator(ICodeGenerator generator, ISpawnSpec<VkRegistry> spawnSpec)
 			: base(generator, spawnSpec, "Enum Creator", 10)
 		{
+			Off = true;
 		}
 
 		public override int Build(IMapper mapper)

@@ -53,12 +53,12 @@
       <HintPath>..\..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FluentAssertions, Version=4.6.1.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\FluentAssertions.4.6.1\lib\net45\FluentAssertions.dll</HintPath>
+    <Reference Include="FluentAssertions, Version=4.6.3.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FluentAssertions.4.6.3\lib\net45\FluentAssertions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FluentAssertions.Core, Version=4.6.1.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\FluentAssertions.4.6.1\lib\net45\FluentAssertions.Core.dll</HintPath>
+    <Reference Include="FluentAssertions.Core, Version=4.6.3.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FluentAssertions.4.6.3\lib\net45\FluentAssertions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -97,12 +97,12 @@
       <HintPath>..\..\packages\NSubstitute.1.10.0.0\lib\net45\NSubstitute.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SixtenLabs.Spawn, Version=1.0.50.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\..\packages\SixtenLabs.Spawn.1.0.50\lib\net461\SixtenLabs.Spawn.dll</HintPath>
+    <Reference Include="SixtenLabs.Spawn, Version=1.0.53.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\..\packages\SixtenLabs.Spawn.1.0.53\lib\net461\SixtenLabs.Spawn.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SixtenLabs.Spawn.CSharp, Version=1.0.50.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\..\packages\SixtenLabs.Spawn.CSharp.1.0.50\lib\net461\SixtenLabs.Spawn.CSharp.dll</HintPath>
+    <Reference Include="SixtenLabs.Spawn.CSharp, Version=1.0.53.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\..\packages\SixtenLabs.Spawn.CSharp.1.0.53\lib\net461\SixtenLabs.Spawn.CSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

@@ -67,12 +67,12 @@
       <HintPath>..\..\packages\Microsoft.VisualStudio.LanguageServices.1.2.2\lib\net46\Microsoft.VisualStudio.LanguageServices.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SixtenLabs.Spawn, Version=1.0.50.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\..\packages\SixtenLabs.Spawn.1.0.50\lib\net461\SixtenLabs.Spawn.dll</HintPath>
+    <Reference Include="SixtenLabs.Spawn, Version=1.0.53.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\..\packages\SixtenLabs.Spawn.1.0.53\lib\net461\SixtenLabs.Spawn.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SixtenLabs.Spawn.CSharp, Version=1.0.50.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\..\packages\SixtenLabs.Spawn.CSharp.1.0.50\lib\net461\SixtenLabs.Spawn.CSharp.dll</HintPath>
+    <Reference Include="SixtenLabs.Spawn.CSharp, Version=1.0.53.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\..\packages\SixtenLabs.Spawn.CSharp.1.0.53\lib\net461\SixtenLabs.Spawn.CSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -133,7 +133,7 @@
     <Compile Include="Spec\VkApiRequire.cs" />
     <Compile Include="Spec\VkApiRequireMember.cs" />
     <Compile Include="Spec\VkCommand.cs" />
-    <Compile Include="Spec\VkConstants.cs" />
+    <Compile Include="Spec\VkConstant.cs" />
     <Compile Include="Spec\VkConstantValue.cs" />
     <Compile Include="Spec\VkEnum.cs" />
     <Compile Include="Spec\VkEnumValue.cs" />

@@ -16,7 +16,7 @@ namespace SixtenLabs.Spawn.Vulkan
 		{
 			var registryConstants = VulkanSpec.SpecTree.Constants;
 
-			var classDefinition = mapper.Map<VkConstants, ClassDefinition>(VulkanSpec.SpecTree.Constants);
+			var classDefinition = mapper.Map<VkConstant, ClassDefinition>(VulkanSpec.SpecTree.Constants);
 
 			classDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
 			classDefinition.AddModifier(SyntaxKindDto.StaticKeyword);

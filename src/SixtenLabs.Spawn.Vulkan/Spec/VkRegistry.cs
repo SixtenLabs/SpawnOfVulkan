@@ -30,7 +30,7 @@ namespace SixtenLabs.Spawn.Vulkan.Spec
 
 		public IList<VkTypeUnion> TypeUnions { get; } = new List<VkTypeUnion>();
 
-		public VkConstants Constants { get; set; }
+		public VkConstant Constants { get; set; }
 
 		public IList<VkEnum> Enums { get; } = new List<VkEnum>();
 

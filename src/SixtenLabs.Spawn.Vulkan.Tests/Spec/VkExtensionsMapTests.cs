@@ -17,7 +17,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests.Spec
 		{
 			var subject = Fixture.VkRegistry;
 
-			subject.Extensions.Should().HaveCount(23);
+			subject.Extensions.Should().HaveCount(26);
 		}
 
 		[Theory]
@@ -44,6 +44,9 @@ namespace SixtenLabs.Spawn.Vulkan.Tests.Spec
 		[InlineData("VK_AMD_extension_5", "21", "disabled", null, "AMD", "Daniel Rakos @aqnuep", 2, 0, 0, 0)]
 		[InlineData("VK_AMD_extension_6", "22", "disabled", null, "AMD", "Daniel Rakos @aqnuep", 2, 0, 0, 0)]
 		[InlineData("VK_EXT_debug_marker", "23", "vulkan", null, "Baldur Karlsson", "baldurk@baldurk.org", 5, 3, 5, 0)]
+		[InlineData("VK_AMD_extension_7", "24", "disabled", null, "AMD", "Daniel Rakos @aqnuep", 2, 0, 0, 0)]
+		[InlineData("VK_AMD_extension_8", "25", "disabled", null, "AMD", "Daniel Rakos @aqnuep", 2, 0, 0, 0)]
+		[InlineData("VK_AMD_extension_9", "26", "disabled", null, "AMD", "Daniel Rakos @aqnuep", 2, 0, 0, 0)]
 		public void VkRegistry_VkExtensions_MappedCorrectly(string name, string number, string supported, string protect, string author, string contact,
 			int enumCount, int typeCount, int commandCount, int usageCount)
 		{

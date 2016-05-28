@@ -277,7 +277,7 @@ namespace SixtenLabs.Spawn.Vulkan
 
 		private void ConfigureConstants()
 		{
-			CreateMap<XElement, VkConstants>()
+			CreateMap<XElement, VkConstant>()
 				.ForMember(dest => dest.Name, opt => opt.MapFrom(m => m.Attribute("name").Value))
 				.ForMember(dest => dest.Values, opt => opt.MapFrom(m => m.Elements("enum")));
 		}
@@ -506,9 +506,12 @@ namespace SixtenLabs.Spawn.Vulkan
 
 		private string MapFunctionPointerReturnType(XElement funcElement)
 		{
-			var funcParts = funcElement.FirstNode.ToString().Split(' ');
+			var funcParts = funcElement.FirstNode.ToString().Replace(Environment.NewLine, "").Replace("*", "").TrimStart();
 
-			return funcParts[7].Replace("*", "");
+			var start = 8;
+			var end = funcParts.IndexOf("(") - 9;
+
+			return funcParts.Substring(start, end);
 		}
 
 		private IList<XElement> GetTypesByCategory(XElement root, string category)

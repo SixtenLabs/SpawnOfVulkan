@@ -19,7 +19,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 		private SpecFixture Fixture { get; set; }
 
-		private VkConstants SubjectUnderTest()
+		private VkConstant SubjectUnderTest()
 		{
 			return Fixture.VkRegistry.Constants;
 		}

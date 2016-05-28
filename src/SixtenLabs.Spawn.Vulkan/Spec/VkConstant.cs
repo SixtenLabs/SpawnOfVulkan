@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.Spawn.Vulkan.Spec
 {
-	public class VkConstants
+	public class VkConstant
 	{
 		public string Name { get; set; }
 

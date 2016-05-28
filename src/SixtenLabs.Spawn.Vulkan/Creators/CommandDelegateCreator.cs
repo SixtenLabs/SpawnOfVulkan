@@ -14,6 +14,7 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 		public CommandDelegateCreator(ICodeGenerator generator, ISpawnSpec<VkRegistry> spawnSpec)
 			: base(generator, spawnSpec, "Command Delegate Creator", 80)
 		{
+			Off = true;
 		}
 
 		public override int Build(IMapper mapper)

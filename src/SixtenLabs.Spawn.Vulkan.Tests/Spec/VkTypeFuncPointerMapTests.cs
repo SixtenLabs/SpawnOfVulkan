@@ -1,6 +1,8 @@
 ﻿using Xunit;
 using FluentAssertions;
 
+using System.Linq;
+
 namespace SixtenLabs.Spawn.Vulkan.Tests.Spec
 {
 	public class VkTypeFuncPointerMapTests : IClassFixture<SpecFixture>
@@ -19,63 +21,62 @@ namespace SixtenLabs.Spawn.Vulkan.Tests.Spec
 		}
 
 		[Theory]
-		[InlineData(0, "PFN_vkInternalAllocationNotification", "void", 4)]
-		[InlineData(1, "PFN_vkInternalFreeNotification", "void", 4)]
-		[InlineData(2, "PFN_vkReallocationFunction", "void", 5)]
-		[InlineData(3, "PFN_vkAllocationFunction", "void", 4)]
-		[InlineData(4, "PFN_vkFreeFunction", "void", 2)]
-		[InlineData(5, "PFN_vkVoidFunction", "void", 0)]
-		[InlineData(6, "PFN_vkDebugReportCallbackEXT", "VkBool32", 8)]
-		public void VkRegistry_TypesFuncPointers_MappedCorrectly(int index, string name, string returnType, int parameterCount)
+		[InlineData("PFN_vkInternalAllocationNotification", "void", 4)]
+		[InlineData("PFN_vkInternalFreeNotification", "void", 4)]
+		[InlineData("PFN_vkReallocationFunction", "void", 5)]
+		[InlineData("PFN_vkAllocationFunction", "void", 4)]
+		[InlineData("PFN_vkFreeFunction", "void", 2)]
+		[InlineData("PFN_vkVoidFunction", "void", 0)]
+		[InlineData("PFN_vkDebugReportCallbackEXT", "VkBool32", 8)]
+		public void VkRegistry_TypesFuncPointers_MappedCorrectly(string name, string returnType, int parameterCount)
 		{
-			var subject = Fixture.VkRegistry;
+			var subject = Fixture.VkRegistry.TypeFuncPointers.Where(x => x.Name == name).FirstOrDefault();
 
-			subject.TypeFuncPointers[index].Name.Should().Be(name);
-			subject.TypeFuncPointers[index].ReturnType.Should().Be(returnType);
-			subject.TypeFuncPointers[index].Parameters.Count.Should().Be(parameterCount);
+			subject.ReturnType.Should().Be(returnType);
+			subject.Parameters.Count.Should().Be(parameterCount);
 		}
 
 		[Theory]
-		[InlineData(0, 0, "pUserData", "void", true, false)]
-		[InlineData(0, 1, "size", "size_t", false, false)]
-		[InlineData(0, 2, "allocationType", "VkInternalAllocationType", false, false)]
-		[InlineData(0, 3, "allocationScope", "VkSystemAllocationScope", false, false)]
+		[InlineData("PFN_vkInternalAllocationNotification", 0, "pUserData", "void", true, false)]
+		[InlineData("PFN_vkInternalAllocationNotification", 1, "size", "size_t", false, false)]
+		[InlineData("PFN_vkInternalAllocationNotification", 2, "allocationType", "VkInternalAllocationType", false, false)]
+		[InlineData("PFN_vkInternalAllocationNotification", 3, "allocationScope", "VkSystemAllocationScope", false, false)]
 
-		[InlineData(1, 0, "pUserData", "void", true, false)]
-		[InlineData(1, 1, "size", "size_t", false, false)]
-		[InlineData(1, 2, "allocationType", "VkInternalAllocationType", false, false)]
-		[InlineData(1, 3, "allocationScope", "VkSystemAllocationScope", false, false)]
+		[InlineData("PFN_vkInternalFreeNotification", 0, "pUserData", "void", true, false)]
+		[InlineData("PFN_vkInternalFreeNotification", 1, "size", "size_t", false, false)]
+		[InlineData("PFN_vkInternalFreeNotification", 2, "allocationType", "VkInternalAllocationType", false, false)]
+		[InlineData("PFN_vkInternalFreeNotification", 3, "allocationScope", "VkSystemAllocationScope", false, false)]
 
-		[InlineData(2, 0, "pUserData", "void", true, false)]
-		[InlineData(2, 1, "pOriginal", "void", true, false)]
-		[InlineData(2, 2, "size", "size_t", false, false)]
-		[InlineData(2, 3, "alignment", "size_t", false, false)]
-		[InlineData(2, 4, "allocationScope", "VkSystemAllocationScope", false, false)]
+		[InlineData("PFN_vkReallocationFunction", 0, "pUserData", "void", true, false)]
+		[InlineData("PFN_vkReallocationFunction", 1, "pOriginal", "void", true, false)]
+		[InlineData("PFN_vkReallocationFunction", 2, "size", "size_t", false, false)]
+		[InlineData("PFN_vkReallocationFunction", 3, "alignment", "size_t", false, false)]
+		[InlineData("PFN_vkReallocationFunction", 4, "allocationScope", "VkSystemAllocationScope", false, false)]
 
-		[InlineData(3, 0, "pUserData", "void", true, false)]
-		[InlineData(3, 1, "size", "size_t", false, false)]
-		[InlineData(3, 2, "alignment", "size_t", false, false)]
-		[InlineData(3, 3, "allocationScope", "VkSystemAllocationScope", false, false)]
+		[InlineData("PFN_vkAllocationFunction", 0, "pUserData", "void", true, false)]
+		[InlineData("PFN_vkAllocationFunction", 1, "size", "size_t", false, false)]
+		[InlineData("PFN_vkAllocationFunction", 2, "alignment", "size_t", false, false)]
+		[InlineData("PFN_vkAllocationFunction", 3, "allocationScope", "VkSystemAllocationScope", false, false)]
 
-		[InlineData(4, 0, "pUserData", "void", true, false)]
-		[InlineData(4, 1, "pMemory", "void", true, false)]
+		[InlineData("PFN_vkFreeFunction", 0, "pUserData", "void", true, false)]
+		[InlineData("PFN_vkFreeFunction", 1, "pMemory", "void", true, false)]
 
-		[InlineData(6, 0, "flags", "VkDebugReportFlagsEXT", false, false)]
-		[InlineData(6, 1, "objectType", "VkDebugReportObjectTypeEXT", false, false)]
-		[InlineData(6, 2, "object", "uint64_t", false, false)]
-		[InlineData(6, 3, "location", "size_t", false, false)]
-		[InlineData(6, 4, "messageCode", "int32_t", false, false)]
-		[InlineData(6, 5, "pLayerPrefix", "char", true, true)]
-		[InlineData(6, 6, "pMessage", "char", true, true)]
-		[InlineData(6, 7, "pUserData", "void", true, false)]
-		public void VkRegistry_TypesFuncPointersParameters_MappedCorrectly(int funcPointerIndex, int parameterIndex, string name, string returnType, bool isPointer, bool isConst)
+		[InlineData("PFN_vkDebugReportCallbackEXT", 0, "flags", "VkDebugReportFlagsEXT", false, false)]
+		[InlineData("PFN_vkDebugReportCallbackEXT", 1, "objectType", "VkDebugReportObjectTypeEXT", false, false)]
+		[InlineData("PFN_vkDebugReportCallbackEXT", 2, "object", "uint64_t", false, false)]
+		[InlineData("PFN_vkDebugReportCallbackEXT", 3, "location", "size_t", false, false)]
+		[InlineData("PFN_vkDebugReportCallbackEXT", 4, "messageCode", "int32_t", false, false)]
+		[InlineData("PFN_vkDebugReportCallbackEXT", 5, "pLayerPrefix", "char", true, true)]
+		[InlineData("PFN_vkDebugReportCallbackEXT", 6, "pMessage", "char", true, true)]
+		[InlineData("PFN_vkDebugReportCallbackEXT", 7, "pUserData", "void", true, false)]
+		public void VkRegistry_TypesFuncPointersParameters_MappedCorrectly(string funcPointerName, int parameterIndex, string name, string returnType, bool isPointer, bool isConst)
 		{
-			var subject = Fixture.VkRegistry;
+			var subject = Fixture.VkRegistry.TypeFuncPointers.Where(x => x.Name == funcPointerName).FirstOrDefault();
 
-			subject.TypeFuncPointers[funcPointerIndex].Parameters[parameterIndex].Name.Should().Be(name);
-			subject.TypeFuncPointers[funcPointerIndex].Parameters[parameterIndex].ReturnType.Should().Be(returnType);
-			subject.TypeFuncPointers[funcPointerIndex].Parameters[parameterIndex].IsPointer.Should().Be(isPointer);
-			subject.TypeFuncPointers[funcPointerIndex].Parameters[parameterIndex].IsConst.Should().Be(isConst);
+			subject.Parameters[parameterIndex].Name.Should().Be(name);
+			subject.Parameters[parameterIndex].ReturnType.Should().Be(returnType);
+			subject.Parameters[parameterIndex].IsPointer.Should().Be(isPointer);
+			subject.Parameters[parameterIndex].IsConst.Should().Be(isConst);
 		}
 
 		private SpecFixture Fixture { get; set; }

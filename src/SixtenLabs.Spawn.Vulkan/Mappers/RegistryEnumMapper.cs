@@ -13,7 +13,7 @@ namespace SixtenLabs.Spawn.Vulkan
 		/// </summary>
 		private void ConfigureApiConstantsMapping()
 		{
-			CreateMap<VkConstants, ClassDefinition>()
+			CreateMap<VkConstant, ClassDefinition>()
 				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(m => m.Name))
 				.ForMember(dest => dest.Fields, opt => opt.MapFrom(m => m.Values));
 
