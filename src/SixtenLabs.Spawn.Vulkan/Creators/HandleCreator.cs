@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using SixtenLabs.Spawn.CSharp;
 using SixtenLabs.Spawn.Vulkan.Spec;
-using System.Linq;
 
 namespace SixtenLabs.Spawn.Vulkan
 {
@@ -10,17 +9,21 @@ namespace SixtenLabs.Spawn.Vulkan
 		public HandleCreator(ICodeGenerator generator, ISpawnSpec<VkRegistry> spawnSpec)
 			: base(generator, spawnSpec, "Handle Creator", 20)
 		{
-			Off = true;
 		}
 
 		public override int Rewrite()
 		{
 			int count = 0;
 
-			foreach(var structDefinition in Definitions)
+			foreach(var definition in Definitions)
 			{
-				structDefinition.TranslatedName = VulkanSpec.GetTranslatedName(structDefinition.SpecName);
-				structDefinition.DerivedType = VulkanSpec.GetTranslatedName(structDefinition.SpecName);
+				definition.TranslatedName = VulkanSpec.GetTranslatedName(definition.SpecName);
+				definition.DerivedType = VulkanSpec.GetTranslatedName(definition.SpecName);
+
+				var nativePointer = new FieldDefinition() { SpecName = "NativePointer", SpecReturnType = "ulong" };
+				nativePointer.AddModifier(SyntaxKindDto.InternalKeyword);
+
+				definition.Fields.Add(nativePointer);
 
 				count++;
 			}
@@ -58,13 +61,6 @@ namespace SixtenLabs.Spawn.Vulkan
 				}
 
 				structDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
-
-				//foreach (var commentLine in classDefintion.Comments)
-				//{
-				//	output.CommentLines.Add(commentLine);
-				//}
-
-				output.AddStandardUsingDirective("System");
 
 				(Generator as CSharpGenerator).GenerateClass(output, structDefinition);
 				count++;

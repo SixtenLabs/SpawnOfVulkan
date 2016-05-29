@@ -57,6 +57,12 @@ namespace SixtenLabs.Spawn.Vulkan
 				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
 			}
 
+			foreach (var regType in SpawnSpec.SpecTree.Handles)
+			{
+				var specTypeDefinition = Mapper.Map<VkTypeHandle, SpecTypeDefinition>(regType);
+				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
+			}
+
 			foreach (var regType in SpawnSpec.SpecTree.TypeEnums)
 			{
 				var specTypeDefinition = Mapper.Map<VkTypeEnum, SpecTypeDefinition>(regType);
