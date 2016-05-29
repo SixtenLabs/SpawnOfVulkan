@@ -10,7 +10,6 @@ namespace SixtenLabs.Spawn.Vulkan
 		public EnumCreator(ICodeGenerator generator, ISpawnSpec<VkRegistry> spawnSpec)
 			: base(generator, spawnSpec, "Enum Creator", 10)
 		{
-			Off = true;
 		}
 
 		private string GetExtensionEnumValueValue(string extNum, VkExtensionEnum extEnum)
@@ -19,15 +18,19 @@ namespace SixtenLabs.Spawn.Vulkan
 
 			string extNumber = (int.Parse(extNum) - 1).ToString();
 
-			if(!string.IsNullOrEmpty(extEnum.Offset))
+			if (!string.IsNullOrEmpty(extEnum.Offset))
 			{
 				var baseValue = "100000";
 				value = $"{baseValue}{extNumber}00{extEnum.Offset}";
 
-				if(!string.IsNullOrEmpty(extEnum.Dir))
+				if (!string.IsNullOrEmpty(extEnum.Dir))
 				{
 					value = $"{extEnum.Dir}{value}";
 				}
+			}
+			else if (!string.IsNullOrEmpty(extEnum.BitPos))
+			{
+				value = extEnum.BitPos.FormatFlagValue();
 			}
 			else
 			{
@@ -37,15 +40,12 @@ namespace SixtenLabs.Spawn.Vulkan
 			return value;
 		}
 
-		private EnumMemberDefinition GetExtensionEnumValue(VkExtensionEnum extEnum)
+		private EnumMemberDefinition GetExtensionEnumValue(VkExtensionEnum extEnum, VkExtension parent)
 		{
 			EnumMemberDefinition extensionEnumDefinition = new EnumMemberDefinition();
 
-			// need parent extension name to get the number from the extension not the original enum.
-			var extNumber = VulkanSpec.SpecTree.Extensions.Where(x => x.Name == extEnum.Extends).FirstOrDefault().Number;
-
 			extensionEnumDefinition.SpecName = extEnum.Name;
-			extensionEnumDefinition.Value = GetExtensionEnumValueValue(extNumber, extEnum);
+			extensionEnumDefinition.Value = GetExtensionEnumValueValue(parent.Number, extEnum);
 
 			return extensionEnumDefinition;
 		}
@@ -53,10 +53,12 @@ namespace SixtenLabs.Spawn.Vulkan
 		private void GetExtensions(EnumDefinition enumDef)
 		{
 			var extEnumValues = VulkanSpec.SpecTree.Extensions.SelectMany(x => x.Enums).Where(x => x.Extends == enumDef.SpecName);
-
+			
 			foreach(var enumValue in extEnumValues)
 			{
-				var enumMemberDef = GetExtensionEnumValue(enumValue);
+				var parentExtension = VulkanSpec.SpecTree.Extensions.Where(x => x.Enums.Contains(enumValue)).FirstOrDefault();
+
+				var enumMemberDef = GetExtensionEnumValue(enumValue, parentExtension);
 
 				enumDef.Members.Add(enumMemberDef);
 			}
@@ -76,6 +78,19 @@ namespace SixtenLabs.Spawn.Vulkan
 			return Definitions.Count;
 		}
 
+		private void SetBaseType(EnumDefinition enumDefinition)
+		{
+			if (enumDefinition.Members.Any(x => x.Value.Length > 10))
+			{
+				enumDefinition.BaseType = SyntaxKindDto.LongKeyword;
+			}
+			else
+			{
+				enumDefinition.BaseType = SyntaxKindDto.IntKeyword;
+			}
+
+		}
+
 		public override int Rewrite()
 		{
 			int count = 0;
@@ -83,7 +98,7 @@ namespace SixtenLabs.Spawn.Vulkan
 			foreach (var enumDefinition in Definitions)
 			{
 				enumDefinition.TranslatedName = VulkanSpec.GetTranslatedName(enumDefinition.SpecName);
-				enumDefinition.BaseType = SyntaxKindDto.IntKeyword;
+				SetBaseType(enumDefinition);
 
 				foreach (var valueDefinition in enumDefinition.Members)
 				{
