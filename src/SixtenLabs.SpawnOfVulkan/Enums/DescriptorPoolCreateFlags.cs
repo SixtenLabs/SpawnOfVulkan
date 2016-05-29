@@ -1,10 +1,7 @@
-﻿using System;
-
-namespace SixtenLabs.SpawnOfVulkan
+﻿namespace SixtenLabs.SpawnOfVulkan
 {
-    [Flags]
     public enum DescriptorPoolCreateFlags : int
     {
-        DescriptorPoolCreateFreeDescriptorSetBit = 0x1
+        None = 0
     }
 }

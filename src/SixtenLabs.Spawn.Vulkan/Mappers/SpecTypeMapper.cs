@@ -20,11 +20,11 @@ namespace SixtenLabs.Spawn.Vulkan
 
 			CreateMap<VkTypeBaseType, SpecTypeDefinition>()
 				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
-				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src.Name)));
+				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedTypeName(src)));
 
 			CreateMap<VkTypeRequires, SpecTypeDefinition>()
 				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
-				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src.Name)));
+				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedTypeName(src)));
 
 			CreateMap<VkTypeBitmask, SpecTypeDefinition>()
 				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
@@ -50,7 +50,7 @@ namespace SixtenLabs.Spawn.Vulkan
 			CreateMap<VkTypeFuncPointer, SpecTypeDefinition>()
 				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
 				.ForMember(dest => dest.Children, opt => opt.MapFrom(m => m.Parameters))
-				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src.Name)));
+				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapFuncPointerTranslatedName(src.Name)));
 
 			CreateMap<VkTypeFuncPointerParameter, SpecTypeDefinition>()
 				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
@@ -110,24 +110,25 @@ namespace SixtenLabs.Spawn.Vulkan
 			return name;
 		}
 
-		// Requires
-		// BaseType
-		// BitMask
+		private string MapFuncPointerTranslatedName(string specName)
+		{
+			return "IntPtr";
+		}
+
 		private string MapTranslatedTypeName(VkTypeRequires type)
 		{
 			return CToCSharpTypes[type.Name];
 		}
 
-		private IList<string> Requires { get; } = new List<string>()
+		private string MapTranslatedTypeName(VkTypeBitmask type)
 		{
-			"X11/Xlib.h",
-			"android/native_window.h",
-			"mir_toolkit/client_types.h",
-			"wayland-client.h",
-			"windows.h",
-			"xcb/xcb.h",
-			"vk_platform"
-		};
+			return CToCSharpTypes[type.Name];
+		}
+
+		private string MapTranslatedTypeName(VkTypeBaseType type)
+		{
+			return CToCSharpTypes[type.Name];
+		}
 
 		/// <summary>
 		/// Translate the Vulkan types to C# types.
@@ -135,7 +136,7 @@ namespace SixtenLabs.Spawn.Vulkan
 		private IDictionary<string, string> CToCSharpTypes { get; } = new Dictionary<string, string>()
 		{
 			{ "void", "IntPtr" },
-			{ "char", "string" }, // Should this be string?
+			{ "char", "byte" },
 			{ "float", "float" },
 			{ "uint8_t", "byte" },
 			{ "uint32_t", "uint" },

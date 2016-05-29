@@ -58,9 +58,24 @@ namespace SixtenLabs.Spawn.Vulkan
 				}
 			}
 
+			if(char.IsLower(name[0]))
+			{
+				name = name.UpperCaseFirstLetter();
+			}
+
 			return name;
 		}
-				
+		
+		public static string UpperCaseFirstLetter(this string text)
+		{
+			if (string.IsNullOrEmpty(text))
+			{
+				return string.Empty;
+			}
+
+			return char.ToUpper(text[0]) + text.Substring(1);
+		} 
+	
 		private static IDictionary<string, string> NameCorrections { get; } = new Dictionary<string, string>()
 		{
 			{ "API", "Api" },

@@ -10,7 +10,7 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 		public StructCreator(ICodeGenerator generator, ISpawnSpec<VkRegistry> spawnSpec)
 			: base(generator, spawnSpec, "Struct Creator", 40)
 		{
-			Off = true;
+			//Off = true;
 		}
 
 		public override int Rewrite()

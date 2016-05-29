@@ -45,15 +45,66 @@ namespace SixtenLabs.Spawn.Vulkan
 			var constSpecTypeDefinition = Mapper.Map<VkConstant, SpecTypeDefinition>(SpawnSpec.SpecTree.Constants);
 			SpawnSpec.AddSpecTypeDefinition(constSpecTypeDefinition);
 
+			foreach (var regRequires in SpawnSpec.SpecTree.Requires)
+			{
+				var specTypeDefinition = Mapper.Map<VkTypeRequires, SpecTypeDefinition>(regRequires);
+				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
+			}
+
+			foreach (var regBaseType in SpawnSpec.SpecTree.BaseTypes)
+			{
+				var specTypeDefinition = Mapper.Map<VkTypeBaseType, SpecTypeDefinition>(regBaseType);
+				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
+			}
+
+			foreach (var regBitmask in SpawnSpec.SpecTree.Bitmasks)
+			{
+				var specTypeDefinition = Mapper.Map<VkTypeBitmask, SpecTypeDefinition>(regBitmask);
+				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
+			}
+
 			foreach (var regType in SpawnSpec.SpecTree.Constants.Values)
 			{
 				var specTypeDefinition = Mapper.Map<VkConstantValue, SpecTypeDefinition>(regType);
 				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
 			}
 
-			foreach (var regType in SpawnSpec.SpecTree.TypeStructs)
+			foreach (var regFuncPointer in SpawnSpec.SpecTree.TypeFuncPointers)
 			{
-				var specTypeDefinition = Mapper.Map<VkTypeStruct, SpecTypeDefinition>(regType);
+				var specTypeDefinition = Mapper.Map<VkTypeFuncPointer, SpecTypeDefinition>(regFuncPointer);
+
+				foreach (var regStructMember in regFuncPointer.Parameters)
+				{
+					var specMemberDefinition = Mapper.Map<VkTypeFuncPointerParameter, SpecTypeDefinition>(regStructMember);
+					specTypeDefinition.Children.Add(specMemberDefinition);
+				}
+
+				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
+			}
+
+			foreach (var regStruct in SpawnSpec.SpecTree.TypeStructs)
+			{
+				var specTypeDefinition = Mapper.Map<VkTypeStruct, SpecTypeDefinition>(regStruct);
+
+				foreach (var regStructMember in regStruct.Members)
+				{
+					var specMemberDefinition = Mapper.Map<VkTypeStructMember, SpecTypeDefinition>(regStructMember);
+					specTypeDefinition.Children.Add(specMemberDefinition);
+				}
+
+				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
+			}
+
+			foreach (var regUnion in SpawnSpec.SpecTree.TypeUnions)
+			{
+				var specTypeDefinition = Mapper.Map<VkTypeUnion, SpecTypeDefinition>(regUnion);
+
+				foreach (var regUnionMember in regUnion.Members)
+				{
+					var specMemberDefinition = Mapper.Map<VkTypeUnionMember, SpecTypeDefinition>(regUnionMember);
+					specTypeDefinition.Children.Add(specMemberDefinition);
+				}
+
 				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
 			}
 

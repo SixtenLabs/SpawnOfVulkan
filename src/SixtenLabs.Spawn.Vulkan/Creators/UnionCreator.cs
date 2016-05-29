@@ -10,7 +10,7 @@ namespace SixtenLabs.Spawn.Vulkan
 		public UnionCreator(ICodeGenerator generator, ISpawnSpec<VkRegistry> spawnSpec)
 			: base(generator, spawnSpec, "Union Creator", 40)
 		{
-			Off = true;
+			//Off = true;
 		}
 
 		public override int Rewrite()
@@ -21,6 +21,11 @@ namespace SixtenLabs.Spawn.Vulkan
 			{
 				structDefinition.TranslatedName = VulkanSpec.GetTranslatedName(structDefinition.SpecName);
 
+				var attribute = new AttributeDefinition() { SpecName = "StructLayout" };
+				attribute.ArgumentList.Add("LayoutKind.Explicit");
+
+				structDefinition.Attributes.Add(attribute);
+
 				if (!string.IsNullOrEmpty(structDefinition.SpecReturnType))
 				{
 					structDefinition.TranslatedReturnType = VulkanSpec.GetTranslatedName(structDefinition.SpecReturnType);
@@ -28,17 +33,25 @@ namespace SixtenLabs.Spawn.Vulkan
 
 				foreach (var fieldDefinition in structDefinition.Fields)
 				{
-					if (fieldDefinition.SpecName.Contains("["))
+					var fieldAttribute = new AttributeDefinition() { SpecName = "FieldOffset" };
+					fieldAttribute.ArgumentList.Add("0");
+
+					fieldDefinition.Attributes.Add(fieldAttribute);
+
+					if (fieldDefinition.ReturnTypeIsArray)
 					{
-						fieldDefinition.TranslatedName = fieldDefinition.SpecName.Substring(0, fieldDefinition.SpecName.IndexOf("["));
-						fieldDefinition.TranslatedReturnType = $"{VulkanSpec.GetTranslatedName(fieldDefinition.SpecReturnType)}[]";
+						var translatedName = VulkanSpec.GetTranslatedChildName(structDefinition.SpecName, fieldDefinition.SpecName);
+						fieldDefinition.TranslatedName = $"{translatedName}[{fieldDefinition.Tag}]";
+						fieldDefinition.TranslatedReturnType = VulkanSpec.GetTranslatedName(fieldDefinition.SpecReturnType);
+						fieldDefinition.AddModifier(SyntaxKindDto.InternalKeyword);
+						fieldDefinition.AddModifier(SyntaxKindDto.UnsafeKeyword);
+						fieldDefinition.AddModifier(SyntaxKindDto.FixedKeyword);
 					}
 					else
 					{
 						fieldDefinition.TranslatedReturnType = VulkanSpec.GetTranslatedName(fieldDefinition.SpecReturnType);
+						fieldDefinition.AddModifier(SyntaxKindDto.InternalKeyword);
 					}
-
-					fieldDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
 				}
 
 				count++;
@@ -49,11 +62,11 @@ namespace SixtenLabs.Spawn.Vulkan
 
 		public override int Build(IMapper mapper)
 		{
-			var registryStructs = VulkanSpec.SpecTree.TypeUnions;
+			var unions = VulkanSpec.SpecTree.TypeUnions;
 
-			foreach (var registryEnum in registryStructs)
+			foreach (var union in unions)
 			{
-				var structDefinition = mapper.Map<VkTypeUnion, StructDefinition>(registryEnum);
+				var structDefinition = mapper.Map<VkTypeUnion, StructDefinition>(union);
 				Definitions.Add(structDefinition);
 			}
 
@@ -70,15 +83,9 @@ namespace SixtenLabs.Spawn.Vulkan
 				output.TargetSolution = TargetSolution;
 				output.AddNamespace(TargetNamespace);
 				output.OutputDirectory = "Unions";
-				output.AddStandardUsingDirective("System");
-
+				output.AddStandardUsingDirective("System.Runtime.InteropServices");
 				structDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
-
-				//foreach (var commentLine in GeneratedComments)
-				//{
-				//	output.CommentLines.Add(commentLine);
-				//}
-
+				
 				(Generator as CSharpGenerator).GenerateStruct(output, structDefinition);
 				count++;
 			}

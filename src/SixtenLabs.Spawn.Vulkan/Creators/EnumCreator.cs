@@ -75,6 +75,19 @@ namespace SixtenLabs.Spawn.Vulkan
 				Definitions.Add(enumDefinition);
 			}
 
+			var vkFlagsEnums = VulkanSpec.SpecTree.Bitmasks.Where(x => x.Type == "VkFlags");
+
+			VulkanSpec.AddSpecTypeDefinition(new SpecTypeDefinition() { SpecName = "None", TranslatedName = "None" });
+
+			foreach (var vkFlagsEnum in vkFlagsEnums)
+			{
+				var enumDefinition = new EnumDefinition() { SpecName = vkFlagsEnum.Name };
+				var enumValueDef = new EnumMemberDefinition() { SpecName = "None", Value = "0" };
+				enumDefinition.Members.Add(enumValueDef);
+
+				Definitions.Add(enumDefinition);
+			}
+
 			return Definitions.Count;
 		}
 

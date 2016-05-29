@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SixtenLabs.SpawnOfVulkan
+﻿namespace SixtenLabs.SpawnOfVulkan
 {
     public class Semaphore
     {

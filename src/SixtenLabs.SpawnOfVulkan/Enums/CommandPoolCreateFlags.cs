@@ -1,11 +1,7 @@
-﻿using System;
-
-namespace SixtenLabs.SpawnOfVulkan
+﻿namespace SixtenLabs.SpawnOfVulkan
 {
-    [Flags]
     public enum CommandPoolCreateFlags : int
     {
-        CommandPoolCreateTransientBit = 0x1,
-        CommandPoolCreateResetCommandBufferBit = 0x2
+        None = 0
     }
 }
