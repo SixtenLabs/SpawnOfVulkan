@@ -57,6 +57,12 @@ namespace SixtenLabs.Spawn.Vulkan
 				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
 			}
 
+			foreach (var regType in SpawnSpec.SpecTree.TypeEnums)
+			{
+				var specTypeDefinition = Mapper.Map<VkTypeEnum, SpecTypeDefinition>(regType);
+				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
+			}
+
 			foreach (var enumValueType in SpawnSpec.SpecTree.Enums.SelectMany(x => x.Values))
 			{
 				var specTypeDefinition = Mapper.Map<VkEnumValue, SpecTypeDefinition>(enumValueType);
@@ -67,6 +73,39 @@ namespace SixtenLabs.Spawn.Vulkan
 			{
 				var specTypeDefinition = Mapper.Map<VkCommand, SpecTypeDefinition>(regCommand);
 				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
+			}
+
+			foreach (var regExtension in SpawnSpec.SpecTree.Extensions)
+			{
+				var specTypeDefinition = Mapper.Map<VkExtension, SpecTypeDefinition>(regExtension);
+				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
+			}
+
+			foreach (var regExtension in SpawnSpec.SpecTree.Extensions)
+			{
+				foreach (var extCommand in regExtension.Commands)
+				{
+					var specTypeDefinition = Mapper.Map<VkExtensionCommand, SpecTypeDefinition>(extCommand);
+					SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
+				}
+			}
+
+			foreach (var regExtension in SpawnSpec.SpecTree.Extensions)
+			{
+				foreach (var extType in regExtension.Types)
+				{
+					var specTypeDefinition = Mapper.Map<VkExtensionType, SpecTypeDefinition>(extType);
+					SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
+				}
+			}
+
+			foreach (var regExtension in SpawnSpec.SpecTree.Extensions)
+			{
+				foreach (var extEnum in regExtension.Enums)
+				{
+					var specTypeDefinition = Mapper.Map<VkExtensionEnum, SpecTypeDefinition>(extEnum);
+					SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
+				}
 			}
 
 			Console.WriteLine($"Mapped {SpawnSpec.SpecTypeCount} types.");

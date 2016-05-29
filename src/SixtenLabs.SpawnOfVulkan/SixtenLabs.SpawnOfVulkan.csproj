@@ -49,7 +49,6 @@
     <Compile Include="Vk.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Constants\" />
     <Folder Include="Enums\" />
     <Folder Include="Handles\" />
     <Folder Include="Interop\" />

@@ -13,13 +13,63 @@ namespace SixtenLabs.Spawn.Vulkan
 			Off = true;
 		}
 
+		private string GetExtensionEnumValueValue(string extNum, VkExtensionEnum extEnum)
+		{
+			string value = null;
+
+			string extNumber = (int.Parse(extNum) - 1).ToString();
+
+			if(!string.IsNullOrEmpty(extEnum.Offset))
+			{
+				var baseValue = "100000";
+				value = $"{baseValue}{extNumber}00{extEnum.Offset}";
+
+				if(!string.IsNullOrEmpty(extEnum.Dir))
+				{
+					value = $"{extEnum.Dir}{value}";
+				}
+			}
+			else
+			{
+				value = extEnum.Value;
+			}
+
+			return value;
+		}
+
+		private EnumMemberDefinition GetExtensionEnumValue(VkExtensionEnum extEnum)
+		{
+			EnumMemberDefinition extensionEnumDefinition = new EnumMemberDefinition();
+
+			// need parent extension name to get the number from the extension not the original enum.
+			var extNumber = VulkanSpec.SpecTree.Extensions.Where(x => x.Name == extEnum.Extends).FirstOrDefault().Number;
+
+			extensionEnumDefinition.SpecName = extEnum.Name;
+			extensionEnumDefinition.Value = GetExtensionEnumValueValue(extNumber, extEnum);
+
+			return extensionEnumDefinition;
+		}
+
+		private void GetExtensions(EnumDefinition enumDef)
+		{
+			var extEnumValues = VulkanSpec.SpecTree.Extensions.SelectMany(x => x.Enums).Where(x => x.Extends == enumDef.SpecName);
+
+			foreach(var enumValue in extEnumValues)
+			{
+				var enumMemberDef = GetExtensionEnumValue(enumValue);
+
+				enumDef.Members.Add(enumMemberDef);
+			}
+		}
+
 		public override int Build(IMapper mapper)
 		{
 			var registryEnums = VulkanSpec.SpecTree.Enums;
 
-			foreach(var registryEnum in registryEnums)
+			foreach (var registryEnum in registryEnums)
 			{
 				var enumDefinition = mapper.Map<VkEnum, EnumDefinition>(registryEnum);
+				GetExtensions(enumDefinition);
 				Definitions.Add(enumDefinition);
 			}
 

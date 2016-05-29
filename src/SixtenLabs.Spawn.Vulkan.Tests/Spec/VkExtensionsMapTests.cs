@@ -65,7 +65,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests.Spec
 
 		[Theory]
 		[InlineData("VK_KHR_surface", 0, "VK_KHR_SURFACE_SPEC_VERSION", "25", null, null, null, null, null)]
-		[InlineData("VK_KHR_surface", 1, "VK_KHR_SURFACE_EXTENSION_NAME", "\"VK_KHR_surface\"", null, null, null, null, null)]
+		[InlineData("VK_KHR_surface", 1, "VK_KHR_SURFACE_EXTENSION_NAME", "VK_KHR_surface", null, null, null, null, null)]
 		[InlineData("VK_KHR_surface", 2, "VK_ERROR_SURFACE_LOST_KHR", null, "0", "VkResult", null, null, "-")]
 		[InlineData("VK_KHR_surface", 3, "VK_ERROR_NATIVE_WINDOW_IN_USE_KHR", null, "1", "VkResult", null, null, "-")]
 		[InlineData("VK_KHR_surface", 4, "VK_COLORSPACE_SRGB_NONLINEAR_KHR", "VK_COLOR_SPACE_SRGB_NONLINEAR_KHR", null, null, null, null, null)]

@@ -386,7 +386,7 @@ namespace SixtenLabs.Spawn.Vulkan
 		{
 			CreateMap<XElement, VkExtensionEnum>()
 				.ForMember(dest => dest.Name, opt => opt.MapFrom(m => MapAttribute(m, "name")))
-				.ForMember(dest => dest.Value, opt => opt.MapFrom(m => MapAttribute(m, "value")))
+				.ForMember(dest => dest.Value, opt => opt.MapFrom(m => MapExtensionEnumValue(m)))
 				.ForMember(dest => dest.Offset, opt => opt.MapFrom(m => MapAttribute(m, "offset")))
 				.ForMember(dest => dest.Extends, opt => opt.MapFrom(m => MapAttribute(m, "extends")))
 				.ForMember(dest => dest.BitPos, opt => opt.MapFrom(m => MapAttribute(m, "bitpos")))
@@ -412,6 +412,13 @@ namespace SixtenLabs.Spawn.Vulkan
 				.ForMember(dest => dest.Command, opt => opt.MapFrom(m => MapAttribute(m, "command")))
 				.ForMember(dest => dest.Struct, opt => opt.MapFrom(m => MapAttribute(m, "struct")))
 				.ForMember(dest => dest.Value, opt => opt.MapFrom(m => m.GetInnerXml()));
+		}
+
+		private string MapExtensionEnumValue(XElement enumElement)
+		{
+			var value = MapAttribute(enumElement, "value");
+
+			return value.Replace("\"", "");
 		}
 
 		#endregion

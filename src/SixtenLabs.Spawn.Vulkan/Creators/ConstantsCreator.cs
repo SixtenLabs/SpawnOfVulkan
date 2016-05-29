@@ -12,6 +12,21 @@ namespace SixtenLabs.Spawn.Vulkan
 		{
 		}
 
+		private void AddExtensions(ClassDefinition classDefinition)
+		{
+			var extEnumValues = VulkanSpec.SpecTree.Extensions.SelectMany(x => x.Enums).Where(x => x.Extends == null && x.Value != x.Name);
+
+			foreach (var enumValue in extEnumValues)
+			{
+				int valueInt;
+				var isInt = int.TryParse(enumValue.Value, out valueInt);
+				var value = new LiteralDefinition() { Value = enumValue.Value, LiteralType = isInt ? typeof(int) : typeof(string) };
+				var fieldDef = new FieldDefinition() { SpecName = enumValue.Name, DefaultValue = value, SpecReturnType = isInt ? "int" : "string" };
+				
+				classDefinition.Fields.Add(fieldDef);
+			}
+		}
+
 		public override int Build(IMapper mapper)
 		{
 			var registryConstants = VulkanSpec.SpecTree.Constants;
@@ -24,6 +39,8 @@ namespace SixtenLabs.Spawn.Vulkan
 			
 			// This is hardcoded for this single enum exception.
 			classDefinition.TranslatedName = "ApiConstants";
+
+			AddExtensions(classDefinition);
 
 			Definitions.Add(classDefinition);
 	
