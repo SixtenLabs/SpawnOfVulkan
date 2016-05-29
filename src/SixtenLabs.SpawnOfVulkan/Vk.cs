@@ -7,59 +7,52 @@ using System.Threading.Tasks;
 
 namespace SixtenLabs.SpawnOfVulkan
 {
-	//public static partial class Vk
-	//{
+	public static partial class Vk
+	{
 
-	//	static Vk()
-	//	{
-			
-	//	}
+		static Vk()
+		{
 
-	//	public static void Test()
-	//	{
-	//		VulkanLibraryHandle = NativeLibrary.LoadLibrary("vulkan-1.dll");
+		}
 
-	//		if (VulkanLibraryHandle != IntPtr.Zero)
-	//		{
-	//			// Marshal all the delegates for all the vulkan Methods
-	//			GetInstanceProcAddr = MarshalDelegate<GetInstanceProcAddrDelegate>("vkGetInstanceProcAddr");
-	//		}
-	//		else
-	//		{
-	//			throw new InvalidOperationException("Could not load vulkan interop...");
-	//		}
-	//	}
+		public static void Test()
+		{
+			VulkanLibraryHandle = NativeLibrary.LoadLibrary("vulkan-1.dll");
 
-	//	private static T MarshalDelegate<T>(string name)
-	//	{
-	//		var delegateHandle = NativeLibrary.GetProcAddress(VulkanLibraryHandle, name);
+			if (VulkanLibraryHandle != IntPtr.Zero)
+			{
+				GetInstanceProcAddr = MarshalDelegate<GetInstanceProcAddrDelegate>("vkGetInstanceProcAddr");
+			}
+			else
+			{
+				throw new InvalidOperationException("Could not load vulkan interop...");
+			}
+		}
 
-	//		if (delegateHandle != IntPtr.Zero)
-	//		{
-	//			return Marshal.GetDelegateForFunctionPointer<T>(delegateHandle);
-	//		}
-	//		else
-	//		{
-	//			return default(T);
-	//		}
-	//	}
+		private static T MarshalDelegate<T>(string name)
+		{
+			var delegateHandle = NativeLibrary.GetProcAddress(VulkanLibraryHandle, name);
 
-	//	//// How to get this call to return a delegate for the method returns have to marshal.GetDelegateForFunctionPointer()
-	//	//// Delegate with function signature for the vkGetInstanceProcAddr function
-	//	//[UnmanagedFunctionPointer(CallingConvention.Winapi)]
-	//	////[return: MarshalAs(UnmanagedType.pt)]
-	//	//public delegate IntPtr GetInstanceProcAddrDelegate(Instance instance, string name);
+			if (delegateHandle != IntPtr.Zero)
+			{
+				return Marshal.GetDelegateForFunctionPointer<T>(delegateHandle);
+			}
+			else
+			{
+				return default(T);
+			}
+		}
+				
+		private static IntPtr VulkanLibraryHandle { get; set; }
 
-	//	private static IntPtr VulkanLibraryHandle { get; set; }
-
-	//	public static GetInstanceProcAddrDelegate GetInstanceProcAddr { get; set; }
+		public static GetInstanceProcAddrDelegate GetInstanceProcAddr { get; set; }
 
 
-	//	public static T GetVulkanCommand<T>(Instance instance, string name)
-	//	{
-	//		var commandHandle = GetInstanceProcAddr(instance, name);
+		public static T GetVulkanCommand<T>(Instance instance, string name)
+		{
+			var commandHandle = GetInstanceProcAddr(instance, name);
 
-	//		return MarshalDelegate<T>(name);
-	//	}
-	//}
+			return MarshalDelegate<T>(name);
+		}
+	}
 }

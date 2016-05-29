@@ -185,6 +185,7 @@
     <Compile Include="Handles\ShaderModule.cs" />
     <Compile Include="Handles\SurfaceKhr.cs" />
     <Compile Include="Handles\SwapchainKhr.cs" />
+    <Compile Include="Interop\VkDelegates.cs" />
     <Compile Include="NativeLibrary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Structs\AllocationCallbacks.cs" />
