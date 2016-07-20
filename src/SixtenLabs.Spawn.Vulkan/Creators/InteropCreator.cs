@@ -9,7 +9,7 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 		public NativeMethodsCreator(ICodeGenerator generator, ISpawnSpec<VkRegistry> spawnSpec)
 			: base(generator, spawnSpec, "Interop Creator", 30)
 		{
-			Off = true;
+			//Off = true;
 		}
 
 		public override int Build(IMapper mapper)
