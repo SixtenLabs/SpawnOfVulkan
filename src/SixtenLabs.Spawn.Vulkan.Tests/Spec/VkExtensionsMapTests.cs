@@ -17,14 +17,14 @@ namespace SixtenLabs.Spawn.Vulkan.Tests.Spec
 		{
 			var subject = Fixture.VkRegistry;
 
-			subject.Extensions.Should().HaveCount(26);
+			subject.Extensions.Should().HaveCount(55);
 		}
 
 		[Theory]
 		[InlineData("VK_KHR_surface", "1", "vulkan", null, null, null, 5, 0, 5, 0)]
 		[InlineData("VK_KHR_swapchain", "2", "vulkan", null, null, null, 7, 0, 5, 0)]
 		[InlineData("VK_KHR_display", "3", "vulkan", null, null, null, 4, 9, 7, 0)]
-		[InlineData("VK_KHR_display_swapchain", "4", "vulkan", null, null, null, 4, 1, 1, 0)]
+		[InlineData("VK_KHR_display_swapchain", "4", "vulkan", null, null, null, 4, 1, 1, 1)]
 		[InlineData("VK_KHR_xlib_surface", "5", "vulkan", "VK_USE_PLATFORM_XLIB_KHR", null, null, 3, 2, 2, 0)]
 		[InlineData("VK_KHR_xcb_surface", "6", "vulkan", "VK_USE_PLATFORM_XCB_KHR", null, null, 3, 2, 2, 0)]
 		[InlineData("VK_KHR_wayland_surface", "7", "vulkan", "VK_USE_PLATFORM_WAYLAND_KHR", null, null, 3, 2, 2, 0)]
@@ -37,16 +37,16 @@ namespace SixtenLabs.Spawn.Vulkan.Tests.Spec
 		[InlineData("VK_NV_extension_1", "14", "disabled", null, "NVIDIA", "Piers Daniell @pdaniell", 3, 0, 0, 0)]
 		[InlineData("VK_KHR_sampler_mirror_clamp_to_edge", "15", "vulkan", null, "KHR", "Tobias Hector @tobias", 3, 0, 0, 0)]
 		[InlineData("VK_IMG_filter_cubic", "16", "vulkan", null, "IMG", "Tobias Hector @tobias", 4, 0, 0, 14)]
-		[InlineData("VK_AMD_extension_1", "17", "disabled", null, "AMD", "Daniel Rakos @aqnuep", 2, 0, 0, 0)]
-		[InlineData("VK_AMD_extension_2", "18", "disabled", null, "AMD", "Daniel Rakos @aqnuep", 2, 0, 0, 0)]
+		[InlineData("VK_AMD_extension_17", "17", "disabled", null, "AMD", "Daniel Rakos @aqnuep", 2, 0, 0, 0)]
+		[InlineData("VK_AMD_extension_18", "18", "disabled", null, "AMD", "Daniel Rakos @aqnuep", 2, 0, 0, 0)]
 		[InlineData("VK_AMD_rasterization_order", "19", "vulkan", null, "AMD", "Daniel Rakos @aqnuep", 3, 2, 0, 0)]
-		[InlineData("VK_AMD_extension_4", "20", "disabled", null, "AMD", "Daniel Rakos @aqnuep", 2, 0, 0, 0)]
-		[InlineData("VK_AMD_extension_5", "21", "disabled", null, "AMD", "Daniel Rakos @aqnuep", 2, 0, 0, 0)]
-		[InlineData("VK_AMD_extension_6", "22", "disabled", null, "AMD", "Daniel Rakos @aqnuep", 2, 0, 0, 0)]
+		[InlineData("VK_AMD_extension_20", "20", "disabled", null, "AMD", "Daniel Rakos @aqnuep", 2, 0, 0, 0)]
+		[InlineData("VK_AMD_shader_trinary_minmax", "21", "vulkan", null, "AMD", "quentin.lin@amd.com", 2, 0, 0, 0)]
+		[InlineData("VK_AMD_shader_explicit_vertex_parameter", "22", "vulkan", null, "AMD", "quentin.lin@amd.com", 2, 0, 0, 0)]
 		[InlineData("VK_EXT_debug_marker", "23", "vulkan", null, "Baldur Karlsson", "baldurk@baldurk.org", 5, 3, 5, 0)]
-		[InlineData("VK_AMD_extension_7", "24", "disabled", null, "AMD", "Daniel Rakos @aqnuep", 2, 0, 0, 0)]
-		[InlineData("VK_AMD_extension_8", "25", "disabled", null, "AMD", "Daniel Rakos @aqnuep", 2, 0, 0, 0)]
-		[InlineData("VK_AMD_extension_9", "26", "disabled", null, "AMD", "Daniel Rakos @aqnuep", 2, 0, 0, 0)]
+		[InlineData("VK_AMD_extension_24", "24", "disabled", null, "AMD", "Daniel Rakos @aqnuep", 2, 0, 0, 0)]
+		[InlineData("VK_AMD_extension_25", "25", "disabled", null, "AMD", "Daniel Rakos @aqnuep", 2, 0, 0, 0)]
+		[InlineData("VK_AMD_gcn_shader", "26", "vulkan", null, "AMD", "dominik.witczak@amd.com", 2, 0, 0, 0)]
 		public void VkRegistry_VkExtensions_MappedCorrectly(string name, string number, string supported, string protect, string author, string contact,
 			int enumCount, int typeCount, int commandCount, int usageCount)
 		{

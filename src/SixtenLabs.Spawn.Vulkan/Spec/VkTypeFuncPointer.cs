@@ -8,6 +8,6 @@ namespace SixtenLabs.Spawn.Vulkan.Spec
 
 		public string ReturnType { get; set; }
 
-		public IList<VkTypeFuncPointerParameter> Parameters { get; } = new List<VkTypeFuncPointerParameter>();
+		public IList<VkTypeFuncPointerParameter> Parameters { get; set; }
 	}
 }

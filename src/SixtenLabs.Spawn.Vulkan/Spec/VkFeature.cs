@@ -10,6 +10,6 @@ namespace SixtenLabs.Spawn.Vulkan.Spec
 
 		public string Number { get; set; }
 
-		public IList<VkFeatureRequire> Requires { get; } = new List<VkFeatureRequire>();
+		public IList<VkFeatureRequire> Requires { get; set; }
 	}
 }

@@ -29,14 +29,15 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 				cfg.AddProfile(new SpecTypeMapper());
 			});
 
-			Mapper.AssertConfigurationIsValid();
+			config.AssertConfigurationIsValid();
 
 			SpecMapper = config.CreateMapper();
 		}
 		
 		private void LoadRegistry()
 		{
-			Registry = XElement.Load("Spec/vk.xml");
+			//Registry = XElement.Load("Spec/vk.xml");
+			Registry = XElement.Load("https://raw.githubusercontent.com/KhronosGroup/Vulkan-Docs/1.0/src/spec/vk.xml");
 
 			VkRegistry = SpecMapper.Map<VkRegistry>(Registry);
 		}

@@ -22,6 +22,6 @@ namespace SixtenLabs.Spawn.Vulkan.Spec
 			}
 		}
 
-		public IList<VkEnumValue> Values { get; } = new List<VkEnumValue>();
+		public IList<VkEnumValue> Values { get; set; }
 	}
 }

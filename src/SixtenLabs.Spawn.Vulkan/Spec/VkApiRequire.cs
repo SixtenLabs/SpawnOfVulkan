@@ -10,6 +10,6 @@ namespace SixtenLabs.Spawn.Vulkan.Spec
 	{
 		public string Comment { get; set; }
 
-		public IList<VkApiRequireMember> Members { get; } = new List<VkApiRequireMember>();
+		public IList<VkApiRequireMember> Members { get; set; }
 	}
 }

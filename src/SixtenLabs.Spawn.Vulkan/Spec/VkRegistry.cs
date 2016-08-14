@@ -6,38 +6,38 @@ namespace SixtenLabs.Spawn.Vulkan.Spec
 	{
 		public string Comments { get; set; }
 
-		public IList<VkVendorId> VendorIds { get; } = new List<VkVendorId>();
+		public IList<VkVendorId> VendorIds { get; set; }
 
-		public IList<VkTag> Tags { get; } = new List<VkTag>();
+		public IList<VkTag> Tags { get; set; }
 
-		public IList<VkTypeInclude> Includes { get; } = new List<VkTypeInclude>();
+		public IList<VkTypeInclude> Includes { get; set; }
 
-		public IList<VkTypeRequires> Requires { get; } = new List<VkTypeRequires>();
+		public IList<VkTypeRequires> Requires { get; set; }
 
-		public IList<VkTypeDefine> Defines { get; } = new List<VkTypeDefine>();
+		public IList<VkTypeDefine> Defines { get; set; }
 
-		public IList<VkTypeBaseType> BaseTypes { get; } = new List<VkTypeBaseType>();
+		public IList<VkTypeBaseType> BaseTypes { get; set; }
 
-		public IList<VkTypeBitmask> Bitmasks { get; } = new List<VkTypeBitmask>();
+		public IList<VkTypeBitmask> Bitmasks { get; set; }
 
-		public IList<VkTypeHandle> Handles { get; } = new List<VkTypeHandle>();
+		public IList<VkTypeHandle> Handles { get; set; }
 
-		public IList<VkTypeEnum> TypeEnums { get; } = new List<VkTypeEnum>();
+		public IList<VkTypeEnum> TypeEnums { get; set; }
 
-		public IList<VkTypeFuncPointer> TypeFuncPointers { get; } = new List<VkTypeFuncPointer>();
+		public IList<VkTypeFuncPointer> TypeFuncPointers { get; set; }
 
-		public IList<VkTypeStruct> TypeStructs { get; } = new List<VkTypeStruct>();
+		public IList<VkTypeStruct> TypeStructs { get; set; }
 
-		public IList<VkTypeUnion> TypeUnions { get; } = new List<VkTypeUnion>();
+		public IList<VkTypeUnion> TypeUnions { get; set; }
 
 		public VkConstant Constants { get; set; }
 
-		public IList<VkEnum> Enums { get; } = new List<VkEnum>();
+		public IList<VkEnum> Enums { get; set; }
 
-		public IList<VkCommand> Commands { get; } = new List<VkCommand>();
+		public IList<VkCommand> Commands { get; set; }
 
 		public VkFeature Feature { get; set; }
 
-		public IList<VkExtension> Extensions { get; } = new List<VkExtension>();
+		public IList<VkExtension> Extensions { get; set; }
 	}
 }

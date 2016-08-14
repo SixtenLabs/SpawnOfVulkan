@@ -8,8 +8,8 @@ namespace SixtenLabs.Spawn.Vulkan.Spec
 
 		public bool IsReturnedOnly { get; set; }
 
-		public IList<VkTypeUnionMember> Members { get; } = new List<VkTypeUnionMember>();
+		public IList<VkTypeUnionMember> Members { get; set; }
 
-		public IList<VkUsage> Validity { get; } = new List<VkUsage>();
+		public IList<VkUsage> Validity { get; set; }
 	}
 }

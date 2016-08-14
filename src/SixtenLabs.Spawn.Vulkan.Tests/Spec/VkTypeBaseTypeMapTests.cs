@@ -19,10 +19,10 @@ namespace SixtenLabs.Spawn.Vulkan.Tests.Spec
 		}
 
 		[Theory]
-		[InlineData(0, "VkSampleMask", "uint32_t", "\n      typedef uint32_tVkSampleMask;\n    ")]
-		[InlineData(1, "VkBool32", "uint32_t", "\n      typedef uint32_tVkBool32;\n    ")]
-		[InlineData(2, "VkFlags", "uint32_t", "\n      typedef uint32_tVkFlags;\n    ")]
-		[InlineData(3, "VkDeviceSize", "uint64_t", "\n      typedef uint64_tVkDeviceSize;\n    ")]
+		[InlineData(0, "VkSampleMask", "uint32_t", "typedef uint32_tVkSampleMask;")]
+		[InlineData(1, "VkBool32", "uint32_t", "typedef uint32_tVkBool32;")]
+		[InlineData(2, "VkFlags", "uint32_t", "typedef uint32_tVkFlags;")]
+		[InlineData(3, "VkDeviceSize", "uint64_t", "typedef uint64_tVkDeviceSize;")]
 		public void VkRegistry_TypeBaseTypes_MappedCorrectly(int index, string name, string type, string requires)
 		{
 			var subject = Fixture.VkRegistry;

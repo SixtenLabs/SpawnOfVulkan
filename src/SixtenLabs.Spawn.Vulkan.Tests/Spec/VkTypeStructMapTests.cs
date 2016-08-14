@@ -17,7 +17,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests.Spec
 		{
 			var subject = Fixture.VkRegistry;
 
-			subject.TypeStructs.Should().HaveCount(129);
+			subject.TypeStructs.Should().HaveCount(132);
 		}
 
 		[Theory]
@@ -44,8 +44,8 @@ namespace SixtenLabs.Spawn.Vulkan.Tests.Spec
 		[InlineData("VkViewport", 5, "maxDepth", "float", false, false, null, null, null, false, null, null)]
 		[InlineData("VkPhysicalDeviceProperties", 5, "deviceName", "char", false, false, null, null, null, true, "VK_MAX_PHYSICAL_DEVICE_NAME_SIZE", null)]
 		[InlineData("VkApplicationInfo", 2, "pApplicationName", "char", true, true, "true", null, "null-terminated", false, null, null)]
-		[InlineData("VkDeviceCreateInfo", 0, "sType", "VkStructureType", false, false, null, null, null, false, null, "Should be VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO")]
-		[InlineData("VkDescriptorImageInfo", 0, "sampler", "VkSampler", false, false, null, "true", null, false, null, "Sampler to write to the descriptor in case it's a SAMPLER or COMBINED_IMAGE_SAMPLER descriptor. Ignored otherwise.")]
+		[InlineData("VkDeviceCreateInfo", 0, "sType", "VkStructureType", false, false, null, null, null, false, null, null)]
+		[InlineData("VkDescriptorImageInfo", 0, "sampler", "VkSampler", false, false, null, "true", null, false, null, "Sampler to write to the descriptor in case it is a SAMPLER or COMBINED_IMAGE_SAMPLER descriptor. Ignored otherwise.")]
 		[InlineData("VkImageBlit", 1, "srcOffsets", "VkOffset3D", false, false, null, null, null, true, "2", "Specified in pixels for both compressed and uncompressed images")]
 		public void VkRegistry_TypesStructMembers_MappedCorrectly(string structName, int memberIndex, string name, string returnType, bool isPointer, bool isConst,
 			string optional, string noAutoValidity, string len, bool isArray, string arrayCount, string comment)

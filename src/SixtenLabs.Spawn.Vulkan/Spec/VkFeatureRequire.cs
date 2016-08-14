@@ -6,10 +6,10 @@ namespace SixtenLabs.Spawn.Vulkan.Spec
 	{
 		public string Comment { get; set; }
 
-		public IList<VkFeatureRequireType> Types { get; } = new List<VkFeatureRequireType>();
+		public IList<VkFeatureRequireType> Types { get; set; }
 
-		public IList<VkFeatureRequireEnum> Enums { get; } = new List<VkFeatureRequireEnum>();
+		public IList<VkFeatureRequireEnum> Enums { get; set; }
 
-		public IList<VkFeatureRequireCommand> Commands { get; } = new List<VkFeatureRequireCommand>();
+		public IList<VkFeatureRequireCommand> Commands { get; set; }
 	}
 }

@@ -2,9 +2,6 @@
 using FluentAssertions;
 using NSubstitute;
 
-using AutoMapper;
-using System.Linq;
-using System.Collections.Generic;
 using SixtenLabs.Spawn.CSharp;
 using SixtenLabs.Spawn.Vulkan.Spec;
 

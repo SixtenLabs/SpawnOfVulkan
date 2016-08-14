@@ -12,12 +12,12 @@ namespace SixtenLabs.Spawn.Vulkan.Spec
 
 		public string Type { get; set; }
 
-		public IList<VkCommandParameter> Parameters { get; } = new List<VkCommandParameter>();
+		public IList<VkCommandParameter> Parameters { get; set; }
 
 		public string SuccessCodes { get; set; }
 
 		public string ErrorCodes { get; set; }
 
-		public IList<VkUsage> Validity { get; } = new List<VkUsage>();
+		public IList<VkUsage> Validity { get; set; }
 	}
 }

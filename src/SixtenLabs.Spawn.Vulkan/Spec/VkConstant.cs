@@ -6,6 +6,6 @@ namespace SixtenLabs.Spawn.Vulkan.Spec
 	{
 		public string Name { get; set; }
 
-		public IList<VkConstantValue> Values { get; } = new List<VkConstantValue>();
+		public IList<VkConstantValue> Values { get; set; }
 	}
 }

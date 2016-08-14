@@ -8,7 +8,12 @@ namespace SixtenLabs.Spawn.Vulkan
 {
 	public class SpecTypeMapper : Profile
 	{
-		protected override void Configure()
+		public SpecTypeMapper()
+		{
+			ConfigureMaps();
+		}
+
+		private void ConfigureMaps()
 		{
 			CreateMap<VkConstant, SpecTypeDefinition>()
 				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))

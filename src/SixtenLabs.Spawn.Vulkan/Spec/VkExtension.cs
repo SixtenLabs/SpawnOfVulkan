@@ -16,12 +16,12 @@ namespace SixtenLabs.Spawn.Vulkan.Spec
 
 		public string Contact { get; set; }
 
-		public IList<VkExtensionEnum> Enums { get; } = new List<VkExtensionEnum>();
+		public IList<VkExtensionEnum> Enums { get; set; }
 
-		public IList<VkExtensionType> Types { get; } = new List<VkExtensionType>();
+		public IList<VkExtensionType> Types { get; set; }
 
-		public IList<VkExtensionCommand> Commands { get; } = new List<VkExtensionCommand>();
+		public IList<VkExtensionCommand> Commands { get; set; }
 
-		public IList<VkExtensionUsage> Usages { get; } = new List<VkExtensionUsage>();
+		public IList<VkExtensionUsage> Usages { get; set; }
 	}
 }

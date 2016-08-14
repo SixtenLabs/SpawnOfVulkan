@@ -30,7 +30,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			var types = vk.TypeStructs;
 
-			types.Should().HaveCount(129);
+			types.Should().HaveCount(132);
 
 			var maps = new List<StructDefinition>();
 
@@ -40,7 +40,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 				maps.Add(map);
 			}
 
-			maps.Should().HaveCount(129);
+			maps.Should().HaveCount(132);
 		}
 
 		[Fact]

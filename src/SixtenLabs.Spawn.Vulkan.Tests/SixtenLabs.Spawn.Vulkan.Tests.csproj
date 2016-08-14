@@ -249,6 +249,7 @@
     <Compile Include="VulkanGeneratorTests.cs" />
     <Compile Include="VulkanSpecTests.cs" />
     <Compile Include="Spec\VkRegistryMapTests.cs" />
+    <Compile Include="xmlTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SixtenLabs.Spawn.Vulkan\SixtenLabs.Spawn.Vulkan.csproj">

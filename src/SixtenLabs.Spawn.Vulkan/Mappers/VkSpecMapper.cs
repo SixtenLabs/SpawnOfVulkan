@@ -3,8 +3,6 @@ using SixtenLabs.Spawn.Vulkan.Spec;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace SixtenLabs.Spawn.Vulkan
@@ -14,10 +12,15 @@ namespace SixtenLabs.Spawn.Vulkan
 	/// </summary>
 	public class VkSpecMapper : Profile
 	{
+		public VkSpecMapper()
+		{
+			ConfigureMaps();
+		}
+
 		private void ConfigureVkRegistry()
 		{
 			CreateMap<XElement, VkRegistry>()
-				.ForMember(dest => dest.Comments, opt => opt.MapFrom(m => m.Value))
+				.ForMember(dest => dest.Comments, opt => opt.MapFrom(m => m.Element("comment").GetInnerXml()))
 				.ForMember(dest => dest.VendorIds, opt => opt.MapFrom(m => m.Element("vendorids").Elements("vendorid")))
 				.ForMember(dest => dest.Tags, opt => opt.MapFrom(m => m.Element("tags").Elements("tag")))
 				.ForMember(dest => dest.Includes, opt => opt.MapFrom(m => GetTypesByCategory(m, "include")))
@@ -80,7 +83,8 @@ namespace SixtenLabs.Spawn.Vulkan
 			CreateMap<XElement, VkTypeBaseType>()
 				.ForMember(dest => dest.Name, opt => opt.MapFrom(m => MapBaseTypeName(m)))
 				.ForMember(dest => dest.Type, opt => opt.MapFrom(m => MapBaseTypeType(m)))
-				.ForMember(dest => dest.Value, opt => opt.MapFrom(m => m.Value));
+				.ForMember(dest => dest.Value, opt => opt.MapFrom(m => m.Value))
+				.ForMember(dest => dest.Category, opt => opt.Ignore());
 		}
 
 		private void ConfigureVkTypeBitmask()
@@ -278,8 +282,8 @@ namespace SixtenLabs.Spawn.Vulkan
 		private void ConfigureConstants()
 		{
 			CreateMap<XElement, VkConstant>()
-				.ForMember(dest => dest.Name, opt => opt.MapFrom(m => m.Attribute("name").Value))
-				.ForMember(dest => dest.Values, opt => opt.MapFrom(m => m.Elements("enum")));
+				.ForMember(dest => dest.Name, opt => opt.MapFrom(m => MapAttribute(m, "name")))
+				.ForMember(dest => dest.Values, opt => opt.MapFrom(m => m.Descendants("enum")));
 		}
 
 		private void ConfigureConstantsValues()
@@ -469,7 +473,7 @@ namespace SixtenLabs.Spawn.Vulkan
 
 		#endregion
 
-		protected override void Configure()
+		private void ConfigureMaps()
 		{
 			ConfigureVkRegistry();
 			ConfigureVkVendorId();
