@@ -32,7 +32,7 @@ namespace SixtenLabs.Vulkan.Generator
 			SimpleContainer.RegisterSingleton<MapperConfiguration>(config);
 			SimpleContainer.Register<IMapper>(() => config.CreateMapper(SimpleContainer.GetInstance));
 
-			Mapper.AssertConfigurationIsValid();
+			config.AssertConfigurationIsValid();
 		}
 
 		private void Register()

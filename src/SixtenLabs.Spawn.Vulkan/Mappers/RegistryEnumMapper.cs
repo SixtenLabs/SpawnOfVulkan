@@ -31,6 +31,7 @@ namespace SixtenLabs.Spawn.Vulkan
 				.ForMember(dest => dest.TranslatedReturnType, opt => opt.Ignore())
 				.ForMember(dest => dest.ModifierDefinitions, opt => opt.Ignore())
 				.ForMember(dest => dest.TranslatedName, opt => opt.Ignore())
+				.ForMember(dest => dest.Properties, opt => opt.Ignore())
 				.ForMember(dest => dest.Tag, opt => opt.Ignore());
 
 			CreateMap<VkConstantValue, FieldDefinition>()
