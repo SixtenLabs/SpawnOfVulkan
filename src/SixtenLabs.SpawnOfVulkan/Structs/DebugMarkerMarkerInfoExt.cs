@@ -7,6 +7,6 @@ namespace SixtenLabs.SpawnOfVulkan
         internal StructureType SType;
         internal IntPtr PNext;
         internal byte PMarkerName;
-        internal unsafe fixed float [4];
+        internal unsafe fixed float color[4];
     }
 }

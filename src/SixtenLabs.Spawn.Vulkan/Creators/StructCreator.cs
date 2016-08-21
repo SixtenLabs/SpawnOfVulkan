@@ -55,8 +55,8 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 							arraySize = fieldDefinition.Tag;
 						}
 
-						fieldDefinition.ReturnType.TranslatedName = VulkanSpec.GetTranslatedName(fieldDefinition.ReturnType.Code);
-						fieldDefinition.Name.TranslatedName = $"{fieldDefinition.Name.TranslatedName}[{arraySize}]";
+						fieldDefinition.ReturnType.TranslatedName = VulkanSpec.GetTranslatedName(fieldDefinition.ReturnType.OriginalName);
+						fieldDefinition.Name.TranslatedName = $"{fieldDefinition.Name.OriginalName}[{arraySize}]";
 					}
 					else
 					{

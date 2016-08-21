@@ -11,6 +11,6 @@ namespace SixtenLabs.SpawnOfVulkan
         internal LogicOp LogicOp;
         internal uint AttachmentCount;
         internal PipelineColorBlendAttachmentState PAttachments;
-        internal unsafe fixed float [4];
+        internal unsafe fixed float blendConstants[4];
     }
 }
