@@ -52,24 +52,24 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			var map = Fixture.SpecMapper.Map<MethodDefinition>(type);
 
-			map.SpecName.Should().Be("vkCreateInstance");
-			map.SpecReturnType.Should().Be("VkResult");
+			map.Name.OriginalName.Should().Be("vkCreateInstance");
+			map.ReturnType.OriginalName.Should().Be("VkResult");
 			map.Parameters.Should().HaveCount(3);
 
-			map.Parameters[0].SpecName.Should().Be("pCreateInfo");
-			map.Parameters[0].SpecReturnType.Should().Be("VkInstanceCreateInfo");
+			map.Parameters[0].Name.OriginalName.Should().Be("pCreateInfo");
+			map.Parameters[0].ParameterType.OriginalName.Should().Be("VkInstanceCreateInfo");
 			//map.Parameters[0].ExternSync.Should().BeFalse();
 			//map.Parameters[0].IsOptional.Should().BeFalse();
 			//map.Parameters[0].IsPointer.Should().BeTrue();
 
-			map.Parameters[1].SpecName.Should().Be("pAllocator");
-			map.Parameters[1].SpecReturnType.Should().Be("VkAllocationCallbacks");
+			map.Parameters[1].Name.OriginalName.Should().Be("pAllocator");
+			map.Parameters[1].ParameterType.OriginalName.Should().Be("VkAllocationCallbacks");
 			//map.Parameters[1].ExternSync.Should().BeFalse();
 			//map.Parameters[1].IsOptional.Should().BeTrue();
 			//map.Parameters[1].IsPointer.Should().BeTrue();
 
-			map.Parameters[2].SpecName.Should().Be("pInstance");
-			map.Parameters[2].SpecReturnType.Should().Be("VkInstance");
+			map.Parameters[2].Name.OriginalName.Should().Be("pInstance");
+			map.Parameters[2].ParameterType.OriginalName.Should().Be("VkInstance");
 			//map.Parameters[2].ExternSync.Should().BeFalse();
 			//map.Parameters[2].IsOptional.Should().BeFalse();
 			//map.Parameters[2].IsPointer.Should().BeTrue();

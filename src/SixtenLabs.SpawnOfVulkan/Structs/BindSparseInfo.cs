@@ -7,7 +7,7 @@ namespace SixtenLabs.SpawnOfVulkan
         internal StructureType SType;
         internal IntPtr PNext;
         internal uint WaitSemaphoreCount;
-        internal Semaphore PWaitSemaphores;
+        internal SemaphoreHandle PWaitSemaphores;
         internal uint BufferBindCount;
         internal SparseBufferMemoryBindInfo PBufferBinds;
         internal uint ImageOpaqueBindCount;
@@ -15,6 +15,6 @@ namespace SixtenLabs.SpawnOfVulkan
         internal uint ImageBindCount;
         internal SparseImageMemoryBindInfo PImageBinds;
         internal uint SignalSemaphoreCount;
-        internal Semaphore PSignalSemaphores;
+        internal SemaphoreHandle PSignalSemaphores;
     }
 }

@@ -1,10 +1,20 @@
-﻿using System;
+﻿using SixtenLabs.Spawn.CSharp;
+using System;
 using System.Collections.Generic;
 
 namespace SixtenLabs.Spawn.Vulkan
 {
 	public static class Extensions
 	{
+    public static DefinitionName MapDefinitionNameToOriginal(this string originalName)
+    {
+      var name = new DefinitionName();
+
+      name.OriginalName = originalName;
+
+      return name;
+    }
+
 		public static string FormatFlagValue(this string position)
 		{
 			var asByte = Convert.ToByte(position);

@@ -6,7 +6,7 @@ namespace SixtenLabs.SpawnOfVulkan
     {
         internal StructureType SType;
         internal IntPtr PNext;
-        internal CommandPool CommandPool;
+        internal CommandPoolHandle CommandPool;
         internal CommandBufferLevel Level;
         internal uint CommandBufferCount;
     }

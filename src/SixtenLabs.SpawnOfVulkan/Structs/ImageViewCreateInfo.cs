@@ -7,7 +7,7 @@ namespace SixtenLabs.SpawnOfVulkan
         internal StructureType SType;
         internal IntPtr PNext;
         internal ImageViewCreateFlags Flags;
-        internal Image Image;
+        internal ImageHandle Image;
         internal ImageViewType ViewType;
         internal Format Format;
         internal ComponentMapping Components;

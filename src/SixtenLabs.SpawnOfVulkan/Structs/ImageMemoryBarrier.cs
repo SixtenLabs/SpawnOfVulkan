@@ -12,7 +12,7 @@ namespace SixtenLabs.SpawnOfVulkan
         internal ImageLayout NewLayout;
         internal uint SrcQueueFamilyIndex;
         internal uint DstQueueFamilyIndex;
-        internal Image Image;
+        internal ImageHandle Image;
         internal ImageSubresourceRange SubresourceRange;
     }
 }

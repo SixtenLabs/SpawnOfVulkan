@@ -1,7 +1,21 @@
-﻿namespace SixtenLabs.SpawnOfVulkan
+﻿using System;
+
+namespace SixtenLabs.SpawnOfVulkan
 {
+    [Flags()]
     public enum StencilFaceFlags : int
     {
-        None = 0
+        /// <summary>
+                /// Front face
+                /// </summary>
+        StencilFaceFrontBit = 0x1,
+        /// <summary>
+                /// Back face
+                /// </summary>
+        StencilFaceBackBit = 0x2,
+        /// <summary>
+                /// Front and back faces
+                /// </summary>
+        StencilFrontAndBack = 0x00000003
     }
 }

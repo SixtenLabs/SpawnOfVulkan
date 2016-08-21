@@ -56,9 +56,9 @@ namespace SixtenLabs.SpawnOfVulkan
         internal uint MaxFragmentDualSrcAttachments;
         internal uint MaxFragmentCombinedOutputResources;
         internal uint MaxComputeSharedMemorySize;
-        internal unsafe fixed uint maxComputeWorkGroupCount[3];
+        internal unsafe fixed uint [3];
         internal uint MaxComputeWorkGroupInvocations;
-        internal unsafe fixed uint maxComputeWorkGroupSize[3];
+        internal unsafe fixed uint [3];
         internal uint SubPixelPrecisionBits;
         internal uint SubTexelPrecisionBits;
         internal uint MipmapPrecisionBits;
@@ -67,8 +67,8 @@ namespace SixtenLabs.SpawnOfVulkan
         internal float MaxSamplerLodBias;
         internal float MaxSamplerAnisotropy;
         internal uint MaxViewports;
-        internal unsafe fixed uint maxViewportDimensions[2];
-        internal unsafe fixed float viewportBoundsRange[2];
+        internal unsafe fixed uint [2];
+        internal unsafe fixed float [2];
         internal uint ViewportSubPixelBits;
         internal UIntPtr MinMemoryMapAlignment;
         internal ulong MinTexelBufferOffsetAlignment;
@@ -101,8 +101,8 @@ namespace SixtenLabs.SpawnOfVulkan
         internal uint MaxCullDistances;
         internal uint MaxCombinedClipAndCullDistances;
         internal uint DiscreteQueuePriorities;
-        internal unsafe fixed float pointSizeRange[2];
-        internal unsafe fixed float lineWidthRange[2];
+        internal unsafe fixed float [2];
+        internal unsafe fixed float [2];
         internal float PointSizeGranularity;
         internal float LineWidthGranularity;
         internal uint StrictLines;

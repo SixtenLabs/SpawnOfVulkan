@@ -8,8 +8,8 @@ namespace SixtenLabs.SpawnOfVulkan
         internal IntPtr PNext;
         internal PipelineCreateFlags Flags;
         internal PipelineShaderStageCreateInfo Stage;
-        internal PipelineLayout Layout;
-        internal Pipeline BasePipelineHandle;
+        internal PipelineLayoutHandle Layout;
+        internal PipelineHandle BasePipelineHandle;
         internal int BasePipelineIndex;
     }
 }

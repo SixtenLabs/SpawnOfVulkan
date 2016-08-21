@@ -1,7 +1,13 @@
-﻿namespace SixtenLabs.SpawnOfVulkan
+﻿using System;
+
+namespace SixtenLabs.SpawnOfVulkan
 {
+    [Flags()]
     public enum MemoryHeapFlags : int
     {
-        None = 0
+        /// <summary>
+                /// If set, heap represents device memory
+                /// </summary>
+        MemoryHeapDeviceLocalBit = 0x1
     }
 }

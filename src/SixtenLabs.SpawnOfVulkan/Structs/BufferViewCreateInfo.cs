@@ -7,7 +7,7 @@ namespace SixtenLabs.SpawnOfVulkan
         internal StructureType SType;
         internal IntPtr PNext;
         internal BufferViewCreateFlags Flags;
-        internal Buffer Buffer;
+        internal BufferHandle Buffer;
         internal Format Format;
         internal ulong Offset;
         internal ulong Range;

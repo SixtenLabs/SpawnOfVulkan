@@ -4,7 +4,7 @@ namespace SixtenLabs.SpawnOfVulkan
 {
     public struct DescriptorBufferInfo
     {
-        internal Buffer Buffer;
+        internal BufferHandle Buffer;
         internal ulong Offset;
         internal ulong Range;
     }

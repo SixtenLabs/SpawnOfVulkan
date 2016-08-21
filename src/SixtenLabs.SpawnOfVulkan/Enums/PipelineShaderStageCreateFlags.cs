@@ -1,4 +1,7 @@
-﻿namespace SixtenLabs.SpawnOfVulkan
+﻿/// <summary>
+/// vkFlag
+/// </summary>
+namespace SixtenLabs.SpawnOfVulkan
 {
     public enum PipelineShaderStageCreateFlags : int
     {

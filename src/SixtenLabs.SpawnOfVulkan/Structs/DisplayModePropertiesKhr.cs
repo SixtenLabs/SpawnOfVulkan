@@ -4,7 +4,7 @@ namespace SixtenLabs.SpawnOfVulkan
 {
     public struct DisplayModePropertiesKhr
     {
-        internal DisplayModeKhr DisplayMode;
+        internal DisplayModeKhrHandle DisplayMode;
         internal DisplayModeParametersKhr Parameters;
     }
 }

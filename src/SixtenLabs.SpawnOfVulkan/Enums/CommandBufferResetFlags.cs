@@ -1,7 +1,13 @@
-﻿namespace SixtenLabs.SpawnOfVulkan
+﻿using System;
+
+namespace SixtenLabs.SpawnOfVulkan
 {
+    [Flags()]
     public enum CommandBufferResetFlags : int
     {
-        None = 0
+        /// <summary>
+                /// Release resources owned by the buffer
+                /// </summary>
+        CommandBufferResetReleaseResourcesBit = 0x1
     }
 }

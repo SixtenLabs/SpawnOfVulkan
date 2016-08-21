@@ -6,8 +6,8 @@ namespace SixtenLabs.SpawnOfVulkan
     {
         internal StructureType SType;
         internal IntPtr PNext;
-        internal RenderPass RenderPass;
-        internal Framebuffer Framebuffer;
+        internal RenderPassHandle RenderPass;
+        internal FramebufferHandle Framebuffer;
         internal Rect2D RenderArea;
         internal uint ClearValueCount;
         internal ClearValue PClearValues;

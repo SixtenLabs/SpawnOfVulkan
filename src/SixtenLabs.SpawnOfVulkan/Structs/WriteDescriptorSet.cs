@@ -6,13 +6,13 @@ namespace SixtenLabs.SpawnOfVulkan
     {
         internal StructureType SType;
         internal IntPtr PNext;
-        internal DescriptorSet DstSet;
+        internal DescriptorSetHandle DstSet;
         internal uint DstBinding;
         internal uint DstArrayElement;
         internal uint DescriptorCount;
         internal DescriptorType DescriptorType;
         internal DescriptorImageInfo PImageInfo;
         internal DescriptorBufferInfo PBufferInfo;
-        internal BufferView PTexelBufferView;
+        internal BufferViewHandle PTexelBufferView;
     }
 }

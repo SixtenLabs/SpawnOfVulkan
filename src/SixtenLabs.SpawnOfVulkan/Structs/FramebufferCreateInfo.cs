@@ -7,9 +7,9 @@ namespace SixtenLabs.SpawnOfVulkan
         internal StructureType SType;
         internal IntPtr PNext;
         internal FramebufferCreateFlags Flags;
-        internal RenderPass RenderPass;
+        internal RenderPassHandle RenderPass;
         internal uint AttachmentCount;
-        internal ImageView PAttachments;
+        internal ImageViewHandle PAttachments;
         internal uint Width;
         internal uint Height;
         internal uint Layers;

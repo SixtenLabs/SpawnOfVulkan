@@ -1,7 +1,13 @@
-﻿namespace SixtenLabs.SpawnOfVulkan
+﻿using System;
+
+namespace SixtenLabs.SpawnOfVulkan
 {
+    [Flags()]
     public enum DependencyFlags : int
     {
-        None = 0
+        /// <summary>
+                /// Dependency is per pixel region 
+                /// </summary>
+        DependencyByRegionBit = 0x1
     }
 }

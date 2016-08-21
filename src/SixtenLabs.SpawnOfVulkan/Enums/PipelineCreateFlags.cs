@@ -1,7 +1,12 @@
-﻿namespace SixtenLabs.SpawnOfVulkan
+﻿using System;
+
+namespace SixtenLabs.SpawnOfVulkan
 {
+    [Flags()]
     public enum PipelineCreateFlags : int
     {
-        None = 0
+        PipelineCreateDisableOptimizationBit = 0x1,
+        PipelineCreateAllowDerivativesBit = 0x2,
+        PipelineCreateDerivativeBit = 0x4
     }
 }

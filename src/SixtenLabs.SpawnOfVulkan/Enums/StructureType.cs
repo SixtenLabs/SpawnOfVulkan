@@ -66,6 +66,9 @@
         StructureTypePipelineRasterizationStateRasterizationOrderAmd = 10000018000,
         StructureTypeDebugMarkerObjectNameInfoExt = 10000022000,
         StructureTypeDebugMarkerObjectTagInfoExt = 10000022001,
-        StructureTypeDebugMarkerMarkerInfoExt = 10000022002
+        StructureTypeDebugMarkerMarkerInfoExt = 10000022002,
+        StructureTypeDedicatedAllocationImageCreateInfoNv = 10000026000,
+        StructureTypeDedicatedAllocationBufferCreateInfoNv = 10000026001,
+        StructureTypeDedicatedAllocationMemoryAllocateInfoNv = 10000026002
     }
 }

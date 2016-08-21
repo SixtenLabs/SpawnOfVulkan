@@ -1,7 +1,10 @@
-﻿namespace SixtenLabs.SpawnOfVulkan
+﻿using System;
+
+namespace SixtenLabs.SpawnOfVulkan
 {
+    [Flags()]
     public enum FenceCreateFlags : int
     {
-        None = 0
+        FenceCreateSignaledBit = 0x1
     }
 }

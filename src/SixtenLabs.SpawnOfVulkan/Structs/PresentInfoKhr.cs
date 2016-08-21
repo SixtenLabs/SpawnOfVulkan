@@ -7,9 +7,9 @@ namespace SixtenLabs.SpawnOfVulkan
         internal StructureType SType;
         internal IntPtr PNext;
         internal uint WaitSemaphoreCount;
-        internal Semaphore PWaitSemaphores;
+        internal SemaphoreHandle PWaitSemaphores;
         internal uint SwapchainCount;
-        internal SwapchainKhr PSwapchains;
+        internal SwapchainKhrHandle PSwapchains;
         internal uint PImageIndices;
         internal Result PResults;
     }

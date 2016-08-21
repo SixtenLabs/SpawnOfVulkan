@@ -1,7 +1,13 @@
-﻿namespace SixtenLabs.SpawnOfVulkan
+﻿using System;
+
+namespace SixtenLabs.SpawnOfVulkan
 {
+    [Flags()]
     public enum CullModeFlags : int
     {
-        None = 0
+        CullModeNone = 0,
+        CullModeFrontBit = 0x1,
+        CullModeBackBit = 0x2,
+        CullModeFrontAndBack = 0x00000003
     }
 }

@@ -6,9 +6,9 @@ namespace SixtenLabs.SpawnOfVulkan
     {
         internal StructureType SType;
         internal IntPtr PNext;
-        internal RenderPass RenderPass;
+        internal RenderPassHandle RenderPass;
         internal uint Subpass;
-        internal Framebuffer Framebuffer;
+        internal FramebufferHandle Framebuffer;
         internal uint OcclusionQueryEnable;
         internal QueryControlFlags QueryFlags;
         internal QueryPipelineStatisticFlags PipelineStatistics;

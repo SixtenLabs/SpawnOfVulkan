@@ -2,6 +2,7 @@
 using SixtenLabs.Spawn.CSharp;
 using SixtenLabs.Spawn.Vulkan.Spec;
 using System.Linq;
+using SixtenLabs.Spawn.CSharp.FluentDefinitions;
 
 namespace SixtenLabs.Spawn.Vulkan
 {
@@ -21,7 +22,7 @@ namespace SixtenLabs.Spawn.Vulkan
 				int valueInt;
 				var isInt = int.TryParse(enumValue.Value, out valueInt);
 				var value = new LiteralDefinition() { Value = enumValue.Value, LiteralType = isInt ? typeof(int) : typeof(string) };
-				var fieldDef = new FieldDefinition() { SpecName = enumValue.Name, DefaultValue = value, SpecReturnType = isInt ? "int" : "string" };
+				var fieldDef = new FieldDefinition(enumValue.Name).WithDefaultValue(value).WithReturnType(isInt ? "int" : "string");
 				
 				classDefinition.Fields.Add(fieldDef);
 			}
@@ -35,10 +36,10 @@ namespace SixtenLabs.Spawn.Vulkan
 
 			classDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
 			classDefinition.AddModifier(SyntaxKindDto.StaticKeyword);
-			classDefinition.SpecName = VulkanSpec.SpecTree.Constants.Name;
+			classDefinition.Name.OriginalName = VulkanSpec.SpecTree.Constants.Name;
 			
 			// This is hardcoded for this single enum exception.
-			classDefinition.TranslatedName = "ApiConstants";
+			classDefinition.Name.TranslatedName = "ApiConstants";
 
 			AddExtensions(classDefinition);
 
@@ -55,9 +56,14 @@ namespace SixtenLabs.Spawn.Vulkan
 			{
 				foreach(var fieldDefinition in classDefinition.Fields)
 				{
-					fieldDefinition.TranslatedName = VulkanSpec.GetTranslatedName(fieldDefinition.SpecName);
+					fieldDefinition.Name.TranslatedName = VulkanSpec.GetTranslatedName(fieldDefinition.Name.OriginalName);
 					fieldDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
 					fieldDefinition.AddModifier(SyntaxKindDto.ConstKeyword);
+
+					if(fieldDefinition.ReturnType.TranslatedName == null)
+					{
+						fieldDefinition.ReturnType.TranslatedName = fieldDefinition.ReturnType.OriginalName;
+					}
 				}
 
 				count++;
@@ -72,7 +78,7 @@ namespace SixtenLabs.Spawn.Vulkan
 
 			foreach (var classDefintion in Definitions)
 			{
-				var output = new OutputDefinition() { FileName = classDefintion.TranslatedName };
+				var output = new OutputDefinition() { FileName = classDefintion.Name.TranslatedName };
 				output.TargetSolution = TargetSolution;
 				output.AddNamespace(TargetNamespace);
 				output.OutputDirectory = "Constants";
@@ -88,6 +94,8 @@ namespace SixtenLabs.Spawn.Vulkan
 				//}
 
 				output.AddStandardUsingDirective("System");
+
+				var results = classDefintion.Fields.Where(x => x.ReturnType.TranslatedName == null);
 
 				(Generator as CSharpGenerator).GenerateClass(output, classDefintion);
 				count++;

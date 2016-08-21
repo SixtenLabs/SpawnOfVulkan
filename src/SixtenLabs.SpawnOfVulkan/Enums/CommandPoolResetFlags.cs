@@ -1,7 +1,13 @@
-﻿namespace SixtenLabs.SpawnOfVulkan
+﻿using System;
+
+namespace SixtenLabs.SpawnOfVulkan
 {
+    [Flags()]
     public enum CommandPoolResetFlags : int
     {
-        None = 0
+        /// <summary>
+                /// Release resources owned by the pool
+                /// </summary>
+        CommandPoolResetReleaseResourcesBit = 0x1
     }
 }

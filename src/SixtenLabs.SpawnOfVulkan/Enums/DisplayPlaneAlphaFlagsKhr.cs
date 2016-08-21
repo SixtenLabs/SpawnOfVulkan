@@ -1,7 +1,13 @@
-﻿namespace SixtenLabs.SpawnOfVulkan
+﻿using System;
+
+namespace SixtenLabs.SpawnOfVulkan
 {
+    [Flags()]
     public enum DisplayPlaneAlphaFlagsKhr : int
     {
-        None = 0
+        DisplayPlaneAlphaOpaqueBitKhr = 0x1,
+        DisplayPlaneAlphaGlobalBitKhr = 0x2,
+        DisplayPlaneAlphaPerPixelBitKhr = 0x4,
+        DisplayPlaneAlphaPerPixelPremultipliedBitKhr = 0x8
     }
 }

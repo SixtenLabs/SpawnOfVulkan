@@ -13,7 +13,7 @@ namespace SixtenLabs.Vulkan.Sandbox
 		{
 			Vk.Test();
 
-			var x = Vk.GetInstanceProcAddr(null, "vkCreateInstance");
+			//var x = Vk.GetInstanceProcAddr(null, "vkCreateInstance");
 		}
 
 		private void CreateInstance()

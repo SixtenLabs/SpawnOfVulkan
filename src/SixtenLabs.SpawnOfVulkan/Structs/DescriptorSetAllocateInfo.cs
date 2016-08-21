@@ -6,8 +6,8 @@ namespace SixtenLabs.SpawnOfVulkan
     {
         internal StructureType SType;
         internal IntPtr PNext;
-        internal DescriptorPool DescriptorPool;
+        internal DescriptorPoolHandle DescriptorPool;
         internal uint DescriptorSetCount;
-        internal DescriptorSetLayout PSetLayouts;
+        internal DescriptorSetLayoutHandle PSetLayouts;
     }
 }

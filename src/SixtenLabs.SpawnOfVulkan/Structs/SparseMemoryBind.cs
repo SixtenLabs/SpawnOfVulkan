@@ -6,7 +6,7 @@ namespace SixtenLabs.SpawnOfVulkan
     {
         internal ulong ResourceOffset;
         internal ulong Size;
-        internal DeviceMemory Memory;
+        internal DeviceMemoryHandle Memory;
         internal ulong MemoryOffset;
         internal SparseMemoryBindFlags Flags;
     }

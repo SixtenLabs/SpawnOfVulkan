@@ -8,7 +8,7 @@ namespace SixtenLabs.SpawnOfVulkan
         internal IntPtr PNext;
         internal PipelineShaderStageCreateFlags Flags;
         internal ShaderStageFlags Stage;
-        internal ShaderModule Module;
+        internal ShaderModuleHandle Module;
         internal byte PName;
         internal SpecializationInfo PSpecializationInfo;
     }

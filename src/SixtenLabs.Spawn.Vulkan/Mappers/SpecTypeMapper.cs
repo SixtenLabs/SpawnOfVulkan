@@ -87,7 +87,7 @@ namespace SixtenLabs.Spawn.Vulkan
 
 			CreateMap<VkTypeHandle, SpecTypeDefinition>()
 				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
-				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src.Name)));
+				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapHandleTranslatedName(src.Name)));
 
 			CreateMap<VkExtension, SpecTypeDefinition>()
 				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
@@ -114,6 +114,13 @@ namespace SixtenLabs.Spawn.Vulkan
 
 			return name;
 		}
+
+    private string MapHandleTranslatedName(string specName)
+    {
+      var translated = specName.TranslateVulkanName();
+
+      return $"{translated}Handle";
+    }
 
 		private string MapFuncPointerTranslatedName(string specName)
 		{

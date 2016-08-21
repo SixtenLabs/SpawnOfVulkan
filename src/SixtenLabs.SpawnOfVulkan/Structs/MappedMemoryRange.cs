@@ -6,7 +6,7 @@ namespace SixtenLabs.SpawnOfVulkan
     {
         internal StructureType SType;
         internal IntPtr PNext;
-        internal DeviceMemory Memory;
+        internal DeviceMemoryHandle Memory;
         internal ulong Offset;
         internal ulong Size;
     }

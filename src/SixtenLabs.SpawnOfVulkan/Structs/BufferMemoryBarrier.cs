@@ -10,7 +10,7 @@ namespace SixtenLabs.SpawnOfVulkan
         internal AccessFlags DstAccessMask;
         internal uint SrcQueueFamilyIndex;
         internal uint DstQueueFamilyIndex;
-        internal Buffer Buffer;
+        internal BufferHandle Buffer;
         internal ulong Offset;
         internal ulong Size;
     }

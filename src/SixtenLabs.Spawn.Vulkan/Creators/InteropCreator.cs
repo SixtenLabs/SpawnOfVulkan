@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SixtenLabs.Spawn.CSharp;
 using SixtenLabs.Spawn.Vulkan.Spec;
+using SixtenLabs.Spawn.CSharp.FluentDefinitions;
 
 namespace SixtenLabs.Spawn.Vulkan.Creators
 {
@@ -9,7 +10,7 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 		public NativeMethodsCreator(ICodeGenerator generator, ISpawnSpec<VkRegistry> spawnSpec)
 			: base(generator, spawnSpec, "Interop Creator", 30)
 		{
-			//Off = true;
+			Off = true;
 		}
 
 		public override int Build(IMapper mapper)
@@ -31,8 +32,8 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 
 			foreach (var methodDefinition in Definitions)
 			{
-				methodDefinition.TranslatedName = VulkanSpec.GetTranslatedName(methodDefinition.SpecName);
-				methodDefinition.TranslatedReturnType = VulkanSpec.GetTranslatedName(methodDefinition.SpecReturnType);
+				methodDefinition.Name.TranslatedName = VulkanSpec.GetTranslatedName(methodDefinition.Name.OriginalName);
+				methodDefinition.ReturnType.TranslatedName = VulkanSpec.GetTranslatedName(methodDefinition.ReturnType.OriginalName);
 				methodDefinition.AddModifier(SyntaxKindDto.InternalKeyword);
 				methodDefinition.AddModifier(SyntaxKindDto.StaticKeyword);
 				methodDefinition.AddModifier(SyntaxKindDto.UnsafeKeyword);
@@ -40,10 +41,10 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 
 				foreach(var parameter in methodDefinition.Parameters)
 				{
-					parameter.TranslatedReturnType = VulkanSpec.GetTranslatedName(parameter.SpecReturnType);
+					parameter.ParameterType.TranslatedName = VulkanSpec.GetTranslatedName(parameter.ParameterType.OriginalName);
 				}
 
-				var attribute = new AttributeDefinition() { SpecName = "DllImport", TranslatedName = "DllImport" };
+				var attribute = new AttributeDefinition("DllImport");
 				attribute.ArgumentList.Add("VulkanLibrary");
 				attribute.ArgumentList.Add("CallingConvention = CallingConvention.StdCall");
 				methodDefinition.Attributes.Add(attribute);
@@ -68,16 +69,16 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 				output.CommentLines.Add(commentLine);
 			}
 
-			var classDefinition = new ClassDefinition() { SpecName = "NativeMethods" };
-			classDefinition.TranslatedName = "NativeMethods";
+			var classDefinition = new ClassDefinition("NativeMethods");
+			classDefinition.Name.TranslatedName = "NativeMethods";
 			classDefinition.AddModifier(SyntaxKindDto.InternalKeyword);
 			classDefinition.AddModifier(SyntaxKindDto.StaticKeyword);
-
-			var dllConstant = new FieldDefinition() { TranslatedName = "VulkanLibrary", TranslatedReturnType = "string", TranslatedValue = "vulkan-1.dll" };
+      
+      var defaulValue = new LiteralDefinition("VulkanLibrary") { Value = "vulkan-1.dll", LiteralType = typeof(string) };
+      var dllConstant = new FieldDefinition("VulkanLibrary").WithReturnType("string").WithDefaultValue(defaulValue);
 			dllConstant.AddModifier(SyntaxKindDto.PrivateKeyword);
 			dllConstant.AddModifier(SyntaxKindDto.ConstKeyword);
-			dllConstant.DefaultValue = new LiteralDefinition() { Value = "vulkan-1.dll", LiteralType = typeof(string) };
-			classDefinition.Fields.Add(dllConstant);
+      classDefinition.Fields.Add(dllConstant);
 
 			classDefinition.Methods.AddRange(Definitions);
 

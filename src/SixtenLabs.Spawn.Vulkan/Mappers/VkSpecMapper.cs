@@ -303,7 +303,7 @@ namespace SixtenLabs.Spawn.Vulkan
 				.ForMember(dest => dest.Name, opt => opt.MapFrom(m => m.Attribute("name").Value))
 				.ForMember(dest => dest.Type, opt => opt.MapFrom(m => m.Attribute("type").Value))
 				.ForMember(dest => dest.Comment, opt => opt.MapFrom(m => MapAttribute(m, "comment")))
-				.ForMember(dest => dest.Values, opt => opt.MapFrom(m => m.Elements("enum")));
+        .ForMember(dest => dest.Values, opt => opt.MapFrom(m => m.Elements("enum")));
 		}
 
 		private void ConfigureEnumValue()

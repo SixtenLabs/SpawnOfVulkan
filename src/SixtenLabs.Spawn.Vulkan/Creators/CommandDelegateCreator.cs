@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
 using SixtenLabs.Spawn.CSharp;
 using SixtenLabs.Spawn.Vulkan.Spec;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SixtenLabs.Spawn.CSharp.FluentDefinitions;
 
 namespace SixtenLabs.Spawn.Vulkan.Creators
 {
@@ -38,18 +34,18 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 
 			foreach (var methodDefinition in Definitions)
 			{
-				methodDefinition.TranslatedName = $"{VulkanSpec.GetTranslatedName(methodDefinition.SpecName)}Delegate";
-				methodDefinition.TranslatedReturnType = VulkanSpec.GetTranslatedName(methodDefinition.SpecReturnType);
+				methodDefinition.Name.TranslatedName = $"{VulkanSpec.GetTranslatedName(methodDefinition.Name.OriginalName)}Delegate";
+				methodDefinition.ReturnType.TranslatedName = VulkanSpec.GetTranslatedName(methodDefinition.ReturnType.OriginalName);
 				methodDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
 				methodDefinition.AddModifier(SyntaxKindDto.DelegateKeyword);
 
 				foreach (var parameter in methodDefinition.Parameters)
 				{
 					parameter.IsPointer = false;
-					parameter.TranslatedReturnType = VulkanSpec.GetTranslatedName(parameter.SpecReturnType);
+					parameter.ParameterType.TranslatedName = VulkanSpec.GetTranslatedName(parameter.ParameterType.OriginalName);
 				}
 
-				var attribute = new AttributeDefinition() { SpecName = "UnmanagedFunctionPointer", TranslatedName = "UnmanagedFunctionPointer" };
+				var attribute = new AttributeDefinition("UnmanagedFunctionPointer");
 				attribute.ArgumentList.Add("CallingConvention.Winapi");
 				methodDefinition.Attributes.Add(attribute);
 
@@ -73,8 +69,8 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 				output.CommentLines.Add(commentLine);
 			}
 
-			var classDefinition = new ClassDefinition() { SpecName = "Vk" };
-			classDefinition.TranslatedName = "Vk";
+			var classDefinition = new ClassDefinition("Vk");
+			classDefinition.Name.TranslatedName = "Vk";
 			classDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
 			classDefinition.AddModifier(SyntaxKindDto.StaticKeyword);
 			classDefinition.AddModifier(SyntaxKindDto.PartialKeyword);

@@ -7,7 +7,7 @@ namespace SixtenLabs.SpawnOfVulkan
         internal StructureType SType;
         internal IntPtr PNext;
         internal DisplaySurfaceCreateFlagsKhr Flags;
-        internal DisplayModeKhr DisplayMode;
+        internal DisplayModeKhrHandle DisplayMode;
         internal uint PlaneIndex;
         internal uint PlaneStackIndex;
         internal SurfaceTransformFlagsKhr Transform;

@@ -8,6 +8,6 @@ namespace SixtenLabs.SpawnOfVulkan
         internal DescriptorType DescriptorType;
         internal uint DescriptorCount;
         internal ShaderStageFlags StageFlags;
-        internal Sampler PImmutableSamplers;
+        internal SamplerHandle PImmutableSamplers;
     }
 }

@@ -6,352 +6,352 @@ namespace SixtenLabs.SpawnOfVulkan
     public static partial class Vk
     {
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateInstanceDelegate(InstanceCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, Instance @pInstance);
+        public delegate Result CreateInstanceDelegate(InstanceCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, InstanceHandle @pInstance);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroyInstanceDelegate(Instance @instance, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroyInstanceDelegate(InstanceHandle @instance, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result EnumeratePhysicalDevicesDelegate(Instance @instance, uint @pPhysicalDeviceCount, PhysicalDevice @pPhysicalDevices);
+        public delegate Result EnumeratePhysicalDevicesDelegate(InstanceHandle @instance, uint @pPhysicalDeviceCount, PhysicalDeviceHandle @pPhysicalDevices);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr GetDeviceProcAddrDelegate(Device @device, string @pName);
+        public delegate IntPtr GetDeviceProcAddrDelegate(DeviceHandle @device, byte @pName);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr GetInstanceProcAddrDelegate(Instance @instance, string @pName);
+        public delegate IntPtr GetInstanceProcAddrDelegate(InstanceHandle @instance, byte @pName);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr GetPhysicalDevicePropertiesDelegate(PhysicalDevice @physicalDevice, PhysicalDeviceProperties @pProperties);
+        public delegate IntPtr GetPhysicalDevicePropertiesDelegate(PhysicalDeviceHandle @physicalDevice, PhysicalDeviceProperties @pProperties);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr GetPhysicalDeviceQueueFamilyPropertiesDelegate(PhysicalDevice @physicalDevice, uint @pQueueFamilyPropertyCount, QueueFamilyProperties @pQueueFamilyProperties);
+        public delegate IntPtr GetPhysicalDeviceQueueFamilyPropertiesDelegate(PhysicalDeviceHandle @physicalDevice, uint @pQueueFamilyPropertyCount, QueueFamilyProperties @pQueueFamilyProperties);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr GetPhysicalDeviceMemoryPropertiesDelegate(PhysicalDevice @physicalDevice, PhysicalDeviceMemoryProperties @pMemoryProperties);
+        public delegate IntPtr GetPhysicalDeviceMemoryPropertiesDelegate(PhysicalDeviceHandle @physicalDevice, PhysicalDeviceMemoryProperties @pMemoryProperties);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr GetPhysicalDeviceFeaturesDelegate(PhysicalDevice @physicalDevice, PhysicalDeviceFeatures @pFeatures);
+        public delegate IntPtr GetPhysicalDeviceFeaturesDelegate(PhysicalDeviceHandle @physicalDevice, PhysicalDeviceFeatures @pFeatures);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr GetPhysicalDeviceFormatPropertiesDelegate(PhysicalDevice @physicalDevice, Format @format, FormatProperties @pFormatProperties);
+        public delegate IntPtr GetPhysicalDeviceFormatPropertiesDelegate(PhysicalDeviceHandle @physicalDevice, Format @format, FormatProperties @pFormatProperties);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result GetPhysicalDeviceImageFormatPropertiesDelegate(PhysicalDevice @physicalDevice, Format @format, ImageType @type, ImageTiling @tiling, ImageUsageFlags @usage, ImageCreateFlags @flags, ImageFormatProperties @pImageFormatProperties);
+        public delegate Result GetPhysicalDeviceImageFormatPropertiesDelegate(PhysicalDeviceHandle @physicalDevice, Format @format, ImageType @type, ImageTiling @tiling, ImageUsageFlags @usage, ImageCreateFlags @flags, ImageFormatProperties @pImageFormatProperties);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateDeviceDelegate(PhysicalDevice @physicalDevice, DeviceCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, Device @pDevice);
+        public delegate Result CreateDeviceDelegate(PhysicalDeviceHandle @physicalDevice, DeviceCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, DeviceHandle @pDevice);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroyDeviceDelegate(Device @device, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroyDeviceDelegate(DeviceHandle @device, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
         public delegate Result EnumerateInstanceLayerPropertiesDelegate(uint @pPropertyCount, LayerProperties @pProperties);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result EnumerateInstanceExtensionPropertiesDelegate(string @pLayerName, uint @pPropertyCount, ExtensionProperties @pProperties);
+        public delegate Result EnumerateInstanceExtensionPropertiesDelegate(byte @pLayerName, uint @pPropertyCount, ExtensionProperties @pProperties);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result EnumerateDeviceLayerPropertiesDelegate(PhysicalDevice @physicalDevice, uint @pPropertyCount, LayerProperties @pProperties);
+        public delegate Result EnumerateDeviceLayerPropertiesDelegate(PhysicalDeviceHandle @physicalDevice, uint @pPropertyCount, LayerProperties @pProperties);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result EnumerateDeviceExtensionPropertiesDelegate(PhysicalDevice @physicalDevice, string @pLayerName, uint @pPropertyCount, ExtensionProperties @pProperties);
+        public delegate Result EnumerateDeviceExtensionPropertiesDelegate(PhysicalDeviceHandle @physicalDevice, byte @pLayerName, uint @pPropertyCount, ExtensionProperties @pProperties);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr GetDeviceQueueDelegate(Device @device, uint @queueFamilyIndex, uint @queueIndex, Queue @pQueue);
+        public delegate IntPtr GetDeviceQueueDelegate(DeviceHandle @device, uint @queueFamilyIndex, uint @queueIndex, QueueHandle @pQueue);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result QueueSubmitDelegate(Queue @queue, uint @submitCount, SubmitInfo @pSubmits, Fence @fence);
+        public delegate Result QueueSubmitDelegate(QueueHandle @queue, uint @submitCount, SubmitInfo @pSubmits, FenceHandle @fence);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result QueueWaitIdleDelegate(Queue @queue);
+        public delegate Result QueueWaitIdleDelegate(QueueHandle @queue);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result DeviceWaitIdleDelegate(Device @device);
+        public delegate Result DeviceWaitIdleDelegate(DeviceHandle @device);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result AllocateMemoryDelegate(Device @device, MemoryAllocateInfo @pAllocateInfo, AllocationCallbacks @pAllocator, DeviceMemory @pMemory);
+        public delegate Result AllocateMemoryDelegate(DeviceHandle @device, MemoryAllocateInfo @pAllocateInfo, AllocationCallbacks @pAllocator, DeviceMemoryHandle @pMemory);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr FreeMemoryDelegate(Device @device, DeviceMemory @memory, AllocationCallbacks @pAllocator);
+        public delegate IntPtr FreeMemoryDelegate(DeviceHandle @device, DeviceMemoryHandle @memory, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result MapMemoryDelegate(Device @device, DeviceMemory @memory, ulong @offset, ulong @size, MemoryMapFlags @flags, IntPtr @ppData);
+        public delegate Result MapMemoryDelegate(DeviceHandle @device, DeviceMemoryHandle @memory, ulong @offset, ulong @size, MemoryMapFlags @flags, IntPtr @ppData);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr UnmapMemoryDelegate(Device @device, DeviceMemory @memory);
+        public delegate IntPtr UnmapMemoryDelegate(DeviceHandle @device, DeviceMemoryHandle @memory);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result FlushMappedMemoryRangesDelegate(Device @device, uint @memoryRangeCount, MappedMemoryRange @pMemoryRanges);
+        public delegate Result FlushMappedMemoryRangesDelegate(DeviceHandle @device, uint @memoryRangeCount, MappedMemoryRange @pMemoryRanges);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result InvalidateMappedMemoryRangesDelegate(Device @device, uint @memoryRangeCount, MappedMemoryRange @pMemoryRanges);
+        public delegate Result InvalidateMappedMemoryRangesDelegate(DeviceHandle @device, uint @memoryRangeCount, MappedMemoryRange @pMemoryRanges);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr GetDeviceMemoryCommitmentDelegate(Device @device, DeviceMemory @memory, ulong @pCommittedMemoryInBytes);
+        public delegate IntPtr GetDeviceMemoryCommitmentDelegate(DeviceHandle @device, DeviceMemoryHandle @memory, ulong @pCommittedMemoryInBytes);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr GetBufferMemoryRequirementsDelegate(Device @device, Buffer @buffer, MemoryRequirements @pMemoryRequirements);
+        public delegate IntPtr GetBufferMemoryRequirementsDelegate(DeviceHandle @device, BufferHandle @buffer, MemoryRequirements @pMemoryRequirements);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result BindBufferMemoryDelegate(Device @device, Buffer @buffer, DeviceMemory @memory, ulong @memoryOffset);
+        public delegate Result BindBufferMemoryDelegate(DeviceHandle @device, BufferHandle @buffer, DeviceMemoryHandle @memory, ulong @memoryOffset);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr GetImageMemoryRequirementsDelegate(Device @device, Image @image, MemoryRequirements @pMemoryRequirements);
+        public delegate IntPtr GetImageMemoryRequirementsDelegate(DeviceHandle @device, ImageHandle @image, MemoryRequirements @pMemoryRequirements);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result BindImageMemoryDelegate(Device @device, Image @image, DeviceMemory @memory, ulong @memoryOffset);
+        public delegate Result BindImageMemoryDelegate(DeviceHandle @device, ImageHandle @image, DeviceMemoryHandle @memory, ulong @memoryOffset);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr GetImageSparseMemoryRequirementsDelegate(Device @device, Image @image, uint @pSparseMemoryRequirementCount, SparseImageMemoryRequirements @pSparseMemoryRequirements);
+        public delegate IntPtr GetImageSparseMemoryRequirementsDelegate(DeviceHandle @device, ImageHandle @image, uint @pSparseMemoryRequirementCount, SparseImageMemoryRequirements @pSparseMemoryRequirements);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr GetPhysicalDeviceSparseImageFormatPropertiesDelegate(PhysicalDevice @physicalDevice, Format @format, ImageType @type, SampleCountFlags @samples, ImageUsageFlags @usage, ImageTiling @tiling, uint @pPropertyCount, SparseImageFormatProperties @pProperties);
+        public delegate IntPtr GetPhysicalDeviceSparseImageFormatPropertiesDelegate(PhysicalDeviceHandle @physicalDevice, Format @format, ImageType @type, SampleCountFlags @samples, ImageUsageFlags @usage, ImageTiling @tiling, uint @pPropertyCount, SparseImageFormatProperties @pProperties);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result QueueBindSparseDelegate(Queue @queue, uint @bindInfoCount, BindSparseInfo @pBindInfo, Fence @fence);
+        public delegate Result QueueBindSparseDelegate(QueueHandle @queue, uint @bindInfoCount, BindSparseInfo @pBindInfo, FenceHandle @fence);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateFenceDelegate(Device @device, FenceCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, Fence @pFence);
+        public delegate Result CreateFenceDelegate(DeviceHandle @device, FenceCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, FenceHandle @pFence);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroyFenceDelegate(Device @device, Fence @fence, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroyFenceDelegate(DeviceHandle @device, FenceHandle @fence, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result ResetFencesDelegate(Device @device, uint @fenceCount, Fence @pFences);
+        public delegate Result ResetFencesDelegate(DeviceHandle @device, uint @fenceCount, FenceHandle @pFences);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result GetFenceStatusDelegate(Device @device, Fence @fence);
+        public delegate Result GetFenceStatusDelegate(DeviceHandle @device, FenceHandle @fence);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result WaitForFencesDelegate(Device @device, uint @fenceCount, Fence @pFences, uint @waitAll, ulong @timeout);
+        public delegate Result WaitForFencesDelegate(DeviceHandle @device, uint @fenceCount, FenceHandle @pFences, uint @waitAll, ulong @timeout);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateSemaphoreDelegate(Device @device, SemaphoreCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, Semaphore @pSemaphore);
+        public delegate Result CreateSemaphoreDelegate(DeviceHandle @device, SemaphoreCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, SemaphoreHandle @pSemaphore);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroySemaphoreDelegate(Device @device, Semaphore @semaphore, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroySemaphoreDelegate(DeviceHandle @device, SemaphoreHandle @semaphore, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateEventDelegate(Device @device, EventCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, Event @pEvent);
+        public delegate Result CreateEventDelegate(DeviceHandle @device, EventCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, EventHandle @pEvent);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroyEventDelegate(Device @device, Event @event, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroyEventDelegate(DeviceHandle @device, EventHandle @event, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result GetEventStatusDelegate(Device @device, Event @event);
+        public delegate Result GetEventStatusDelegate(DeviceHandle @device, EventHandle @event);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result SetEventDelegate(Device @device, Event @event);
+        public delegate Result SetEventDelegate(DeviceHandle @device, EventHandle @event);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result ResetEventDelegate(Device @device, Event @event);
+        public delegate Result ResetEventDelegate(DeviceHandle @device, EventHandle @event);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateQueryPoolDelegate(Device @device, QueryPoolCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, QueryPool @pQueryPool);
+        public delegate Result CreateQueryPoolDelegate(DeviceHandle @device, QueryPoolCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, QueryPoolHandle @pQueryPool);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroyQueryPoolDelegate(Device @device, QueryPool @queryPool, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroyQueryPoolDelegate(DeviceHandle @device, QueryPoolHandle @queryPool, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result GetQueryPoolResultsDelegate(Device @device, QueryPool @queryPool, uint @firstQuery, uint @queryCount, UIntPtr @dataSize, IntPtr @pData, ulong @stride, QueryResultFlags @flags);
+        public delegate Result GetQueryPoolResultsDelegate(DeviceHandle @device, QueryPoolHandle @queryPool, uint @firstQuery, uint @queryCount, UIntPtr @dataSize, IntPtr @pData, ulong @stride, QueryResultFlags @flags);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateBufferDelegate(Device @device, BufferCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, Buffer @pBuffer);
+        public delegate Result CreateBufferDelegate(DeviceHandle @device, BufferCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, BufferHandle @pBuffer);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroyBufferDelegate(Device @device, Buffer @buffer, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroyBufferDelegate(DeviceHandle @device, BufferHandle @buffer, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateBufferViewDelegate(Device @device, BufferViewCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, BufferView @pView);
+        public delegate Result CreateBufferViewDelegate(DeviceHandle @device, BufferViewCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, BufferViewHandle @pView);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroyBufferViewDelegate(Device @device, BufferView @bufferView, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroyBufferViewDelegate(DeviceHandle @device, BufferViewHandle @bufferView, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateImageDelegate(Device @device, ImageCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, Image @pImage);
+        public delegate Result CreateImageDelegate(DeviceHandle @device, ImageCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, ImageHandle @pImage);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroyImageDelegate(Device @device, Image @image, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroyImageDelegate(DeviceHandle @device, ImageHandle @image, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr GetImageSubresourceLayoutDelegate(Device @device, Image @image, ImageSubresource @pSubresource, SubresourceLayout @pLayout);
+        public delegate IntPtr GetImageSubresourceLayoutDelegate(DeviceHandle @device, ImageHandle @image, ImageSubresource @pSubresource, SubresourceLayout @pLayout);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateImageViewDelegate(Device @device, ImageViewCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, ImageView @pView);
+        public delegate Result CreateImageViewDelegate(DeviceHandle @device, ImageViewCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, ImageViewHandle @pView);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroyImageViewDelegate(Device @device, ImageView @imageView, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroyImageViewDelegate(DeviceHandle @device, ImageViewHandle @imageView, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateShaderModuleDelegate(Device @device, ShaderModuleCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, ShaderModule @pShaderModule);
+        public delegate Result CreateShaderModuleDelegate(DeviceHandle @device, ShaderModuleCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, ShaderModuleHandle @pShaderModule);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroyShaderModuleDelegate(Device @device, ShaderModule @shaderModule, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroyShaderModuleDelegate(DeviceHandle @device, ShaderModuleHandle @shaderModule, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreatePipelineCacheDelegate(Device @device, PipelineCacheCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, PipelineCache @pPipelineCache);
+        public delegate Result CreatePipelineCacheDelegate(DeviceHandle @device, PipelineCacheCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, PipelineCacheHandle @pPipelineCache);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroyPipelineCacheDelegate(Device @device, PipelineCache @pipelineCache, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroyPipelineCacheDelegate(DeviceHandle @device, PipelineCacheHandle @pipelineCache, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result GetPipelineCacheDataDelegate(Device @device, PipelineCache @pipelineCache, UIntPtr @pDataSize, IntPtr @pData);
+        public delegate Result GetPipelineCacheDataDelegate(DeviceHandle @device, PipelineCacheHandle @pipelineCache, UIntPtr @pDataSize, IntPtr @pData);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result MergePipelineCachesDelegate(Device @device, PipelineCache @dstCache, uint @srcCacheCount, PipelineCache @pSrcCaches);
+        public delegate Result MergePipelineCachesDelegate(DeviceHandle @device, PipelineCacheHandle @dstCache, uint @srcCacheCount, PipelineCacheHandle @pSrcCaches);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateGraphicsPipelinesDelegate(Device @device, PipelineCache @pipelineCache, uint @createInfoCount, GraphicsPipelineCreateInfo @pCreateInfos, AllocationCallbacks @pAllocator, Pipeline @pPipelines);
+        public delegate Result CreateGraphicsPipelinesDelegate(DeviceHandle @device, PipelineCacheHandle @pipelineCache, uint @createInfoCount, GraphicsPipelineCreateInfo @pCreateInfos, AllocationCallbacks @pAllocator, PipelineHandle @pPipelines);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateComputePipelinesDelegate(Device @device, PipelineCache @pipelineCache, uint @createInfoCount, ComputePipelineCreateInfo @pCreateInfos, AllocationCallbacks @pAllocator, Pipeline @pPipelines);
+        public delegate Result CreateComputePipelinesDelegate(DeviceHandle @device, PipelineCacheHandle @pipelineCache, uint @createInfoCount, ComputePipelineCreateInfo @pCreateInfos, AllocationCallbacks @pAllocator, PipelineHandle @pPipelines);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroyPipelineDelegate(Device @device, Pipeline @pipeline, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroyPipelineDelegate(DeviceHandle @device, PipelineHandle @pipeline, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreatePipelineLayoutDelegate(Device @device, PipelineLayoutCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, PipelineLayout @pPipelineLayout);
+        public delegate Result CreatePipelineLayoutDelegate(DeviceHandle @device, PipelineLayoutCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, PipelineLayoutHandle @pPipelineLayout);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroyPipelineLayoutDelegate(Device @device, PipelineLayout @pipelineLayout, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroyPipelineLayoutDelegate(DeviceHandle @device, PipelineLayoutHandle @pipelineLayout, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateSamplerDelegate(Device @device, SamplerCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, Sampler @pSampler);
+        public delegate Result CreateSamplerDelegate(DeviceHandle @device, SamplerCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, SamplerHandle @pSampler);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroySamplerDelegate(Device @device, Sampler @sampler, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroySamplerDelegate(DeviceHandle @device, SamplerHandle @sampler, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateDescriptorSetLayoutDelegate(Device @device, DescriptorSetLayoutCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, DescriptorSetLayout @pSetLayout);
+        public delegate Result CreateDescriptorSetLayoutDelegate(DeviceHandle @device, DescriptorSetLayoutCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, DescriptorSetLayoutHandle @pSetLayout);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroyDescriptorSetLayoutDelegate(Device @device, DescriptorSetLayout @descriptorSetLayout, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroyDescriptorSetLayoutDelegate(DeviceHandle @device, DescriptorSetLayoutHandle @descriptorSetLayout, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateDescriptorPoolDelegate(Device @device, DescriptorPoolCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, DescriptorPool @pDescriptorPool);
+        public delegate Result CreateDescriptorPoolDelegate(DeviceHandle @device, DescriptorPoolCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, DescriptorPoolHandle @pDescriptorPool);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroyDescriptorPoolDelegate(Device @device, DescriptorPool @descriptorPool, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroyDescriptorPoolDelegate(DeviceHandle @device, DescriptorPoolHandle @descriptorPool, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result ResetDescriptorPoolDelegate(Device @device, DescriptorPool @descriptorPool, DescriptorPoolResetFlags @flags);
+        public delegate Result ResetDescriptorPoolDelegate(DeviceHandle @device, DescriptorPoolHandle @descriptorPool, DescriptorPoolResetFlags @flags);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result AllocateDescriptorSetsDelegate(Device @device, DescriptorSetAllocateInfo @pAllocateInfo, DescriptorSet @pDescriptorSets);
+        public delegate Result AllocateDescriptorSetsDelegate(DeviceHandle @device, DescriptorSetAllocateInfo @pAllocateInfo, DescriptorSetHandle @pDescriptorSets);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result FreeDescriptorSetsDelegate(Device @device, DescriptorPool @descriptorPool, uint @descriptorSetCount, DescriptorSet @pDescriptorSets);
+        public delegate Result FreeDescriptorSetsDelegate(DeviceHandle @device, DescriptorPoolHandle @descriptorPool, uint @descriptorSetCount, DescriptorSetHandle @pDescriptorSets);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr UpdateDescriptorSetsDelegate(Device @device, uint @descriptorWriteCount, WriteDescriptorSet @pDescriptorWrites, uint @descriptorCopyCount, CopyDescriptorSet @pDescriptorCopies);
+        public delegate IntPtr UpdateDescriptorSetsDelegate(DeviceHandle @device, uint @descriptorWriteCount, WriteDescriptorSet @pDescriptorWrites, uint @descriptorCopyCount, CopyDescriptorSet @pDescriptorCopies);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateFramebufferDelegate(Device @device, FramebufferCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, Framebuffer @pFramebuffer);
+        public delegate Result CreateFramebufferDelegate(DeviceHandle @device, FramebufferCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, FramebufferHandle @pFramebuffer);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroyFramebufferDelegate(Device @device, Framebuffer @framebuffer, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroyFramebufferDelegate(DeviceHandle @device, FramebufferHandle @framebuffer, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateRenderPassDelegate(Device @device, RenderPassCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, RenderPass @pRenderPass);
+        public delegate Result CreateRenderPassDelegate(DeviceHandle @device, RenderPassCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, RenderPassHandle @pRenderPass);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroyRenderPassDelegate(Device @device, RenderPass @renderPass, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroyRenderPassDelegate(DeviceHandle @device, RenderPassHandle @renderPass, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr GetRenderAreaGranularityDelegate(Device @device, RenderPass @renderPass, Extent2D @pGranularity);
+        public delegate IntPtr GetRenderAreaGranularityDelegate(DeviceHandle @device, RenderPassHandle @renderPass, Extent2D @pGranularity);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateCommandPoolDelegate(Device @device, CommandPoolCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, CommandPool @pCommandPool);
+        public delegate Result CreateCommandPoolDelegate(DeviceHandle @device, CommandPoolCreateInfo @pCreateInfo, AllocationCallbacks @pAllocator, CommandPoolHandle @pCommandPool);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroyCommandPoolDelegate(Device @device, CommandPool @commandPool, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroyCommandPoolDelegate(DeviceHandle @device, CommandPoolHandle @commandPool, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result ResetCommandPoolDelegate(Device @device, CommandPool @commandPool, CommandPoolResetFlags @flags);
+        public delegate Result ResetCommandPoolDelegate(DeviceHandle @device, CommandPoolHandle @commandPool, CommandPoolResetFlags @flags);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result AllocateCommandBuffersDelegate(Device @device, CommandBufferAllocateInfo @pAllocateInfo, CommandBuffer @pCommandBuffers);
+        public delegate Result AllocateCommandBuffersDelegate(DeviceHandle @device, CommandBufferAllocateInfo @pAllocateInfo, CommandBufferHandle @pCommandBuffers);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr FreeCommandBuffersDelegate(Device @device, CommandPool @commandPool, uint @commandBufferCount, CommandBuffer @pCommandBuffers);
+        public delegate IntPtr FreeCommandBuffersDelegate(DeviceHandle @device, CommandPoolHandle @commandPool, uint @commandBufferCount, CommandBufferHandle @pCommandBuffers);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result BeginCommandBufferDelegate(CommandBuffer @commandBuffer, CommandBufferBeginInfo @pBeginInfo);
+        public delegate Result BeginCommandBufferDelegate(CommandBufferHandle @commandBuffer, CommandBufferBeginInfo @pBeginInfo);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result EndCommandBufferDelegate(CommandBuffer @commandBuffer);
+        public delegate Result EndCommandBufferDelegate(CommandBufferHandle @commandBuffer);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result ResetCommandBufferDelegate(CommandBuffer @commandBuffer, CommandBufferResetFlags @flags);
+        public delegate Result ResetCommandBufferDelegate(CommandBufferHandle @commandBuffer, CommandBufferResetFlags @flags);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdBindPipelineDelegate(CommandBuffer @commandBuffer, PipelineBindPoint @pipelineBindPoint, Pipeline @pipeline);
+        public delegate IntPtr CmdBindPipelineDelegate(CommandBufferHandle @commandBuffer, PipelineBindPoint @pipelineBindPoint, PipelineHandle @pipeline);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdSetViewportDelegate(CommandBuffer @commandBuffer, uint @firstViewport, uint @viewportCount, Viewport @pViewports);
+        public delegate IntPtr CmdSetViewportDelegate(CommandBufferHandle @commandBuffer, uint @firstViewport, uint @viewportCount, Viewport @pViewports);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdSetScissorDelegate(CommandBuffer @commandBuffer, uint @firstScissor, uint @scissorCount, Rect2D @pScissors);
+        public delegate IntPtr CmdSetScissorDelegate(CommandBufferHandle @commandBuffer, uint @firstScissor, uint @scissorCount, Rect2D @pScissors);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdSetLineWidthDelegate(CommandBuffer @commandBuffer, float @lineWidth);
+        public delegate IntPtr CmdSetLineWidthDelegate(CommandBufferHandle @commandBuffer, float @lineWidth);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdSetDepthBiasDelegate(CommandBuffer @commandBuffer, float @depthBiasConstantFactor, float @depthBiasClamp, float @depthBiasSlopeFactor);
+        public delegate IntPtr CmdSetDepthBiasDelegate(CommandBufferHandle @commandBuffer, float @depthBiasConstantFactor, float @depthBiasClamp, float @depthBiasSlopeFactor);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdSetBlendConstantsDelegate(CommandBuffer @commandBuffer, float @blendConstants);
+        public delegate IntPtr CmdSetBlendConstantsDelegate(CommandBufferHandle @commandBuffer, float @blendConstants);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdSetDepthBoundsDelegate(CommandBuffer @commandBuffer, float @minDepthBounds, float @maxDepthBounds);
+        public delegate IntPtr CmdSetDepthBoundsDelegate(CommandBufferHandle @commandBuffer, float @minDepthBounds, float @maxDepthBounds);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdSetStencilCompareMaskDelegate(CommandBuffer @commandBuffer, StencilFaceFlags @faceMask, uint @compareMask);
+        public delegate IntPtr CmdSetStencilCompareMaskDelegate(CommandBufferHandle @commandBuffer, StencilFaceFlags @faceMask, uint @compareMask);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdSetStencilWriteMaskDelegate(CommandBuffer @commandBuffer, StencilFaceFlags @faceMask, uint @writeMask);
+        public delegate IntPtr CmdSetStencilWriteMaskDelegate(CommandBufferHandle @commandBuffer, StencilFaceFlags @faceMask, uint @writeMask);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdSetStencilReferenceDelegate(CommandBuffer @commandBuffer, StencilFaceFlags @faceMask, uint @reference);
+        public delegate IntPtr CmdSetStencilReferenceDelegate(CommandBufferHandle @commandBuffer, StencilFaceFlags @faceMask, uint @reference);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdBindDescriptorSetsDelegate(CommandBuffer @commandBuffer, PipelineBindPoint @pipelineBindPoint, PipelineLayout @layout, uint @firstSet, uint @descriptorSetCount, DescriptorSet @pDescriptorSets, uint @dynamicOffsetCount, uint @pDynamicOffsets);
+        public delegate IntPtr CmdBindDescriptorSetsDelegate(CommandBufferHandle @commandBuffer, PipelineBindPoint @pipelineBindPoint, PipelineLayoutHandle @layout, uint @firstSet, uint @descriptorSetCount, DescriptorSetHandle @pDescriptorSets, uint @dynamicOffsetCount, uint @pDynamicOffsets);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdBindIndexBufferDelegate(CommandBuffer @commandBuffer, Buffer @buffer, ulong @offset, IndexType @indexType);
+        public delegate IntPtr CmdBindIndexBufferDelegate(CommandBufferHandle @commandBuffer, BufferHandle @buffer, ulong @offset, IndexType @indexType);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdBindVertexBuffersDelegate(CommandBuffer @commandBuffer, uint @firstBinding, uint @bindingCount, Buffer @pBuffers, ulong @pOffsets);
+        public delegate IntPtr CmdBindVertexBuffersDelegate(CommandBufferHandle @commandBuffer, uint @firstBinding, uint @bindingCount, BufferHandle @pBuffers, ulong @pOffsets);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdDrawDelegate(CommandBuffer @commandBuffer, uint @vertexCount, uint @instanceCount, uint @firstVertex, uint @firstInstance);
+        public delegate IntPtr CmdDrawDelegate(CommandBufferHandle @commandBuffer, uint @vertexCount, uint @instanceCount, uint @firstVertex, uint @firstInstance);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdDrawIndexedDelegate(CommandBuffer @commandBuffer, uint @indexCount, uint @instanceCount, uint @firstIndex, int @vertexOffset, uint @firstInstance);
+        public delegate IntPtr CmdDrawIndexedDelegate(CommandBufferHandle @commandBuffer, uint @indexCount, uint @instanceCount, uint @firstIndex, int @vertexOffset, uint @firstInstance);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdDrawIndirectDelegate(CommandBuffer @commandBuffer, Buffer @buffer, ulong @offset, uint @drawCount, uint @stride);
+        public delegate IntPtr CmdDrawIndirectDelegate(CommandBufferHandle @commandBuffer, BufferHandle @buffer, ulong @offset, uint @drawCount, uint @stride);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdDrawIndexedIndirectDelegate(CommandBuffer @commandBuffer, Buffer @buffer, ulong @offset, uint @drawCount, uint @stride);
+        public delegate IntPtr CmdDrawIndexedIndirectDelegate(CommandBufferHandle @commandBuffer, BufferHandle @buffer, ulong @offset, uint @drawCount, uint @stride);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdDispatchDelegate(CommandBuffer @commandBuffer, uint @x, uint @y, uint @z);
+        public delegate IntPtr CmdDispatchDelegate(CommandBufferHandle @commandBuffer, uint @x, uint @y, uint @z);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdDispatchIndirectDelegate(CommandBuffer @commandBuffer, Buffer @buffer, ulong @offset);
+        public delegate IntPtr CmdDispatchIndirectDelegate(CommandBufferHandle @commandBuffer, BufferHandle @buffer, ulong @offset);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdCopyBufferDelegate(CommandBuffer @commandBuffer, Buffer @srcBuffer, Buffer @dstBuffer, uint @regionCount, BufferCopy @pRegions);
+        public delegate IntPtr CmdCopyBufferDelegate(CommandBufferHandle @commandBuffer, BufferHandle @srcBuffer, BufferHandle @dstBuffer, uint @regionCount, BufferCopy @pRegions);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdCopyImageDelegate(CommandBuffer @commandBuffer, Image @srcImage, ImageLayout @srcImageLayout, Image @dstImage, ImageLayout @dstImageLayout, uint @regionCount, ImageCopy @pRegions);
+        public delegate IntPtr CmdCopyImageDelegate(CommandBufferHandle @commandBuffer, ImageHandle @srcImage, ImageLayout @srcImageLayout, ImageHandle @dstImage, ImageLayout @dstImageLayout, uint @regionCount, ImageCopy @pRegions);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdBlitImageDelegate(CommandBuffer @commandBuffer, Image @srcImage, ImageLayout @srcImageLayout, Image @dstImage, ImageLayout @dstImageLayout, uint @regionCount, ImageBlit @pRegions, Filter @filter);
+        public delegate IntPtr CmdBlitImageDelegate(CommandBufferHandle @commandBuffer, ImageHandle @srcImage, ImageLayout @srcImageLayout, ImageHandle @dstImage, ImageLayout @dstImageLayout, uint @regionCount, ImageBlit @pRegions, Filter @filter);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdCopyBufferToImageDelegate(CommandBuffer @commandBuffer, Buffer @srcBuffer, Image @dstImage, ImageLayout @dstImageLayout, uint @regionCount, BufferImageCopy @pRegions);
+        public delegate IntPtr CmdCopyBufferToImageDelegate(CommandBufferHandle @commandBuffer, BufferHandle @srcBuffer, ImageHandle @dstImage, ImageLayout @dstImageLayout, uint @regionCount, BufferImageCopy @pRegions);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdCopyImageToBufferDelegate(CommandBuffer @commandBuffer, Image @srcImage, ImageLayout @srcImageLayout, Buffer @dstBuffer, uint @regionCount, BufferImageCopy @pRegions);
+        public delegate IntPtr CmdCopyImageToBufferDelegate(CommandBufferHandle @commandBuffer, ImageHandle @srcImage, ImageLayout @srcImageLayout, BufferHandle @dstBuffer, uint @regionCount, BufferImageCopy @pRegions);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdUpdateBufferDelegate(CommandBuffer @commandBuffer, Buffer @dstBuffer, ulong @dstOffset, ulong @dataSize, uint @pData);
+        public delegate IntPtr CmdUpdateBufferDelegate(CommandBufferHandle @commandBuffer, BufferHandle @dstBuffer, ulong @dstOffset, ulong @dataSize, IntPtr @pData);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdFillBufferDelegate(CommandBuffer @commandBuffer, Buffer @dstBuffer, ulong @dstOffset, ulong @size, uint @data);
+        public delegate IntPtr CmdFillBufferDelegate(CommandBufferHandle @commandBuffer, BufferHandle @dstBuffer, ulong @dstOffset, ulong @size, uint @data);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdClearColorImageDelegate(CommandBuffer @commandBuffer, Image @image, ImageLayout @imageLayout, ClearColorValue @pColor, uint @rangeCount, ImageSubresourceRange @pRanges);
+        public delegate IntPtr CmdClearColorImageDelegate(CommandBufferHandle @commandBuffer, ImageHandle @image, ImageLayout @imageLayout, ClearColorValue @pColor, uint @rangeCount, ImageSubresourceRange @pRanges);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdClearDepthStencilImageDelegate(CommandBuffer @commandBuffer, Image @image, ImageLayout @imageLayout, ClearDepthStencilValue @pDepthStencil, uint @rangeCount, ImageSubresourceRange @pRanges);
+        public delegate IntPtr CmdClearDepthStencilImageDelegate(CommandBufferHandle @commandBuffer, ImageHandle @image, ImageLayout @imageLayout, ClearDepthStencilValue @pDepthStencil, uint @rangeCount, ImageSubresourceRange @pRanges);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdClearAttachmentsDelegate(CommandBuffer @commandBuffer, uint @attachmentCount, ClearAttachment @pAttachments, uint @rectCount, ClearRect @pRects);
+        public delegate IntPtr CmdClearAttachmentsDelegate(CommandBufferHandle @commandBuffer, uint @attachmentCount, ClearAttachment @pAttachments, uint @rectCount, ClearRect @pRects);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdResolveImageDelegate(CommandBuffer @commandBuffer, Image @srcImage, ImageLayout @srcImageLayout, Image @dstImage, ImageLayout @dstImageLayout, uint @regionCount, ImageResolve @pRegions);
+        public delegate IntPtr CmdResolveImageDelegate(CommandBufferHandle @commandBuffer, ImageHandle @srcImage, ImageLayout @srcImageLayout, ImageHandle @dstImage, ImageLayout @dstImageLayout, uint @regionCount, ImageResolve @pRegions);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdSetEventDelegate(CommandBuffer @commandBuffer, Event @event, PipelineStageFlags @stageMask);
+        public delegate IntPtr CmdSetEventDelegate(CommandBufferHandle @commandBuffer, EventHandle @event, PipelineStageFlags @stageMask);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdResetEventDelegate(CommandBuffer @commandBuffer, Event @event, PipelineStageFlags @stageMask);
+        public delegate IntPtr CmdResetEventDelegate(CommandBufferHandle @commandBuffer, EventHandle @event, PipelineStageFlags @stageMask);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdWaitEventsDelegate(CommandBuffer @commandBuffer, uint @eventCount, Event @pEvents, PipelineStageFlags @srcStageMask, PipelineStageFlags @dstStageMask, uint @memoryBarrierCount, MemoryBarrier @pMemoryBarriers, uint @bufferMemoryBarrierCount, BufferMemoryBarrier @pBufferMemoryBarriers, uint @imageMemoryBarrierCount, ImageMemoryBarrier @pImageMemoryBarriers);
+        public delegate IntPtr CmdWaitEventsDelegate(CommandBufferHandle @commandBuffer, uint @eventCount, EventHandle @pEvents, PipelineStageFlags @srcStageMask, PipelineStageFlags @dstStageMask, uint @memoryBarrierCount, MemoryBarrier @pMemoryBarriers, uint @bufferMemoryBarrierCount, BufferMemoryBarrier @pBufferMemoryBarriers, uint @imageMemoryBarrierCount, ImageMemoryBarrier @pImageMemoryBarriers);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdPipelineBarrierDelegate(CommandBuffer @commandBuffer, PipelineStageFlags @srcStageMask, PipelineStageFlags @dstStageMask, DependencyFlags @dependencyFlags, uint @memoryBarrierCount, MemoryBarrier @pMemoryBarriers, uint @bufferMemoryBarrierCount, BufferMemoryBarrier @pBufferMemoryBarriers, uint @imageMemoryBarrierCount, ImageMemoryBarrier @pImageMemoryBarriers);
+        public delegate IntPtr CmdPipelineBarrierDelegate(CommandBufferHandle @commandBuffer, PipelineStageFlags @srcStageMask, PipelineStageFlags @dstStageMask, DependencyFlags @dependencyFlags, uint @memoryBarrierCount, MemoryBarrier @pMemoryBarriers, uint @bufferMemoryBarrierCount, BufferMemoryBarrier @pBufferMemoryBarriers, uint @imageMemoryBarrierCount, ImageMemoryBarrier @pImageMemoryBarriers);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdBeginQueryDelegate(CommandBuffer @commandBuffer, QueryPool @queryPool, uint @query, QueryControlFlags @flags);
+        public delegate IntPtr CmdBeginQueryDelegate(CommandBufferHandle @commandBuffer, QueryPoolHandle @queryPool, uint @query, QueryControlFlags @flags);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdEndQueryDelegate(CommandBuffer @commandBuffer, QueryPool @queryPool, uint @query);
+        public delegate IntPtr CmdEndQueryDelegate(CommandBufferHandle @commandBuffer, QueryPoolHandle @queryPool, uint @query);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdResetQueryPoolDelegate(CommandBuffer @commandBuffer, QueryPool @queryPool, uint @firstQuery, uint @queryCount);
+        public delegate IntPtr CmdResetQueryPoolDelegate(CommandBufferHandle @commandBuffer, QueryPoolHandle @queryPool, uint @firstQuery, uint @queryCount);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdWriteTimestampDelegate(CommandBuffer @commandBuffer, PipelineStageFlags @pipelineStage, QueryPool @queryPool, uint @query);
+        public delegate IntPtr CmdWriteTimestampDelegate(CommandBufferHandle @commandBuffer, PipelineStageFlags @pipelineStage, QueryPoolHandle @queryPool, uint @query);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdCopyQueryPoolResultsDelegate(CommandBuffer @commandBuffer, QueryPool @queryPool, uint @firstQuery, uint @queryCount, Buffer @dstBuffer, ulong @dstOffset, ulong @stride, QueryResultFlags @flags);
+        public delegate IntPtr CmdCopyQueryPoolResultsDelegate(CommandBufferHandle @commandBuffer, QueryPoolHandle @queryPool, uint @firstQuery, uint @queryCount, BufferHandle @dstBuffer, ulong @dstOffset, ulong @stride, QueryResultFlags @flags);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdPushConstantsDelegate(CommandBuffer @commandBuffer, PipelineLayout @layout, ShaderStageFlags @stageFlags, uint @offset, uint @size, IntPtr @pValues);
+        public delegate IntPtr CmdPushConstantsDelegate(CommandBufferHandle @commandBuffer, PipelineLayoutHandle @layout, ShaderStageFlags @stageFlags, uint @offset, uint @size, IntPtr @pValues);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdBeginRenderPassDelegate(CommandBuffer @commandBuffer, RenderPassBeginInfo @pRenderPassBegin, SubpassContents @contents);
+        public delegate IntPtr CmdBeginRenderPassDelegate(CommandBufferHandle @commandBuffer, RenderPassBeginInfo @pRenderPassBegin, SubpassContents @contents);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdNextSubpassDelegate(CommandBuffer @commandBuffer, SubpassContents @contents);
+        public delegate IntPtr CmdNextSubpassDelegate(CommandBufferHandle @commandBuffer, SubpassContents @contents);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdEndRenderPassDelegate(CommandBuffer @commandBuffer);
+        public delegate IntPtr CmdEndRenderPassDelegate(CommandBufferHandle @commandBuffer);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdExecuteCommandsDelegate(CommandBuffer @commandBuffer, uint @commandBufferCount, CommandBuffer @pCommandBuffers);
+        public delegate IntPtr CmdExecuteCommandsDelegate(CommandBufferHandle @commandBuffer, uint @commandBufferCount, CommandBufferHandle @pCommandBuffers);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateAndroidSurfaceKhrDelegate(Instance @instance, AndroidSurfaceCreateInfoKhr @pCreateInfo, AllocationCallbacks @pAllocator, SurfaceKhr @pSurface);
+        public delegate Result CreateAndroidSurfaceKhrDelegate(InstanceHandle @instance, AndroidSurfaceCreateInfoKhr @pCreateInfo, AllocationCallbacks @pAllocator, SurfaceKhrHandle @pSurface);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result GetPhysicalDeviceDisplayPropertiesKhrDelegate(PhysicalDevice @physicalDevice, uint @pPropertyCount, DisplayPropertiesKhr @pProperties);
+        public delegate Result GetPhysicalDeviceDisplayPropertiesKhrDelegate(PhysicalDeviceHandle @physicalDevice, uint @pPropertyCount, DisplayPropertiesKhr @pProperties);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result GetPhysicalDeviceDisplayPlanePropertiesKhrDelegate(PhysicalDevice @physicalDevice, uint @pPropertyCount, DisplayPlanePropertiesKhr @pProperties);
+        public delegate Result GetPhysicalDeviceDisplayPlanePropertiesKhrDelegate(PhysicalDeviceHandle @physicalDevice, uint @pPropertyCount, DisplayPlanePropertiesKhr @pProperties);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result GetDisplayPlaneSupportedDisplaysKhrDelegate(PhysicalDevice @physicalDevice, uint @planeIndex, uint @pDisplayCount, DisplayKhr @pDisplays);
+        public delegate Result GetDisplayPlaneSupportedDisplaysKhrDelegate(PhysicalDeviceHandle @physicalDevice, uint @planeIndex, uint @pDisplayCount, DisplayKhrHandle @pDisplays);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result GetDisplayModePropertiesKhrDelegate(PhysicalDevice @physicalDevice, DisplayKhr @display, uint @pPropertyCount, DisplayModePropertiesKhr @pProperties);
+        public delegate Result GetDisplayModePropertiesKhrDelegate(PhysicalDeviceHandle @physicalDevice, DisplayKhrHandle @display, uint @pPropertyCount, DisplayModePropertiesKhr @pProperties);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateDisplayModeKhrDelegate(PhysicalDevice @physicalDevice, DisplayKhr @display, DisplayModeCreateInfoKhr @pCreateInfo, AllocationCallbacks @pAllocator, DisplayModeKhr @pMode);
+        public delegate Result CreateDisplayModeKhrDelegate(PhysicalDeviceHandle @physicalDevice, DisplayKhrHandle @display, DisplayModeCreateInfoKhr @pCreateInfo, AllocationCallbacks @pAllocator, DisplayModeKhrHandle @pMode);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result GetDisplayPlaneCapabilitiesKhrDelegate(PhysicalDevice @physicalDevice, DisplayModeKhr @mode, uint @planeIndex, DisplayPlaneCapabilitiesKhr @pCapabilities);
+        public delegate Result GetDisplayPlaneCapabilitiesKhrDelegate(PhysicalDeviceHandle @physicalDevice, DisplayModeKhrHandle @mode, uint @planeIndex, DisplayPlaneCapabilitiesKhr @pCapabilities);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateDisplayPlaneSurfaceKhrDelegate(Instance @instance, DisplaySurfaceCreateInfoKhr @pCreateInfo, AllocationCallbacks @pAllocator, SurfaceKhr @pSurface);
+        public delegate Result CreateDisplayPlaneSurfaceKhrDelegate(InstanceHandle @instance, DisplaySurfaceCreateInfoKhr @pCreateInfo, AllocationCallbacks @pAllocator, SurfaceKhrHandle @pSurface);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateSharedSwapchainsKhrDelegate(Device @device, uint @swapchainCount, SwapchainCreateInfoKhr @pCreateInfos, AllocationCallbacks @pAllocator, SwapchainKhr @pSwapchains);
+        public delegate Result CreateSharedSwapchainsKhrDelegate(DeviceHandle @device, uint @swapchainCount, SwapchainCreateInfoKhr @pCreateInfos, AllocationCallbacks @pAllocator, SwapchainKhrHandle @pSwapchains);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateMirSurfaceKhrDelegate(Instance @instance, MirSurfaceCreateInfoKhr @pCreateInfo, AllocationCallbacks @pAllocator, SurfaceKhr @pSurface);
+        public delegate Result CreateMirSurfaceKhrDelegate(InstanceHandle @instance, MirSurfaceCreateInfoKhr @pCreateInfo, AllocationCallbacks @pAllocator, SurfaceKhrHandle @pSurface);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate uint GetPhysicalDeviceMirPresentationSupportKhrDelegate(PhysicalDevice @physicalDevice, uint @queueFamilyIndex, IntPtr @connection);
+        public delegate uint GetPhysicalDeviceMirPresentationSupportKhrDelegate(PhysicalDeviceHandle @physicalDevice, uint @queueFamilyIndex, IntPtr @connection);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroySurfaceKhrDelegate(Instance @instance, SurfaceKhr @surface, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroySurfaceKhrDelegate(InstanceHandle @instance, SurfaceKhrHandle @surface, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result GetPhysicalDeviceSurfaceSupportKhrDelegate(PhysicalDevice @physicalDevice, uint @queueFamilyIndex, SurfaceKhr @surface, uint @pSupported);
+        public delegate Result GetPhysicalDeviceSurfaceSupportKhrDelegate(PhysicalDeviceHandle @physicalDevice, uint @queueFamilyIndex, SurfaceKhrHandle @surface, uint @pSupported);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result GetPhysicalDeviceSurfaceCapabilitiesKhrDelegate(PhysicalDevice @physicalDevice, SurfaceKhr @surface, SurfaceCapabilitiesKhr @pSurfaceCapabilities);
+        public delegate Result GetPhysicalDeviceSurfaceCapabilitiesKhrDelegate(PhysicalDeviceHandle @physicalDevice, SurfaceKhrHandle @surface, SurfaceCapabilitiesKhr @pSurfaceCapabilities);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result GetPhysicalDeviceSurfaceFormatsKhrDelegate(PhysicalDevice @physicalDevice, SurfaceKhr @surface, uint @pSurfaceFormatCount, SurfaceFormatKhr @pSurfaceFormats);
+        public delegate Result GetPhysicalDeviceSurfaceFormatsKhrDelegate(PhysicalDeviceHandle @physicalDevice, SurfaceKhrHandle @surface, uint @pSurfaceFormatCount, SurfaceFormatKhr @pSurfaceFormats);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result GetPhysicalDeviceSurfacePresentModesKhrDelegate(PhysicalDevice @physicalDevice, SurfaceKhr @surface, uint @pPresentModeCount, PresentModeKhr @pPresentModes);
+        public delegate Result GetPhysicalDeviceSurfacePresentModesKhrDelegate(PhysicalDeviceHandle @physicalDevice, SurfaceKhrHandle @surface, uint @pPresentModeCount, PresentModeKhr @pPresentModes);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateSwapchainKhrDelegate(Device @device, SwapchainCreateInfoKhr @pCreateInfo, AllocationCallbacks @pAllocator, SwapchainKhr @pSwapchain);
+        public delegate Result CreateSwapchainKhrDelegate(DeviceHandle @device, SwapchainCreateInfoKhr @pCreateInfo, AllocationCallbacks @pAllocator, SwapchainKhrHandle @pSwapchain);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroySwapchainKhrDelegate(Device @device, SwapchainKhr @swapchain, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroySwapchainKhrDelegate(DeviceHandle @device, SwapchainKhrHandle @swapchain, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result GetSwapchainImagesKhrDelegate(Device @device, SwapchainKhr @swapchain, uint @pSwapchainImageCount, Image @pSwapchainImages);
+        public delegate Result GetSwapchainImagesKhrDelegate(DeviceHandle @device, SwapchainKhrHandle @swapchain, uint @pSwapchainImageCount, ImageHandle @pSwapchainImages);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result AcquireNextImageKhrDelegate(Device @device, SwapchainKhr @swapchain, ulong @timeout, Semaphore @semaphore, Fence @fence, uint @pImageIndex);
+        public delegate Result AcquireNextImageKhrDelegate(DeviceHandle @device, SwapchainKhrHandle @swapchain, ulong @timeout, SemaphoreHandle @semaphore, FenceHandle @fence, uint @pImageIndex);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result QueuePresentKhrDelegate(Queue @queue, PresentInfoKhr @pPresentInfo);
+        public delegate Result QueuePresentKhrDelegate(QueueHandle @queue, PresentInfoKhr @pPresentInfo);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateWaylandSurfaceKhrDelegate(Instance @instance, WaylandSurfaceCreateInfoKhr @pCreateInfo, AllocationCallbacks @pAllocator, SurfaceKhr @pSurface);
+        public delegate Result CreateWaylandSurfaceKhrDelegate(InstanceHandle @instance, WaylandSurfaceCreateInfoKhr @pCreateInfo, AllocationCallbacks @pAllocator, SurfaceKhrHandle @pSurface);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate uint GetPhysicalDeviceWaylandPresentationSupportKhrDelegate(PhysicalDevice @physicalDevice, uint @queueFamilyIndex, IntPtr @display);
+        public delegate uint GetPhysicalDeviceWaylandPresentationSupportKhrDelegate(PhysicalDeviceHandle @physicalDevice, uint @queueFamilyIndex, IntPtr @display);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateWin32SurfaceKhrDelegate(Instance @instance, Win32SurfaceCreateInfoKhr @pCreateInfo, AllocationCallbacks @pAllocator, SurfaceKhr @pSurface);
+        public delegate Result CreateWin32SurfaceKhrDelegate(InstanceHandle @instance, Win32SurfaceCreateInfoKhr @pCreateInfo, AllocationCallbacks @pAllocator, SurfaceKhrHandle @pSurface);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate uint GetPhysicalDeviceWin32PresentationSupportKhrDelegate(PhysicalDevice @physicalDevice, uint @queueFamilyIndex);
+        public delegate uint GetPhysicalDeviceWin32PresentationSupportKhrDelegate(PhysicalDeviceHandle @physicalDevice, uint @queueFamilyIndex);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateXlibSurfaceKhrDelegate(Instance @instance, XlibSurfaceCreateInfoKhr @pCreateInfo, AllocationCallbacks @pAllocator, SurfaceKhr @pSurface);
+        public delegate Result CreateXlibSurfaceKhrDelegate(InstanceHandle @instance, XlibSurfaceCreateInfoKhr @pCreateInfo, AllocationCallbacks @pAllocator, SurfaceKhrHandle @pSurface);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate uint GetPhysicalDeviceXlibPresentationSupportKhrDelegate(PhysicalDevice @physicalDevice, uint @queueFamilyIndex, IntPtr @dpy, IntPtr @visualID);
+        public delegate uint GetPhysicalDeviceXlibPresentationSupportKhrDelegate(PhysicalDeviceHandle @physicalDevice, uint @queueFamilyIndex, IntPtr @dpy, IntPtr @visualID);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateXcbSurfaceKhrDelegate(Instance @instance, XcbSurfaceCreateInfoKhr @pCreateInfo, AllocationCallbacks @pAllocator, SurfaceKhr @pSurface);
+        public delegate Result CreateXcbSurfaceKhrDelegate(InstanceHandle @instance, XcbSurfaceCreateInfoKhr @pCreateInfo, AllocationCallbacks @pAllocator, SurfaceKhrHandle @pSurface);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate uint GetPhysicalDeviceXcbPresentationSupportKhrDelegate(PhysicalDevice @physicalDevice, uint @queueFamilyIndex, IntPtr @connection, IntPtr @visual_id);
+        public delegate uint GetPhysicalDeviceXcbPresentationSupportKhrDelegate(PhysicalDeviceHandle @physicalDevice, uint @queueFamilyIndex, IntPtr @connection, IntPtr @visual_id);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result CreateDebugReportCallbackExtDelegate(Instance @instance, DebugReportCallbackCreateInfoExt @pCreateInfo, AllocationCallbacks @pAllocator, DebugReportCallbackExt @pCallback);
+        public delegate Result CreateDebugReportCallbackExtDelegate(InstanceHandle @instance, DebugReportCallbackCreateInfoExt @pCreateInfo, AllocationCallbacks @pAllocator, DebugReportCallbackExtHandle @pCallback);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DestroyDebugReportCallbackExtDelegate(Instance @instance, DebugReportCallbackExt @callback, AllocationCallbacks @pAllocator);
+        public delegate IntPtr DestroyDebugReportCallbackExtDelegate(InstanceHandle @instance, DebugReportCallbackExtHandle @callback, AllocationCallbacks @pAllocator);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr DebugReportMessageExtDelegate(Instance @instance, DebugReportFlagsExt @flags, DebugReportObjectTypeExt @objectType, ulong @object, UIntPtr @location, int @messageCode, string @pLayerPrefix, string @pMessage);
+        public delegate IntPtr DebugReportMessageExtDelegate(InstanceHandle @instance, DebugReportFlagsExt @flags, DebugReportObjectTypeExt @objectType, ulong @object, UIntPtr @location, int @messageCode, byte @pLayerPrefix, byte @pMessage);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result DebugMarkerSetObjectNameExtDelegate(Device @device, DebugMarkerObjectNameInfoExt @pNameInfo);
+        public delegate Result DebugMarkerSetObjectNameExtDelegate(DeviceHandle @device, DebugMarkerObjectNameInfoExt @pNameInfo);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate Result DebugMarkerSetObjectTagExtDelegate(Device @device, DebugMarkerObjectTagInfoExt @pTagInfo);
+        public delegate Result DebugMarkerSetObjectTagExtDelegate(DeviceHandle @device, DebugMarkerObjectTagInfoExt @pTagInfo);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdDebugMarkerBeginExtDelegate(CommandBuffer @commandBuffer, DebugMarkerMarkerInfoExt @pMarkerInfo);
+        public delegate IntPtr CmdDebugMarkerBeginExtDelegate(CommandBufferHandle @commandBuffer, DebugMarkerMarkerInfoExt @pMarkerInfo);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdDebugMarkerEndExtDelegate(CommandBuffer @commandBuffer);
+        public delegate IntPtr CmdDebugMarkerEndExtDelegate(CommandBufferHandle @commandBuffer);
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        public delegate IntPtr CmdDebugMarkerInsertExtDelegate(CommandBuffer @commandBuffer, DebugMarkerMarkerInfoExt @pMarkerInfo);
+        public delegate IntPtr CmdDebugMarkerInsertExtDelegate(CommandBufferHandle @commandBuffer, DebugMarkerMarkerInfoExt @pMarkerInfo);
     }
 }

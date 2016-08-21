@@ -7,7 +7,7 @@ namespace SixtenLabs.SpawnOfVulkan
         internal StructureType SType;
         internal IntPtr PNext;
         internal SwapchainCreateFlagsKhr Flags;
-        internal SurfaceKhr Surface;
+        internal SurfaceKhrHandle Surface;
         internal uint MinImageCount;
         internal Format ImageFormat;
         internal ColorSpaceKhr ImageColorSpace;
@@ -21,6 +21,6 @@ namespace SixtenLabs.SpawnOfVulkan
         internal CompositeAlphaFlagsKhr CompositeAlpha;
         internal PresentModeKhr PresentMode;
         internal uint Clipped;
-        internal SwapchainKhr OldSwapchain;
+        internal SwapchainKhrHandle OldSwapchain;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace SixtenLabs.SpawnOfVulkan
 {
-    public enum Format : int
+    public enum Format : long
     {
         FormatUndefined = 0,
         FormatR4g4UnormPack8 = 1,
@@ -186,6 +186,14 @@
         FormatAstc12X10UnormBlock = 181,
         FormatAstc12X10SrgbBlock = 182,
         FormatAstc12X12UnormBlock = 183,
-        FormatAstc12X12SrgbBlock = 184
+        FormatAstc12X12SrgbBlock = 184,
+        FormatPvrtc12BppUnormBlockImg = 10000054000,
+        FormatPvrtc14BppUnormBlockImg = 10000054001,
+        FormatPvrtc22BppUnormBlockImg = 10000054002,
+        FormatPvrtc24BppUnormBlockImg = 10000054003,
+        FormatPvrtc12BppSrgbBlockImg = 10000054004,
+        FormatPvrtc14BppSrgbBlockImg = 10000054005,
+        FormatPvrtc22BppSrgbBlockImg = 10000054006,
+        FormatPvrtc24BppSrgbBlockImg = 10000054007
     }
 }

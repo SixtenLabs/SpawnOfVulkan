@@ -1,7 +1,13 @@
-﻿namespace SixtenLabs.SpawnOfVulkan
+﻿using System;
+
+namespace SixtenLabs.SpawnOfVulkan
 {
+    [Flags()]
     public enum QueryControlFlags : int
     {
-        None = 0
+        /// <summary>
+                /// Require precise results to be collected by the query
+                /// </summary>
+        QueryControlPreciseBit = 0x1
     }
 }

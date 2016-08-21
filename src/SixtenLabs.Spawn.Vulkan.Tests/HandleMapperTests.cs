@@ -32,11 +32,11 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			types.Should().HaveCount(30);
 
-			var maps = new List<ClassDefinition>();
+			var maps = new List<StructDefinition>();
 
 			foreach (var type in types)
 			{
-				var map = Fixture.SpecMapper.Map<ClassDefinition>(type);
+				var map = Fixture.SpecMapper.Map<StructDefinition>(type);
 				maps.Add(map);
 			}
 
@@ -50,9 +50,9 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			var type = vk.Handles.Where(x => x.Name == "VkInstance").FirstOrDefault();
 
-			var map = Fixture.SpecMapper.Map<ClassDefinition>(type);
+			var map = Fixture.SpecMapper.Map<StructDefinition>(type);
 
-			map.SpecName.Should().Be("VkInstance");
+			map.Name.OriginalName.Should().Be("VkInstance");
 			map.SpecDerivedType.Should().BeNull();
 		}
 
@@ -65,7 +65,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 		//	var map = AMapper.Map<StructDefinition>(type);
 
-		//	map.SpecName.Should().Be("VkInstance");
+		//	map.Name.OriginalName.Should().Be("VkInstance");
 		//	map.SpecDerivedType.Should().BeNull();
 		//}
 
@@ -76,9 +76,9 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			var type = vk.Handles.Where(x => x.Name == "VkCommandBuffer").FirstOrDefault();
 
-			var map = Fixture.SpecMapper.Map<ClassDefinition>(type);
+			var map = Fixture.SpecMapper.Map<StructDefinition>(type);
 
-			map.SpecName.Should().Be("VkCommandBuffer");
+			map.Name.OriginalName.Should().Be("VkCommandBuffer");
 			map.SpecDerivedType.Should().Be("VkCommandPool");
 		}
 	}

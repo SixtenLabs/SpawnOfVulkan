@@ -8,7 +8,7 @@ namespace SixtenLabs.SpawnOfVulkan
         internal IntPtr PNext;
         internal PipelineLayoutCreateFlags Flags;
         internal uint SetLayoutCount;
-        internal DescriptorSetLayout PSetLayouts;
+        internal DescriptorSetLayoutHandle PSetLayouts;
         internal uint PushConstantRangeCount;
         internal PushConstantRange PPushConstantRanges;
     }

@@ -4,8 +4,8 @@ namespace SixtenLabs.SpawnOfVulkan
 {
     public struct DescriptorImageInfo
     {
-        internal Sampler Sampler;
-        internal ImageView ImageView;
+        internal SamplerHandle Sampler;
+        internal ImageViewHandle ImageView;
         internal ImageLayout ImageLayout;
     }
 }

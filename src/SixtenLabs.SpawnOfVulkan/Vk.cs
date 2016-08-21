@@ -48,11 +48,11 @@ namespace SixtenLabs.SpawnOfVulkan
 		public static GetInstanceProcAddrDelegate GetInstanceProcAddr { get; set; }
 
 
-		public static T GetVulkanCommand<T>(Instance instance, string name)
-		{
-			var commandHandle = GetInstanceProcAddr(instance, name);
+		//public static T GetVulkanCommand<T>(Instance instance, string name)
+		//{
+		//	var commandHandle = GetInstanceProcAddr(instance, name);
 
-			return MarshalDelegate<T>(name);
-		}
+		//	return MarshalDelegate<T>(name);
+		//}
 	}
 }

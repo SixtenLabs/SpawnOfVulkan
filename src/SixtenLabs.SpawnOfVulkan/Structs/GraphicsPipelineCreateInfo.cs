@@ -18,10 +18,10 @@ namespace SixtenLabs.SpawnOfVulkan
         internal PipelineDepthStencilStateCreateInfo PDepthStencilState;
         internal PipelineColorBlendStateCreateInfo PColorBlendState;
         internal PipelineDynamicStateCreateInfo PDynamicState;
-        internal PipelineLayout Layout;
-        internal RenderPass RenderPass;
+        internal PipelineLayoutHandle Layout;
+        internal RenderPassHandle RenderPass;
         internal uint Subpass;
-        internal Pipeline BasePipelineHandle;
+        internal PipelineHandle BasePipelineHandle;
         internal int BasePipelineIndex;
     }
 }

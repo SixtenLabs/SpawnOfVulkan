@@ -4,7 +4,7 @@ namespace SixtenLabs.SpawnOfVulkan
 {
     public struct SparseBufferMemoryBindInfo
     {
-        internal Buffer Buffer;
+        internal BufferHandle Buffer;
         internal uint BindCount;
         internal SparseMemoryBind PBinds;
     }

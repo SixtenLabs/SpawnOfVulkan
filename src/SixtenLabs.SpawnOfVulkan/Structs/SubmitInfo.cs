@@ -7,11 +7,11 @@ namespace SixtenLabs.SpawnOfVulkan
         internal StructureType SType;
         internal IntPtr PNext;
         internal uint WaitSemaphoreCount;
-        internal Semaphore PWaitSemaphores;
+        internal SemaphoreHandle PWaitSemaphores;
         internal PipelineStageFlags PWaitDstStageMask;
         internal uint CommandBufferCount;
-        internal CommandBuffer PCommandBuffers;
+        internal CommandBufferHandle PCommandBuffers;
         internal uint SignalSemaphoreCount;
-        internal Semaphore PSignalSemaphores;
+        internal SemaphoreHandle PSignalSemaphores;
     }
 }
