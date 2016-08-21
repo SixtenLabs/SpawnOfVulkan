@@ -3,6 +3,7 @@ using SixtenLabs.Spawn.Vulkan.Spec;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace SixtenLabs.Spawn.Vulkan
 {
@@ -104,7 +105,16 @@ namespace SixtenLabs.Spawn.Vulkan
 			CreateMap<VkExtensionEnum, SpecTypeDefinition>()
 				.ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Name))
 				.ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapTranslatedName(src.Name)));
-		}
+
+      CreateMap<VkFeatureRequire, SpecTypeDefinition>()
+        .ForMember(dest => dest.SpecName, opt => opt.MapFrom(src => src.Comment))
+        .ForMember(dest => dest.TranslatedName, opt => opt.MapFrom(src => MapFeatureRequireTranslatedName(src.Comment)));
+    }
+
+    private string MapFeatureRequireTranslatedName(string specName)
+    {
+      return specName.ConvertToTitleCase(' ');
+    }
 
 		private string MapTranslatedName(string specName)
 		{

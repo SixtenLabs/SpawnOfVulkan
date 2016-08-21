@@ -175,6 +175,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Creators\ApiCreator.cs" />
     <Compile Include="Creators\CommandCreator.cs" />
     <Compile Include="Creators\CommandDelegateCreator.cs" />
     <Compile Include="Creators\ConstantsCreator.cs" />

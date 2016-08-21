@@ -165,7 +165,13 @@ namespace SixtenLabs.Spawn.Vulkan
 				}
 			}
 
-			Console.WriteLine($"Mapped {SpawnSpec.SpecTypeCount} types.");
+      foreach (var featureRequire in SpawnSpec.SpecTree.Feature.Requires)
+      {
+         var specTypeDefinition = Mapper.Map<VkFeatureRequire, SpecTypeDefinition>(featureRequire);
+         SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
+      }
+
+      Console.WriteLine($"Mapped {SpawnSpec.SpecTypeCount} types.");
 		}
 
 		private void Rewrite()
