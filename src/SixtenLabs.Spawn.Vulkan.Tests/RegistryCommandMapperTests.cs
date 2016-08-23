@@ -54,22 +54,22 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			map.Name.OriginalName.Should().Be("vkCreateInstance");
 			map.ReturnType.OriginalName.Should().Be("VkResult");
-			map.Parameters.Should().HaveCount(3);
+			map.ParameterDefinitions.Should().HaveCount(3);
 
-			map.Parameters[0].Name.OriginalName.Should().Be("pCreateInfo");
-			map.Parameters[0].ParameterType.OriginalName.Should().Be("VkInstanceCreateInfo");
+			map.ParameterDefinitions[0].Name.OriginalName.Should().Be("pCreateInfo");
+			map.ParameterDefinitions[0].ParameterType.OriginalName.Should().Be("VkInstanceCreateInfo");
 			//map.Parameters[0].ExternSync.Should().BeFalse();
 			//map.Parameters[0].IsOptional.Should().BeFalse();
 			//map.Parameters[0].IsPointer.Should().BeTrue();
 
-			map.Parameters[1].Name.OriginalName.Should().Be("pAllocator");
-			map.Parameters[1].ParameterType.OriginalName.Should().Be("VkAllocationCallbacks");
+			map.ParameterDefinitions[1].Name.OriginalName.Should().Be("pAllocator");
+			map.ParameterDefinitions[1].ParameterType.OriginalName.Should().Be("VkAllocationCallbacks");
 			//map.Parameters[1].ExternSync.Should().BeFalse();
 			//map.Parameters[1].IsOptional.Should().BeTrue();
 			//map.Parameters[1].IsPointer.Should().BeTrue();
 
-			map.Parameters[2].Name.OriginalName.Should().Be("pInstance");
-			map.Parameters[2].ParameterType.OriginalName.Should().Be("VkInstance");
+			map.ParameterDefinitions[2].Name.OriginalName.Should().Be("pInstance");
+			map.ParameterDefinitions[2].ParameterType.OriginalName.Should().Be("VkInstance");
 			//map.Parameters[2].ExternSync.Should().BeFalse();
 			//map.Parameters[2].IsOptional.Should().BeFalse();
 			//map.Parameters[2].IsPointer.Should().BeTrue();

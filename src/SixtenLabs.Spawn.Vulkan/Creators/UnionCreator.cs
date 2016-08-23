@@ -22,31 +22,23 @@ namespace SixtenLabs.Spawn.Vulkan
 			{
 				structDefinition.Name.TranslatedName = VulkanSpec.GetTranslatedName(structDefinition.Name.OriginalName);
 
-				var attribute = new AttributeDefinition("StructLayout");
-				attribute.ArgumentList.Add("LayoutKind.Explicit");
+				structDefinition.WithAttribute("StructLayout", "LayoutKind.Explicit");
 
-				structDefinition.Attributes.Add(attribute);
-
-				foreach (var fieldDefinition in structDefinition.Fields)
+				foreach (var fieldDefinition in structDefinition.FieldDefinitions)
 				{
-					var fieldAttribute = new AttributeDefinition("FieldOffset");
-					fieldAttribute.ArgumentList.Add("0");
-
-					fieldDefinition.AttributeDefinitions.Add(fieldAttribute);
+					fieldDefinition.WithAttribute("FieldOffset", "0");
 
 					if (fieldDefinition.ReturnTypeIsArray)
 					{
 						var translatedName = VulkanSpec.GetTranslatedChildName(structDefinition.Name.OriginalName, fieldDefinition.Name.OriginalName);
 						fieldDefinition.Name.TranslatedName = $"{translatedName}[{fieldDefinition.Tag}]";
 						fieldDefinition.ReturnType.TranslatedName = VulkanSpec.GetTranslatedName(fieldDefinition.ReturnType.OriginalName);
-						fieldDefinition.AddModifier(SyntaxKindDto.InternalKeyword);
-						fieldDefinition.AddModifier(SyntaxKindDto.UnsafeKeyword);
-						fieldDefinition.AddModifier(SyntaxKindDto.FixedKeyword);
+						fieldDefinition.WithModifiers(SyntaxKindDto.InternalKeyword, SyntaxKindDto.UnsafeKeyword, SyntaxKindDto.FixedKeyword);
 					}
 					else
 					{
 						fieldDefinition.ReturnType.TranslatedName = VulkanSpec.GetTranslatedName(fieldDefinition.ReturnType.OriginalName);
-						fieldDefinition.AddModifier(SyntaxKindDto.InternalKeyword);
+						fieldDefinition.WithModifier(SyntaxKindDto.InternalKeyword);
 					}
 				}
 
@@ -79,8 +71,9 @@ namespace SixtenLabs.Spawn.Vulkan
 				output.TargetSolution = TargetSolution;
 				output.AddNamespace(TargetNamespace);
 				output.OutputDirectory = "Unions";
-				output.AddStandardUsingDirective("System.Runtime.InteropServices");
-				structDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
+        output.Extension = "cs";
+        output.AddStandardUsingDirective("System.Runtime.InteropServices");
+				structDefinition.WithModifier(SyntaxKindDto.PublicKeyword);
 				
 				(Generator as CSharpGenerator).GenerateStruct(output, structDefinition);
 				count++;

@@ -15,16 +15,26 @@ namespace SixtenLabs.Spawn.Vulkan
     {
       CreateMap<VkFeatureRequire, ClassDefinition>()
       .ForMember(dest => dest.Name, opt => opt.MapFrom(m => new DefinitionName() { OriginalName = m.Comment }))
-      .ForMember(dest => dest.SpecDerivedType, opt => opt.Ignore())
-      .ForMember(dest => dest.Constructors, opt => opt.Ignore())
-      .ForMember(dest => dest.Fields, opt => opt.Ignore())
-      .ForMember(dest => dest.Properties, opt => opt.Ignore())
-      .ForMember(dest => dest.Attributes, opt => opt.Ignore())
+      .ForMember(dest => dest.DerivedType, opt => opt.Ignore())
+      .ForMember(dest => dest.ConstructorDefinitions, opt => opt.Ignore())
+      .ForMember(dest => dest.FieldDefinitions, opt => opt.Ignore())
+      .ForMember(dest => dest.PropertyDefinitions, opt => opt.Ignore())
+      .ForMember(dest => dest.AttributeDefinitions, opt => opt.Ignore())
       .ForMember(dest => dest.DerivedType, opt => opt.Ignore())
       .ForMember(dest => dest.ModifierDefinitions, opt => opt.Ignore())
-      .ForMember(dest => dest.Comments, opt => opt.Ignore())
+      .ForMember(dest => dest.CommentDefinition, opt => opt.Ignore())
       .ForMember(dest => dest.Tag, opt => opt.Ignore())
-      .ForMember(dest => dest.Methods, opt => opt.Ignore());
+      .ForMember(dest => dest.InterfaceDefinitions, opt => opt.Ignore())
+      .ForMember(dest => dest.MethodDefinitions, opt => opt.Ignore());
+
+      CreateMap<VkFeatureRequireCommand, MethodDefinition>()
+      .ForMember(dest => dest.Name, opt => opt.MapFrom(m => new DefinitionName() { OriginalName = m.Name }))
+      .ForMember(dest => dest.AttributeDefinitions, opt => opt.Ignore())
+      .ForMember(dest => dest.ModifierDefinitions, opt => opt.Ignore())
+      .ForMember(dest => dest.ReturnType, opt => opt.Ignore())
+      .ForMember(dest => dest.BlockDefinition, opt => opt.Ignore())
+      .ForMember(dest => dest.ParameterDefinitions, opt => opt.Ignore())
+      .ForMember(dest => dest.Tag, opt => opt.Ignore());
     }
   }
 }

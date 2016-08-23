@@ -27,6 +27,18 @@ namespace SixtenLabs.Spawn.Vulkan
       {
         var classDefinition = mapper.Map<VkFeatureRequire, ClassDefinition>(registryRequires);
 
+        foreach (var method in classDefinition.MethodDefinitions)
+        {
+          var command = VulkanSpec.SpecTree.Commands.Where(x => x.Name == method.Name.OriginalName).FirstOrDefault();
+          var commandDefinition = mapper.Map<VkCommand, MethodDefinition>(command);
+
+          method.ReturnType = commandDefinition.ReturnType;
+          method.ParameterDefinitions = commandDefinition.ParameterDefinitions;
+          method.ModifierDefinitions = commandDefinition.ModifierDefinitions;
+          method.Tag = commandDefinition.Tag;
+          method.BlockDefinition = commandDefinition.BlockDefinition;
+        }
+
         Definitions.Add(classDefinition);
         count++;
       }
@@ -42,6 +54,11 @@ namespace SixtenLabs.Spawn.Vulkan
       {
         classDefinition.Name.TranslatedName = VulkanSpec.GetTranslatedName(classDefinition.Name.OriginalName);
 
+        foreach(var method in classDefinition.MethodDefinitions)
+        {
+          method.Name.TranslatedName = method.Name.OriginalName.TranslateVulkanName();
+        }
+
         count++;
       }
 
@@ -54,16 +71,16 @@ namespace SixtenLabs.Spawn.Vulkan
 
       foreach (var classDefinition in Definitions)
       {
-        var output = new OutputDefinition() { FileName = $"VulkanApi.{classDefinition.Name.Code}.cs" };
+        var output = new OutputDefinition() { FileName = $"VulkanApi{classDefinition.Name.Code}" };
         output.TargetSolution = TargetSolution;
         output.AddNamespace(TargetNamespace);
         output.AddStandardUsingDirective("System");
-        output.OutputDirectory = "";
+        output.OutputDirectory = "Api";
+        output.Extension = "cs";
 
-        classDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
-        classDefinition.AddModifier(SyntaxKindDto.PartialKeyword);
+        classDefinition.WithModifiers(SyntaxKindDto.PublicKeyword, SyntaxKindDto.PartialKeyword);
 
-        classDefinition.Comments.CommentLines.Add(classDefinition.Name.Code);
+        classDefinition.WithComment(classDefinition.Name.Code);
         classDefinition.Name.TranslatedName = "VulkanApi";
 
         (Generator as CSharpGenerator).GenerateClass(output, classDefinition);

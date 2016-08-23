@@ -29,7 +29,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 			var map = Fixture.SpecMapper.Map<ClassDefinition>(subject);
 
 			map.Should().NotBeNull();
-			map.Fields.Should().HaveCount(15);
+			map.FieldDefinitions.Should().HaveCount(15);
 		}
 	}
 }

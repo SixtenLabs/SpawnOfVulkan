@@ -21,15 +21,16 @@ namespace SixtenLabs.Spawn.Vulkan
 		{
 			CreateMap<VkConstant, ClassDefinition>()
 				.ForMember(dest => dest.Name, opt => opt.MapFrom(m => m.Name.MapDefinitionNameToOriginal()))
-				.ForMember(dest => dest.Fields, opt => opt.MapFrom(m => m.Values))
-				.ForMember(dest => dest.SpecDerivedType, opt => opt.Ignore())
+				.ForMember(dest => dest.FieldDefinitions, opt => opt.MapFrom(m => m.Values))
 				.ForMember(dest => dest.DerivedType, opt => opt.Ignore())
-				.ForMember(dest => dest.Methods, opt => opt.Ignore())
-				.ForMember(dest => dest.Attributes, opt => opt.Ignore())
-				.ForMember(dest => dest.Comments, opt => opt.Ignore())
+				.ForMember(dest => dest.DerivedType, opt => opt.Ignore())
+				.ForMember(dest => dest.MethodDefinitions, opt => opt.Ignore())
+				.ForMember(dest => dest.AttributeDefinitions, opt => opt.Ignore())
+				.ForMember(dest => dest.CommentDefinition, opt => opt.Ignore())
 				.ForMember(dest => dest.ModifierDefinitions, opt => opt.Ignore())
-				.ForMember(dest => dest.Properties, opt => opt.Ignore())
-        .ForMember(dest => dest.Constructors, opt => opt.Ignore())
+				.ForMember(dest => dest.PropertyDefinitions, opt => opt.Ignore())
+        .ForMember(dest => dest.ConstructorDefinitions, opt => opt.Ignore())
+        .ForMember(dest => dest.InterfaceDefinitions, opt => opt.Ignore())
         .ForMember(dest => dest.Tag, opt => opt.Ignore());
 
 			CreateMap<VkConstantValue, FieldDefinition>()
@@ -40,7 +41,8 @@ namespace SixtenLabs.Spawn.Vulkan
         .ForMember(dest => dest.AttributeDefinitions, opt => opt.Ignore())
         .ForMember(dest => dest.ArraySize, opt => opt.Ignore())
 				.ForMember(dest => dest.ModifierDefinitions, opt => opt.Ignore())
-				.ForMember(dest => dest.Tag, opt => opt.Ignore());
+        .ForMember(dest => dest.LineFeed, opt => opt.Ignore())
+        .ForMember(dest => dest.Tag, opt => opt.Ignore());
 		}
 
 		private void ConfigureEnumMapping()

@@ -21,28 +21,17 @@ namespace SixtenLabs.Spawn.Vulkan
 				definition.Name.TranslatedName = VulkanSpec.GetTranslatedName(definition.Name.OriginalName);
 				definition.DerivedType = VulkanSpec.GetTranslatedName(definition.Name.OriginalName);
 
-				var nativePointer = new FieldDefinition("nativePointer").WithReturnType("IntPtr");
-				var fieldOffset = new AttributeDefinition("FieldOffset") { ArgumentList = new[] { "0" } };
-				nativePointer.AttributeDefinitions.Add(fieldOffset);
-				nativePointer.AddModifier(SyntaxKindDto.PublicKeyword);
+        definition.AddField("nativePointer").WithReturnType("IntPtr").WithAttribute("FieldOffset", "0").WithModifier(SyntaxKindDto.PublicKeyword);
 
-				definition.Fields.Add(nativePointer);
+        definition.AddField("Null")
+          .WithReturnType(definition.Name.TranslatedName)
+          .WithDefaultValue(definition.Name.TranslatedName, typeof(string), SyntaxKindDto.ObjectCreationExpression, "IntPtr.Zero")
+          .WithModifiers(SyntaxKindDto.PublicKeyword, SyntaxKindDto.ReadOnlyKeyword, SyntaxKindDto.StaticKeyword);
 
-        var defaultValue = new LiteralDefinition(definition.Name.TranslatedName) { Kind = SyntaxKindDto.ObjectCreationExpression };
-        defaultValue.Arguments.Add(new ArgumentDefinition("IntPtr.Zero"));
-        var nullProperty = new FieldDefinition("Null").WithReturnType(definition.Name.TranslatedName).WithDefaultValue(defaultValue);
-				nullProperty.AddModifier(SyntaxKindDto.PublicKeyword);
-				nullProperty.AddModifier(SyntaxKindDto.ReadOnlyKeyword);
-				nullProperty.AddModifier(SyntaxKindDto.StaticKeyword);
-
-				definition.Fields.Add(nullProperty);
-
-        var constructor = new ConstructorDefinition(definition.Name.Code);
-        constructor.AddModifier(SyntaxKindDto.PrivateKeyword);
-        constructor.AddCodeLineToBody("this.nativePointer = nativePointer;");
-        constructor.AddParameter("nativePointer", "IntPtr");
-
-        definition.Constructors.Add(constructor);
+        definition.AddConstructor(definition.Name.Code)
+          .WithModifier(SyntaxKindDto.PrivateKeyword)
+          .WithParameter("nativePointer", "IntPtr")
+          .WithBlock("this.nativePointer = nativePointer;");
 
         count++;
 			}
@@ -75,14 +64,16 @@ namespace SixtenLabs.Spawn.Vulkan
 				output.AddStandardUsingDirective("System");
 				output.AddStandardUsingDirective("System.Runtime.InteropServices");
 				output.OutputDirectory = "Handles";
+        output.Extension = "cs";
 
-				foreach (var commentLine in GeneratedComments)
+        foreach (var commentLine in GeneratedComments)
 				{
 					output.CommentLines.Add(commentLine);
 				}
 
-				structDefinition.Attributes.Add(new AttributeDefinition("StructLayout") { ArgumentList = new[] { "LayoutKind.Explicit" } });
-				structDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
+				structDefinition
+          .WithModifier(SyntaxKindDto.PublicKeyword)
+          .WithAttribute("StructLayout", "LayoutKind.Explicit");
 
 				(Generator as CSharpGenerator).GenerateStruct(output, structDefinition);
 				count++;

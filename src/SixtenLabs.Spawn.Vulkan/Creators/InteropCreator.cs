@@ -34,20 +34,14 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 			{
 				methodDefinition.Name.TranslatedName = VulkanSpec.GetTranslatedName(methodDefinition.Name.OriginalName);
 				methodDefinition.ReturnType.TranslatedName = VulkanSpec.GetTranslatedName(methodDefinition.ReturnType.OriginalName);
-				methodDefinition.AddModifier(SyntaxKindDto.InternalKeyword);
-				methodDefinition.AddModifier(SyntaxKindDto.StaticKeyword);
-				methodDefinition.AddModifier(SyntaxKindDto.UnsafeKeyword);
-				methodDefinition.AddModifier(SyntaxKindDto.ExternKeyword);
-
-				foreach(var parameter in methodDefinition.Parameters)
+				methodDefinition.WithModifiers(SyntaxKindDto.InternalKeyword, SyntaxKindDto.StaticKeyword, SyntaxKindDto.UnsafeKeyword, SyntaxKindDto.ExternKeyword);
+	
+				foreach(var parameter in methodDefinition.ParameterDefinitions)
 				{
 					parameter.ParameterType.TranslatedName = VulkanSpec.GetTranslatedName(parameter.ParameterType.OriginalName);
 				}
 
-				var attribute = new AttributeDefinition("DllImport");
-				attribute.ArgumentList.Add("VulkanLibrary");
-				attribute.ArgumentList.Add("CallingConvention = CallingConvention.StdCall");
-				methodDefinition.Attributes.Add(attribute);
+        methodDefinition.WithAttribute("DllImport", "VulkanLibrary", "CallingConvention = CallingConvention.StdCall");
 
 				count++;
 			}
@@ -63,24 +57,22 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 			output.TargetSolution = TargetSolution;
 			output.AddNamespace($"{TargetNamespace}");
 			output.OutputDirectory = "Interop";
-			
-			foreach (var commentLine in GeneratedComments)
+      output.Extension = "cs";
+
+      foreach (var commentLine in GeneratedComments)
 			{
 				output.CommentLines.Add(commentLine);
 			}
 
 			var classDefinition = new ClassDefinition("NativeMethods");
 			classDefinition.Name.TranslatedName = "NativeMethods";
-			classDefinition.AddModifier(SyntaxKindDto.InternalKeyword);
-			classDefinition.AddModifier(SyntaxKindDto.StaticKeyword);
-      
-      var defaulValue = new LiteralDefinition("VulkanLibrary") { Value = "vulkan-1.dll", LiteralType = typeof(string) };
-      var dllConstant = new FieldDefinition("VulkanLibrary").WithReturnType("string").WithDefaultValue(defaulValue);
-			dllConstant.AddModifier(SyntaxKindDto.PrivateKeyword);
-			dllConstant.AddModifier(SyntaxKindDto.ConstKeyword);
-      classDefinition.Fields.Add(dllConstant);
+			classDefinition.WithModifiers(SyntaxKindDto.InternalKeyword, SyntaxKindDto.StaticKeyword);
 
-			classDefinition.Methods.AddRange(Definitions);
+      classDefinition.AddField("VulkanLibrary")
+        .WithDefaultValue("VulkanLibrary", typeof(string), SyntaxKindDto.None)
+        .WithModifiers(SyntaxKindDto.PrivateKeyword, SyntaxKindDto.ConstKeyword);
+
+			//classDefinition.Methods.AddRange(Definitions);
 
 			output.AddStandardUsingDirective("System");
 			output.AddStandardUsingDirective("System.Runtime.InteropServices");

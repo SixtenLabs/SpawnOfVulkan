@@ -216,6 +216,8 @@ namespace SixtenLabs.Spawn.Vulkan
 			Build();
 			Rewrite();
 			Generate();
+
+      Console.WriteLine("Finished");
 		}
 
 		private IEnumerable<ICreator> Creators { get; }

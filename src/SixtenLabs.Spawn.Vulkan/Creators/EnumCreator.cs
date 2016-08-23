@@ -144,8 +144,9 @@ namespace SixtenLabs.Spawn.Vulkan
 				output.TargetSolution = TargetSolution;
 				output.AddNamespace(TargetNamespace);
 				output.OutputDirectory = "Enums";
+        output.Extension = "cs";
 
-				enumDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
+        enumDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
 
 				foreach (var commentLine in GeneratedComments)
 				{

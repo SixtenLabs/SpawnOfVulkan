@@ -43,6 +43,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\VulkanApiApiConstants.cs" />
+    <Compile Include="Api\VulkanApiApiVersion.cs" />
+    <Compile Include="Api\VulkanApiBufferCommands.cs" />
+    <Compile Include="Api\VulkanApiBufferViewCommands.cs" />
+    <Compile Include="Api\VulkanApiCommandBufferBuildingCommands.cs" />
+    <Compile Include="Api\VulkanApiCommandBufferCommands.cs" />
+    <Compile Include="Api\VulkanApiCommandPoolCommands.cs" />
+    <Compile Include="Api\VulkanApiDescriptorSetCommands.cs" />
+    <Compile Include="Api\VulkanApiDeviceCommands.cs" />
+    <Compile Include="Api\VulkanApiDeviceInitialization.cs" />
+    <Compile Include="Api\VulkanApiEventCommands.cs" />
+    <Compile Include="Api\VulkanApiExtensionDiscoveryCommands.cs" />
+    <Compile Include="Api\VulkanApiFenceCommands.cs" />
+    <Compile Include="Api\VulkanApiHeaderBoilerplate.cs" />
+    <Compile Include="Api\VulkanApiImageCommands.cs" />
+    <Compile Include="Api\VulkanApiImageViewCommands.cs" />
+    <Compile Include="Api\VulkanApiLayerDiscoveryCommands.cs" />
+    <Compile Include="Api\VulkanApiMemoryCommands.cs" />
+    <Compile Include="Api\VulkanApiMemoryManagementApiCommands.cs" />
+    <Compile Include="Api\VulkanApiPassCommands.cs" />
+    <Compile Include="Api\VulkanApiPipelineCacheCommands.cs" />
+    <Compile Include="Api\VulkanApiPipelineCommands.cs" />
+    <Compile Include="Api\VulkanApiPipelineLayoutCommands.cs" />
+    <Compile Include="Api\VulkanApiQueryCommands.cs" />
+    <Compile Include="Api\VulkanApiQueueCommands.cs" />
+    <Compile Include="Api\VulkanApiQueueSemaphoreCommands.cs" />
+    <Compile Include="Api\VulkanApiSamplerCommands.cs" />
+    <Compile Include="Api\VulkanApiShaderCommands.cs" />
+    <Compile Include="Api\VulkanApiSparseResourceMemoryManagementApiCommands.cs" />
+    <Compile Include="Api\VulkanApiTypesNotDirectlyUsedByTheApi.cs" />
     <Compile Include="Constants\ApiConstants.cs" />
     <Compile Include="Enums\AccessFlags.cs" />
     <Compile Include="Enums\AndroidSurfaceCreateFlagsKhr.cs" />
@@ -324,7 +354,9 @@
     <Compile Include="Unions\ClearValue.cs" />
     <Compile Include="Vk.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Api\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

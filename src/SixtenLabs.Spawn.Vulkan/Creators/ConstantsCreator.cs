@@ -21,11 +21,8 @@ namespace SixtenLabs.Spawn.Vulkan
 			{
 				int valueInt;
 				var isInt = int.TryParse(enumValue.Value, out valueInt);
-				var value = new LiteralDefinition() { Value = enumValue.Value, LiteralType = isInt ? typeof(int) : typeof(string) };
-				var fieldDef = new FieldDefinition(enumValue.Name).WithDefaultValue(value).WithReturnType(isInt ? "int" : "string");
-				
-				classDefinition.Fields.Add(fieldDef);
-			}
+					classDefinition.AddField(enumValue.Name).WithDefaultValue(enumValue.Value, isInt ? typeof(int) : typeof(string), SyntaxKindDto.None).WithReturnType(isInt ? "int" : "string");
+      }
 		}
 
 		public override int Build(IMapper mapper)
@@ -34,8 +31,7 @@ namespace SixtenLabs.Spawn.Vulkan
 
 			var classDefinition = mapper.Map<VkConstant, ClassDefinition>(VulkanSpec.SpecTree.Constants);
 
-			classDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
-			classDefinition.AddModifier(SyntaxKindDto.StaticKeyword);
+			classDefinition.WithModifiers(SyntaxKindDto.PublicKeyword, SyntaxKindDto.StaticKeyword);
 			classDefinition.Name.OriginalName = VulkanSpec.SpecTree.Constants.Name;
 			
 			// This is hardcoded for this single enum exception.
@@ -54,11 +50,10 @@ namespace SixtenLabs.Spawn.Vulkan
 
 			foreach(var classDefinition in Definitions)
 			{
-				foreach(var fieldDefinition in classDefinition.Fields)
+				foreach(var fieldDefinition in classDefinition.FieldDefinitions)
 				{
 					fieldDefinition.Name.TranslatedName = VulkanSpec.GetTranslatedName(fieldDefinition.Name.OriginalName);
-					fieldDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
-					fieldDefinition.AddModifier(SyntaxKindDto.ConstKeyword);
+					fieldDefinition.WithModifiers(SyntaxKindDto.PublicKeyword, SyntaxKindDto.ConstKeyword);
 
 					if(fieldDefinition.ReturnType.TranslatedName == null)
 					{
@@ -82,8 +77,9 @@ namespace SixtenLabs.Spawn.Vulkan
 				output.TargetSolution = TargetSolution;
 				output.AddNamespace(TargetNamespace);
 				output.OutputDirectory = "Constants";
+        output.Extension = "cs";
 
-				foreach (var commentLine in GeneratedComments)
+        foreach (var commentLine in GeneratedComments)
 				{
 					output.CommentLines.Add(commentLine);
 				}
@@ -95,7 +91,7 @@ namespace SixtenLabs.Spawn.Vulkan
 
 				output.AddStandardUsingDirective("System");
 
-				var results = classDefintion.Fields.Where(x => x.ReturnType.TranslatedName == null);
+				var results = classDefintion.FieldDefinitions.Where(x => x.ReturnType.TranslatedName == null);
 
 				(Generator as CSharpGenerator).GenerateClass(output, classDefintion);
 				count++;

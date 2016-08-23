@@ -24,22 +24,20 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 
 				if (structDefinition.NeedsMarshalling)
 				{
-					structDefinition.AddModifier(SyntaxKindDto.UnsafeKeyword);
-					structDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
+					structDefinition.WithModifiers(SyntaxKindDto.UnsafeKeyword, SyntaxKindDto.PublicKeyword);
 				}
 				else
 				{
-					structDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
+					structDefinition.WithModifier(SyntaxKindDto.PublicKeyword);
 				}
 
-				foreach (var fieldDefinition in structDefinition.Fields)
+				foreach (var fieldDefinition in structDefinition.FieldDefinitions)
 				{
-					fieldDefinition.AddModifier(SyntaxKindDto.InternalKeyword);
+					fieldDefinition.WithModifier(SyntaxKindDto.InternalKeyword);
 
 					if (fieldDefinition.ReturnTypeIsArray && structDefinition.Name.OriginalName != "VkImageBlit" && structDefinition.Name.OriginalName != "VkPhysicalDeviceMemoryProperties")
 					{
-						fieldDefinition.AddModifier(SyntaxKindDto.UnsafeKeyword);
-						fieldDefinition.AddModifier(SyntaxKindDto.FixedKeyword);
+						fieldDefinition.WithModifiers(SyntaxKindDto.UnsafeKeyword, SyntaxKindDto.FixedKeyword);
 
 						var structx = VulkanSpec.SpecTree.Constants;
 						var field = structx.Values.Where(x => x.Name == fieldDefinition.Tag).FirstOrDefault();
@@ -92,8 +90,9 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 			{
 				var output = new OutputDefinition() { FileName = structDefinition.Name.TranslatedName };
 				output.TargetSolution = TargetSolution;
+        output.Extension = "cs";
 
-				if (structDefinition.NeedsMarshalling)
+        if (structDefinition.NeedsMarshalling)
 				{
 					output.AddNamespace($"{TargetNamespace}");
 					output.OutputDirectory = "Interop";

@@ -16,9 +16,9 @@ namespace SixtenLabs.Spawn.Vulkan
 			CreateMap<VkCommand, MethodDefinition>()
 				.ForMember(dest => dest.Name, opt => opt.MapFrom(m => new DefinitionName() { OriginalName = m.Name }))
 				.ForMember(dest => dest.ReturnType, opt => opt.MapFrom(m => new DefinitionName() { OriginalName = m.Type }))
-				.ForMember(dest => dest.Parameters, opt => opt.MapFrom(m => m.Parameters))
-				.ForMember(dest => dest.Attributes, opt => opt.Ignore())
-				.ForMember(dest => dest.Block, opt => opt.Ignore())
+				.ForMember(dest => dest.ParameterDefinitions, opt => opt.MapFrom(m => m.Parameters))
+				.ForMember(dest => dest.AttributeDefinitions, opt => opt.Ignore())
+				.ForMember(dest => dest.BlockDefinition, opt => opt.Ignore())
 				.ForMember(dest => dest.ModifierDefinitions, opt => opt.Ignore())
 				.ForMember(dest => dest.Tag, opt => opt.Ignore());
 
