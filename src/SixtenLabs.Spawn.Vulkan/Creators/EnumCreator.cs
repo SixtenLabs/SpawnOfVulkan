@@ -85,9 +85,8 @@ namespace SixtenLabs.Spawn.Vulkan
 
         if (!isEnum)
         {
-          var enumDefinition = new EnumDefinition(vkFlagsEnum.Name).WithComments("vkFlag");
-          var enumValueDef = new EnumMemberDefinition("None").WithValue("0");
-          enumDefinition.Members.Add(enumValueDef);
+          var enumDefinition = new EnumDefinition(vkFlagsEnum.Name).WithComment("vkFlag");
+          enumDefinition.AddEnumMember("None").WithValue("0");
 
           Definitions.Add(enumDefinition);
         }
@@ -146,7 +145,7 @@ namespace SixtenLabs.Spawn.Vulkan
 				output.OutputDirectory = "Enums";
         output.Extension = "cs";
 
-        enumDefinition.AddModifier(SyntaxKindDto.PublicKeyword);
+        enumDefinition.WithModifier(SyntaxKindDto.PublicKeyword);
 
 				foreach (var commentLine in GeneratedComments)
 				{

@@ -53,13 +53,13 @@ namespace SixtenLabs.Spawn.Vulkan
 				.ForMember(dest => dest.Members, opt => opt.MapFrom(m => m.Values))
         .ForMember(dest => dest.AttributeDefinitions, opt => opt.Ignore())
         .ForMember(dest => dest.BaseType, opt => opt.Ignore())
-				.ForMember(dest => dest.Comments, opt => opt.Ignore())
+				.ForMember(dest => dest.CommentDefinition, opt => opt.Ignore())
 				.ForMember(dest => dest.ModifierDefinitions, opt => opt.Ignore())
 				.ForMember(dest => dest.Tag, opt => opt.Ignore());
 
 			CreateMap<VkEnumValue, EnumMemberDefinition>()
 				.ForMember(dest => dest.Name, opt => opt.MapFrom(m => m.Name.MapDefinitionNameToOriginal()))
-				.ForMember(dest => dest.Comments, opt => opt.MapFrom(m => AddComment(m.Comment)))
+				.ForMember(dest => dest.CommentDefinition, opt => opt.MapFrom(m => AddComment(m.Comment)))
 				.ForMember(dest => dest.Value, opt => opt.MapFrom(m => ProcessEnumValue(m)))
 				.ForMember(dest => dest.Tag, opt => opt.Ignore());
 		}

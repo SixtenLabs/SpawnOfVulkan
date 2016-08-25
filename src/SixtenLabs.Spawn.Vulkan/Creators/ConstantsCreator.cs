@@ -92,7 +92,7 @@ namespace SixtenLabs.Spawn.Vulkan
 				output.AddStandardUsingDirective("System");
 
 				var results = classDefintion.FieldDefinitions.Where(x => x.ReturnType.TranslatedName == null);
-
+        // One of the literals is null. figure out which one.
 				(Generator as CSharpGenerator).GenerateClass(output, classDefintion);
 				count++;
 			}

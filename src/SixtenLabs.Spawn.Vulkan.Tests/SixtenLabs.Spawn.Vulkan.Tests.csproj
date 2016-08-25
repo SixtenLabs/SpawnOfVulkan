@@ -97,12 +97,12 @@
       <HintPath>..\..\packages\NSubstitute.1.10.0.0\lib\net45\NSubstitute.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SixtenLabs.Spawn, Version=1.0.69.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\..\packages\SixtenLabs.Spawn.1.0.69\lib\net461\SixtenLabs.Spawn.dll</HintPath>
+    <Reference Include="SixtenLabs.Spawn, Version=1.0.71.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\..\packages\SixtenLabs.Spawn.1.0.71\lib\net461\SixtenLabs.Spawn.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SixtenLabs.Spawn.CSharp, Version=1.0.69.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\..\packages\SixtenLabs.Spawn.CSharp.1.0.69\lib\net461\SixtenLabs.Spawn.CSharp.dll</HintPath>
+    <Reference Include="SixtenLabs.Spawn.CSharp, Version=1.0.71.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\..\packages\SixtenLabs.Spawn.CSharp.1.0.71\lib\net461\SixtenLabs.Spawn.CSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
