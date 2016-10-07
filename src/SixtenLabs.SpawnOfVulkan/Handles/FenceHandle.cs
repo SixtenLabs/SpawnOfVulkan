@@ -9,7 +9,7 @@ namespace SixtenLabs.SpawnOfVulkan
         [FieldOffset(0)]
         public IntPtr nativePointer;
         public readonly static FenceHandle Null = new FenceHandle(IntPtr.Zero);
-        private FenceHandle(IntPtr @nativePointer)
+        private FenceHandle(IntPtr nativePointer)
         {
             this.nativePointer = nativePointer;
         }

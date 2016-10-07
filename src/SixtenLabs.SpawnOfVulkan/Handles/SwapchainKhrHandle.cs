@@ -9,7 +9,7 @@ namespace SixtenLabs.SpawnOfVulkan
         [FieldOffset(0)]
         public IntPtr nativePointer;
         public readonly static SwapchainKhrHandle Null = new SwapchainKhrHandle(IntPtr.Zero);
-        private SwapchainKhrHandle(IntPtr @nativePointer)
+        private SwapchainKhrHandle(IntPtr nativePointer)
         {
             this.nativePointer = nativePointer;
         }

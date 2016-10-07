@@ -17,14 +17,14 @@ namespace SixtenLabs.Spawn.Vulkan.Tests.Spec
 		{
 			var subject = Fixture.VkRegistry;
 
-			subject.Extensions.Should().HaveCount(55);
+			subject.Extensions.Should().HaveCount(70);
 		}
 
 		[Theory]
 		[InlineData("VK_KHR_surface", "1", "vulkan", null, null, null, 5, 0, 5, 0)]
 		[InlineData("VK_KHR_swapchain", "2", "vulkan", null, null, null, 7, 0, 5, 0)]
 		[InlineData("VK_KHR_display", "3", "vulkan", null, null, null, 4, 9, 7, 0)]
-		[InlineData("VK_KHR_display_swapchain", "4", "vulkan", null, null, null, 4, 1, 1, 1)]
+		[InlineData("VK_KHR_display_swapchain", "4", "vulkan", null, null, null, 4, 1, 1, 0)]
 		[InlineData("VK_KHR_xlib_surface", "5", "vulkan", "VK_USE_PLATFORM_XLIB_KHR", null, null, 3, 2, 2, 0)]
 		[InlineData("VK_KHR_xcb_surface", "6", "vulkan", "VK_USE_PLATFORM_XCB_KHR", null, null, 3, 2, 2, 0)]
 		[InlineData("VK_KHR_wayland_surface", "7", "vulkan", "VK_USE_PLATFORM_WAYLAND_KHR", null, null, 3, 2, 2, 0)]
@@ -36,7 +36,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests.Spec
 		[InlineData("VK_NV_glsl_shader", "13", "vulkan", null, "NVIDIA", "Piers Daniell @pdaniell", 3, 0, 0, 0)]
 		[InlineData("VK_NV_extension_1", "14", "disabled", null, "NVIDIA", "Piers Daniell @pdaniell", 3, 0, 0, 0)]
 		[InlineData("VK_KHR_sampler_mirror_clamp_to_edge", "15", "vulkan", null, "KHR", "Tobias Hector @tobias", 3, 0, 0, 0)]
-		[InlineData("VK_IMG_filter_cubic", "16", "vulkan", null, "IMG", "Tobias Hector @tobias", 4, 0, 0, 14)]
+		[InlineData("VK_IMG_filter_cubic", "16", "vulkan", null, "IMG", "Tobias Hector @tobias", 4, 0, 0, 0)]
 		[InlineData("VK_AMD_extension_17", "17", "disabled", null, "AMD", "Daniel Rakos @aqnuep", 2, 0, 0, 0)]
 		[InlineData("VK_AMD_extension_18", "18", "disabled", null, "AMD", "Daniel Rakos @aqnuep", 2, 0, 0, 0)]
 		[InlineData("VK_AMD_rasterization_order", "19", "vulkan", null, "AMD", "Daniel Rakos @aqnuep", 3, 2, 0, 0)]
@@ -106,19 +106,6 @@ namespace SixtenLabs.Spawn.Vulkan.Tests.Spec
 			subject.Commands[valueIndex].Name.Should().Be(name);
 		}
 
-		[Theory]
-		[InlineData("VK_IMG_filter_cubic", 0, "vkCmdDraw", null, "Any slink:VkImageView being sampled with ename:VK_FILTER_CUBIC_IMG as a result of this command must: be of a format which supports cubic filtering, as specified by the ename:VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG flag in sname:VkFormatProperties::pname:linearTilingFeatures (for a linear image) or sname:VkFormatProperties::pname:optimalTilingFeatures(for an optimally tiled image) returned by fname:vkGetPhysicalDeviceFormatProperties")]
-		[InlineData("VK_IMG_filter_cubic", 1, "vkCmdDraw", null, "Any slink:VkImageView being sampled with ename:VK_FILTER_CUBIC_IMG as a result of this command mustnot: have an elink:VkImageViewType of ename:VK_IMAGE_VIEW_TYPE_3D, ename:VK_IMAGE_VIEW_TYPE_CUBE, or ename:VK_IMAGE_VIEW_TYPE_CUBE_ARRAY")]
-		[InlineData("VK_IMG_filter_cubic", 2, "vkCmdDrawIndexed", null, "Any slink:VkImageView being sampled with ename:VK_FILTER_CUBIC_IMG as a result of this command must: be of a format which supports cubic filtering, as specified by the ename:VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG flag in sname:VkFormatProperties::pname:linearTilingFeatures (for a linear image) or sname:VkFormatProperties::pname:optimalTilingFeatures(for an optimally tiled image) returned by fname:vkGetPhysicalDeviceFormatProperties")]
-		public void VkRegistry_VkExtensionUsages_MappedCorrectly(string extensionName, int valueIndex, string command, string structValue, string value)
-		{
-			var subject = Fixture.VkRegistry.Extensions.Where(x => x.Name == extensionName).FirstOrDefault();
-
-			subject.Usages[valueIndex].Command.Should().Be(command);
-			subject.Usages[valueIndex].Struct.Should().Be(structValue);
-			subject.Usages[valueIndex].Value.Should().Be(value);
-		}
-
-		private SpecFixture Fixture { get; set; }
+    private SpecFixture Fixture { get; set; }
 	}
 }

@@ -9,7 +9,7 @@ namespace SixtenLabs.SpawnOfVulkan
         [FieldOffset(0)]
         public IntPtr nativePointer;
         public readonly static PipelineHandle Null = new PipelineHandle(IntPtr.Zero);
-        private PipelineHandle(IntPtr @nativePointer)
+        private PipelineHandle(IntPtr nativePointer)
         {
             this.nativePointer = nativePointer;
         }

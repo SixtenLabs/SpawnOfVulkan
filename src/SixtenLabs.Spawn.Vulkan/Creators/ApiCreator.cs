@@ -15,6 +15,8 @@ namespace SixtenLabs.Spawn.Vulkan
     public ApiCreator(ICodeGenerator generator, ISpawnSpec<VkRegistry> spawnSpec)
 			: base(generator, spawnSpec, "API Creator", 5000)
 		{
+      // Try again after structs are created.
+      //Off = true;
     }
 
     public override int Build(IMapper mapper)
@@ -29,7 +31,7 @@ namespace SixtenLabs.Spawn.Vulkan
 
         foreach (var method in classDefinition.MethodDefinitions)
         {
-          var command = VulkanSpec.SpecTree.Commands.Where(x => x.Name == method.Name.OriginalName).FirstOrDefault();
+          var command = VulkanSpec.SpecTree.Commands.Where(x => x.Name == method.Name.Original).FirstOrDefault();
           var commandDefinition = mapper.Map<VkCommand, MethodDefinition>(command);
 
           method.ReturnType = commandDefinition.ReturnType;
@@ -52,11 +54,10 @@ namespace SixtenLabs.Spawn.Vulkan
 
       foreach(var classDefinition in Definitions)
       {
-        classDefinition.Name.TranslatedName = VulkanSpec.GetTranslatedName(classDefinition.Name.OriginalName);
-
         foreach(var method in classDefinition.MethodDefinitions)
         {
-          method.Name.TranslatedName = method.Name.OriginalName.TranslateVulkanName();
+          method.WithModifier(SyntaxKindDto.PublicKeyword);
+          method.BlockDefinition = new BlockDefinition("body").WithStatement("throw new NotImplementedException();");
         }
 
         count++;
@@ -71,7 +72,7 @@ namespace SixtenLabs.Spawn.Vulkan
 
       foreach (var classDefinition in Definitions)
       {
-        var output = new OutputDefinition() { FileName = $"VulkanApi{classDefinition.Name.Code}" };
+        var output = new OutputDefinition() { FileName = $"VulkanApi{classDefinition.Name.Output}" };
         output.TargetSolution = TargetSolution;
         output.AddNamespace(TargetNamespace);
         output.AddStandardUsingDirective("System");
@@ -80,8 +81,8 @@ namespace SixtenLabs.Spawn.Vulkan
 
         classDefinition.WithModifiers(SyntaxKindDto.PublicKeyword, SyntaxKindDto.PartialKeyword);
 
-        classDefinition.WithComment(classDefinition.Name.Code);
-        classDefinition.Name.TranslatedName = "VulkanApi";
+        classDefinition.WithComment(classDefinition.Name.Output);
+        classDefinition.Name.Translated = "VulkanApi";
 
         (Generator as CSharpGenerator).GenerateClass(output, classDefinition);
         count++;

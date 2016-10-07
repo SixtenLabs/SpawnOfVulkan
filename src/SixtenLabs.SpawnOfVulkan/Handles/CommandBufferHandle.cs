@@ -9,7 +9,7 @@ namespace SixtenLabs.SpawnOfVulkan
         [FieldOffset(0)]
         public IntPtr nativePointer;
         public readonly static CommandBufferHandle Null = new CommandBufferHandle(IntPtr.Zero);
-        private CommandBufferHandle(IntPtr @nativePointer)
+        private CommandBufferHandle(IntPtr nativePointer)
         {
             this.nativePointer = nativePointer;
         }

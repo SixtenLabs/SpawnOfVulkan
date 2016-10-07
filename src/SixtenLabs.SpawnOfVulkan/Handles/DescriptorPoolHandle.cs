@@ -9,7 +9,7 @@ namespace SixtenLabs.SpawnOfVulkan
         [FieldOffset(0)]
         public IntPtr nativePointer;
         public readonly static DescriptorPoolHandle Null = new DescriptorPoolHandle(IntPtr.Zero);
-        private DescriptorPoolHandle(IntPtr @nativePointer)
+        private DescriptorPoolHandle(IntPtr nativePointer)
         {
             this.nativePointer = nativePointer;
         }

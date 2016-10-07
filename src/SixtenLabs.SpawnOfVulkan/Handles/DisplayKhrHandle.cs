@@ -9,7 +9,7 @@ namespace SixtenLabs.SpawnOfVulkan
         [FieldOffset(0)]
         public IntPtr nativePointer;
         public readonly static DisplayKhrHandle Null = new DisplayKhrHandle(IntPtr.Zero);
-        private DisplayKhrHandle(IntPtr @nativePointer)
+        private DisplayKhrHandle(IntPtr nativePointer)
         {
             this.nativePointer = nativePointer;
         }

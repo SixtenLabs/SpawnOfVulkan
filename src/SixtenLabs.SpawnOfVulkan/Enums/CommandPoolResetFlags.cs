@@ -6,8 +6,8 @@ namespace SixtenLabs.SpawnOfVulkan
     public enum CommandPoolResetFlags : int
     {
         /// <summary>
-                /// Release resources owned by the pool
-                /// </summary>
+        /// Release resources owned by the pool
+        /// </summary>
         CommandPoolResetReleaseResourcesBit = 0x1
     }
 }

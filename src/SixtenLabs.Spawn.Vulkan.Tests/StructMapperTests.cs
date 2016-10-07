@@ -30,7 +30,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			var types = vk.TypeStructs;
 
-			types.Should().HaveCount(132);
+			types.Should().HaveCount(139);
 
 			var maps = new List<StructDefinition>();
 
@@ -40,7 +40,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 				maps.Add(map);
 			}
 
-			maps.Should().HaveCount(132);
+			maps.Should().HaveCount(139);
 		}
 
 		[Fact]
@@ -52,7 +52,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			var map = Fixture.SpecMapper.Map<StructDefinition>(type);
 
-			map.Name.OriginalName.Should().Be("VkOffset2D");
+			map.Name.Original.Should().Be("VkOffset2D");
 			map.FieldDefinitions.Should().HaveCount(2);
 		}
 
@@ -65,7 +65,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			var map = Fixture.SpecMapper.Map<StructDefinition>(type);
 
-			map.Name.OriginalName.Should().Be("VkPhysicalDeviceProperties");
+			map.Name.Original.Should().Be("VkPhysicalDeviceProperties");
 			map.FieldDefinitions.Should().HaveCount(9);
 		}
 
@@ -78,11 +78,11 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			var map = Fixture.SpecMapper.Map<StructDefinition>(type);
 
-			map.Name.OriginalName.Should().Be("VkViewport");
+			map.Name.Original.Should().Be("VkViewport");
 			map.FieldDefinitions.Should().HaveCount(6);
 
-			map.FieldDefinitions[0].Name.OriginalName.Should().Be("x");
-			map.FieldDefinitions[0].ReturnType.OriginalName.Should().Be("float");
+			map.FieldDefinitions[0].Name.Original.Should().Be("x");
+			map.FieldDefinitions[0].ReturnType.Original.Should().Be("float");
 
 			// We return the SpecType if we have not created a translated type.
 			//map.Fields[0].TranslatedReturnType.Should().Be("float");
@@ -97,32 +97,32 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			var map = Fixture.SpecMapper.Map<StructDefinition>(type);
 
-			map.Name.OriginalName.Should().Be("VkImageBlit");
+			map.Name.Original.Should().Be("VkImageBlit");
 			map.FieldDefinitions.Should().HaveCount(4);
 
-			map.FieldDefinitions[0].Name.OriginalName.Should().Be("srcSubresource");
-			map.FieldDefinitions[0].ReturnType.OriginalName.Should().Be("VkImageSubresourceLayers");
+			map.FieldDefinitions[0].Name.Original.Should().Be("srcSubresource");
+			map.FieldDefinitions[0].ReturnType.Original.Should().Be("VkImageSubresourceLayers");
 			map.FieldDefinitions[0].ReturnTypeIsArray.Should().BeFalse();
 
 			// We return the SpecType if we have not created a translated type.
 			//map.Fields[0].TranslatedReturnType.Should().BeNull("ImageSubresourceLayers");
 
-			map.FieldDefinitions[1].Name.OriginalName.Should().Be("srcOffsets");
-			map.FieldDefinitions[1].ReturnType.OriginalName.Should().Be("VkOffset3D");
+			map.FieldDefinitions[1].Name.Original.Should().Be("srcOffsets");
+			map.FieldDefinitions[1].ReturnType.Original.Should().Be("VkOffset3D");
 			map.FieldDefinitions[1].ReturnTypeIsArray.Should().BeTrue();
 
 			// We return the SpecType if we have not created a translated type.
 			//map.Fields[1].TranslatedReturnType.Should().Be("Offset3D");
 
-			map.FieldDefinitions[2].Name.OriginalName.Should().Be("dstSubresource");
-			map.FieldDefinitions[2].ReturnType.OriginalName.Should().Be("VkImageSubresourceLayers");
+			map.FieldDefinitions[2].Name.Original.Should().Be("dstSubresource");
+			map.FieldDefinitions[2].ReturnType.Original.Should().Be("VkImageSubresourceLayers");
 			map.FieldDefinitions[2].ReturnTypeIsArray.Should().BeFalse();
 
 			// We return the SpecType if we have not created a translated type.
 			//map.Fields[2].TranslatedReturnType.Should().Be("ImageSubresourceLayers");
 
-			map.FieldDefinitions[3].Name.OriginalName.Should().Be("dstOffsets");
-			map.FieldDefinitions[3].ReturnType.OriginalName.Should().Be("VkOffset3D");
+			map.FieldDefinitions[3].Name.Original.Should().Be("dstOffsets");
+			map.FieldDefinitions[3].ReturnType.Original.Should().Be("VkOffset3D");
 			map.FieldDefinitions[3].ReturnTypeIsArray.Should().BeTrue();
 
 			// We return the SpecType if we have not created a translated type.
@@ -138,23 +138,23 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			var map = Fixture.SpecMapper.Map<StructDefinition>(type);
 
-			map.Name.OriginalName.Should().Be("VkDebugMarkerObjectNameInfoEXT");
+			map.Name.Original.Should().Be("VkDebugMarkerObjectNameInfoEXT");
 			map.FieldDefinitions.Should().HaveCount(5);
 
-			map.FieldDefinitions[0].Name.OriginalName.Should().Be("sType");
-			map.FieldDefinitions[0].ReturnType.OriginalName.Should().Be("VkStructureType");
+			map.FieldDefinitions[0].Name.Original.Should().Be("sType");
+			map.FieldDefinitions[0].ReturnType.Original.Should().Be("VkStructureType");
 
-			map.FieldDefinitions[1].Name.OriginalName.Should().Be("pNext");
-			map.FieldDefinitions[1].ReturnType.OriginalName.Should().Be("void");
+			map.FieldDefinitions[1].Name.Original.Should().Be("pNext");
+			map.FieldDefinitions[1].ReturnType.Original.Should().Be("void");
 
-			map.FieldDefinitions[2].Name.OriginalName.Should().Be("objectType");
-			map.FieldDefinitions[2].ReturnType.OriginalName.Should().Be("VkDebugReportObjectTypeEXT");
+			map.FieldDefinitions[2].Name.Original.Should().Be("objectType");
+			map.FieldDefinitions[2].ReturnType.Original.Should().Be("VkDebugReportObjectTypeEXT");
 
-			map.FieldDefinitions[3].Name.OriginalName.Should().Be("object");
-			map.FieldDefinitions[3].ReturnType.OriginalName.Should().Be("uint64_t");
+			map.FieldDefinitions[3].Name.Original.Should().Be("object");
+			map.FieldDefinitions[3].ReturnType.Original.Should().Be("uint64_t");
 
-			map.FieldDefinitions[4].Name.OriginalName.Should().Be("pObjectName");
-			map.FieldDefinitions[4].ReturnType.OriginalName.Should().Be("char");
+			map.FieldDefinitions[4].Name.Original.Should().Be("pObjectName");
+			map.FieldDefinitions[4].ReturnType.Original.Should().Be("char");
 		}
 	}
 }

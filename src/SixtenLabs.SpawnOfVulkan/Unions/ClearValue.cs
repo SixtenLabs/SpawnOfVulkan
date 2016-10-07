@@ -6,8 +6,8 @@ namespace SixtenLabs.SpawnOfVulkan
     public struct ClearValue
     {
         [FieldOffset(0)]
-        internal ClearColorValue color;
+        internal ClearColorValue Color;
         [FieldOffset(0)]
-        internal ClearDepthStencilValue depthStencil;
+        internal ClearDepthStencilValue DepthStencil;
     }
 }

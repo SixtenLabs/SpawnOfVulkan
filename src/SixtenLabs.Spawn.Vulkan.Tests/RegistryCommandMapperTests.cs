@@ -30,7 +30,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			var commands = vk.Commands;
 
-			commands.Should().HaveCount(174);
+			commands.Should().HaveCount(178);
 
 			var maps = new List<MethodDefinition>();
 
@@ -40,7 +40,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 				maps.Add(map);
 			}
 
-			maps.Should().HaveCount(174);
+			maps.Should().HaveCount(178);
 		}
 
 		[Fact]
@@ -52,24 +52,24 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			var map = Fixture.SpecMapper.Map<MethodDefinition>(type);
 
-			map.Name.OriginalName.Should().Be("vkCreateInstance");
-			map.ReturnType.OriginalName.Should().Be("VkResult");
+			map.Name.Original.Should().Be("vkCreateInstance");
+			map.ReturnType.Original.Should().Be("VkResult");
 			map.ParameterDefinitions.Should().HaveCount(3);
 
-			map.ParameterDefinitions[0].Name.OriginalName.Should().Be("pCreateInfo");
-			map.ParameterDefinitions[0].ParameterType.OriginalName.Should().Be("VkInstanceCreateInfo");
+			map.ParameterDefinitions[0].Name.Original.Should().Be("pCreateInfo");
+			map.ParameterDefinitions[0].ParameterType.Original.Should().Be("VkInstanceCreateInfo");
 			//map.Parameters[0].ExternSync.Should().BeFalse();
 			//map.Parameters[0].IsOptional.Should().BeFalse();
 			//map.Parameters[0].IsPointer.Should().BeTrue();
 
-			map.ParameterDefinitions[1].Name.OriginalName.Should().Be("pAllocator");
-			map.ParameterDefinitions[1].ParameterType.OriginalName.Should().Be("VkAllocationCallbacks");
+			map.ParameterDefinitions[1].Name.Original.Should().Be("pAllocator");
+			map.ParameterDefinitions[1].ParameterType.Original.Should().Be("VkAllocationCallbacks");
 			//map.Parameters[1].ExternSync.Should().BeFalse();
 			//map.Parameters[1].IsOptional.Should().BeTrue();
 			//map.Parameters[1].IsPointer.Should().BeTrue();
 
-			map.ParameterDefinitions[2].Name.OriginalName.Should().Be("pInstance");
-			map.ParameterDefinitions[2].ParameterType.OriginalName.Should().Be("VkInstance");
+			map.ParameterDefinitions[2].Name.Original.Should().Be("pInstance");
+			map.ParameterDefinitions[2].ParameterType.Original.Should().Be("VkInstance");
 			//map.Parameters[2].ExternSync.Should().BeFalse();
 			//map.Parameters[2].IsOptional.Should().BeFalse();
 			//map.Parameters[2].IsPointer.Should().BeTrue();

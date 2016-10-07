@@ -13,8 +13,10 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 			MockSettings = Substitute.For<IGeneratorSettings>();
 			MockWebClientFactory = Substitute.For<IWebClientFactory>();
 			MockFileLoader = Substitute.For<XmlFileLoader>(MockSettings, MockWebClientFactory);
+      MockSpecMapper = Substitute.For<ISpecMapper<VkRegistry>>();
+      MockDefinitionDictionary = Substitute.For<IDefinitionDictionary>();
 
-			return new VulkanSpec(MockFileLoader);
+      return new VulkanSpec(MockFileLoader, MockSpecMapper, MockDefinitionDictionary);
 		}
 
 		[Fact]
@@ -30,5 +32,9 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		private IGeneratorSettings MockSettings { get; set; }
 
 		private IWebClientFactory MockWebClientFactory { get; set; }
+
+    private ISpecMapper<VkRegistry> MockSpecMapper { get; set; }
+
+    private IDefinitionDictionary MockDefinitionDictionary { get; set; }
 	}
 }

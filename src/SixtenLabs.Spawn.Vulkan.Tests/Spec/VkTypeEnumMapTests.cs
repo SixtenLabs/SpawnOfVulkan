@@ -15,7 +15,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests.Spec
 		{
 			var subject = Fixture.VkRegistry;
 
-			subject.TypeEnums.Should().HaveCount(95);
+			subject.TypeEnums.Should().HaveCount(98);
 		}
 
 		[Theory]

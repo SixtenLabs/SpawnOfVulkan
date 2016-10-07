@@ -6,8 +6,8 @@ namespace SixtenLabs.SpawnOfVulkan
     public enum DescriptorPoolCreateFlags : int
     {
         /// <summary>
-                /// Descriptor sets may be freed individually
-                /// </summary>
+        /// Descriptor sets may be freed individually
+        /// </summary>
         DescriptorPoolCreateFreeDescriptorSetBit = 0x1
     }
 }

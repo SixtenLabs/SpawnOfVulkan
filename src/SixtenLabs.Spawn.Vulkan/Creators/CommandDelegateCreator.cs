@@ -15,7 +15,10 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 
 		public override int Build(IMapper mapper)
 		{
-			VulkanSpec.AddSpecTypeDefinition(new SpecTypeDefinition() { SpecName = "string", TranslatedName = "string" });
+      var std = new SpecTypeDefinition();
+      std.Name.Original = "string";
+      std.Name.Translated = "string";
+			VulkanSpec.DefinitionDictionary.AddSpecTypeDefinition(std);
 
 			var registryCommands = VulkanSpec.SpecTree.Commands;
 
@@ -34,14 +37,14 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 
 			foreach (var methodDefinition in Definitions)
 			{
-				methodDefinition.Name.TranslatedName = $"{VulkanSpec.GetTranslatedName(methodDefinition.Name.OriginalName)}Delegate";
-				methodDefinition.ReturnType.TranslatedName = VulkanSpec.GetTranslatedName(methodDefinition.ReturnType.OriginalName);
+				methodDefinition.Name.Translated = $"{VulkanSpec.DefinitionDictionary.GetTranslatedName(methodDefinition.Name.Original)}Delegate";
+				methodDefinition.ReturnType.Translated = VulkanSpec.DefinitionDictionary.GetTranslatedName(methodDefinition.ReturnType.Original);
 				methodDefinition.WithModifiers(SyntaxKindDto.PublicKeyword, SyntaxKindDto.DelegateKeyword);
 
 				foreach (var parameter in methodDefinition.ParameterDefinitions)
 				{
 					parameter.IsPointer = false;
-					parameter.ParameterType.TranslatedName = VulkanSpec.GetTranslatedName(parameter.ParameterType.OriginalName);
+					parameter.ParameterType.Translated = VulkanSpec.DefinitionDictionary.GetTranslatedName(parameter.ParameterType.Original);
 				}
 
 				methodDefinition.WithAttribute("UnmanagedFunctionPointer", "CallingConvention.Winapi");
@@ -68,7 +71,7 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 			}
 
 			var classDefinition = new ClassDefinition("Vk");
-			classDefinition.Name.TranslatedName = "Vk";
+			classDefinition.Name.Translated = "Vk";
 			classDefinition.WithModifiers(SyntaxKindDto.PublicKeyword, SyntaxKindDto.StaticKeyword, SyntaxKindDto.PartialKeyword);
 
 			//var dllConstant = new FieldDefinition() { TranslatedName = "VulkanLibrary", TranslatedReturnType = "string", TranslatedValue = "vulkan-1.dll" };

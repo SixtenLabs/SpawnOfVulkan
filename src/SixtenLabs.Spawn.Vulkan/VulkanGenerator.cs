@@ -42,136 +42,9 @@ namespace SixtenLabs.Spawn.Vulkan
 
 		private void MapTypes()
 		{
-			var constSpecTypeDefinition = Mapper.Map<VkConstant, SpecTypeDefinition>(SpawnSpec.SpecTree.Constants);
-			SpawnSpec.AddSpecTypeDefinition(constSpecTypeDefinition);
+      SpawnSpec.SpecMapper.MapSpecTypes(Mapper, SpawnSpec.SpecTree);
 
-			foreach (var regRequires in SpawnSpec.SpecTree.Requires)
-			{
-				var specTypeDefinition = Mapper.Map<VkTypeRequires, SpecTypeDefinition>(regRequires);
-				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
-			}
-
-			foreach (var regBaseType in SpawnSpec.SpecTree.BaseTypes)
-			{
-				var specTypeDefinition = Mapper.Map<VkTypeBaseType, SpecTypeDefinition>(regBaseType);
-				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
-			}
-
-			foreach (var regBitmask in SpawnSpec.SpecTree.Bitmasks)
-			{
-				var specTypeDefinition = Mapper.Map<VkTypeBitmask, SpecTypeDefinition>(regBitmask);
-				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
-			}
-
-			foreach (var regType in SpawnSpec.SpecTree.Constants.Values)
-			{
-				var specTypeDefinition = Mapper.Map<VkConstantValue, SpecTypeDefinition>(regType);
-				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
-			}
-
-			foreach (var regFuncPointer in SpawnSpec.SpecTree.TypeFuncPointers)
-			{
-				var specTypeDefinition = Mapper.Map<VkTypeFuncPointer, SpecTypeDefinition>(regFuncPointer);
-
-				foreach (var regStructMember in regFuncPointer.Parameters)
-				{
-					var specMemberDefinition = Mapper.Map<VkTypeFuncPointerParameter, SpecTypeDefinition>(regStructMember);
-					specTypeDefinition.Children.Add(specMemberDefinition);
-				}
-
-				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
-			}
-
-			foreach (var regStruct in SpawnSpec.SpecTree.TypeStructs)
-			{
-				var specTypeDefinition = Mapper.Map<VkTypeStruct, SpecTypeDefinition>(regStruct);
-
-				foreach (var regStructMember in regStruct.Members)
-				{
-					var specMemberDefinition = Mapper.Map<VkTypeStructMember, SpecTypeDefinition>(regStructMember);
-					specTypeDefinition.Children.Add(specMemberDefinition);
-				}
-
-				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
-			}
-
-			foreach (var regUnion in SpawnSpec.SpecTree.TypeUnions)
-			{
-				var specTypeDefinition = Mapper.Map<VkTypeUnion, SpecTypeDefinition>(regUnion);
-
-				foreach (var regUnionMember in regUnion.Members)
-				{
-					var specMemberDefinition = Mapper.Map<VkTypeUnionMember, SpecTypeDefinition>(regUnionMember);
-					specTypeDefinition.Children.Add(specMemberDefinition);
-				}
-
-				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
-			}
-
-			foreach (var regType in SpawnSpec.SpecTree.Handles)
-			{
-				var specTypeDefinition = Mapper.Map<VkTypeHandle, SpecTypeDefinition>(regType);
-				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
-			}
-
-			foreach (var regType in SpawnSpec.SpecTree.TypeEnums)
-			{
-				var specTypeDefinition = Mapper.Map<VkTypeEnum, SpecTypeDefinition>(regType);
-				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
-			}
-
-			foreach (var enumValueType in SpawnSpec.SpecTree.Enums.SelectMany(x => x.Values))
-			{
-				var specTypeDefinition = Mapper.Map<VkEnumValue, SpecTypeDefinition>(enumValueType);
-				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
-			}
-
-			foreach (var regCommand in SpawnSpec.SpecTree.Commands)
-			{
-				var specTypeDefinition = Mapper.Map<VkCommand, SpecTypeDefinition>(regCommand);
-				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
-			}
-
-			foreach (var regExtension in SpawnSpec.SpecTree.Extensions)
-			{
-				var specTypeDefinition = Mapper.Map<VkExtension, SpecTypeDefinition>(regExtension);
-				SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
-			}
-
-			foreach (var regExtension in SpawnSpec.SpecTree.Extensions)
-			{
-				foreach (var extCommand in regExtension.Commands)
-				{
-					var specTypeDefinition = Mapper.Map<VkExtensionCommand, SpecTypeDefinition>(extCommand);
-					SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
-				}
-			}
-
-			foreach (var regExtension in SpawnSpec.SpecTree.Extensions)
-			{
-				foreach (var extType in regExtension.Types)
-				{
-					var specTypeDefinition = Mapper.Map<VkExtensionType, SpecTypeDefinition>(extType);
-					SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
-				}
-			}
-
-			foreach (var regExtension in SpawnSpec.SpecTree.Extensions)
-			{
-				foreach (var extEnum in regExtension.Enums)
-				{
-					var specTypeDefinition = Mapper.Map<VkExtensionEnum, SpecTypeDefinition>(extEnum);
-					SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
-				}
-			}
-
-      foreach (var featureRequire in SpawnSpec.SpecTree.Feature.Requires)
-      {
-         var specTypeDefinition = Mapper.Map<VkFeatureRequire, SpecTypeDefinition>(featureRequire);
-         SpawnSpec.AddSpecTypeDefinition(specTypeDefinition);
-      }
-
-      Console.WriteLine($"Mapped {SpawnSpec.SpecTypeCount} types.");
+      Console.WriteLine($"Mapped {SpawnSpec.DefinitionDictionary.SpecTypeCount} types.");
 		}
 
 		private void Rewrite()
@@ -221,8 +94,6 @@ namespace SixtenLabs.Spawn.Vulkan
 		}
 
 		private IEnumerable<ICreator> Creators { get; }
-
-		private XElement Registry { get; set; }
 
 		private ISpawnService Spawn { get; }
 

@@ -67,12 +67,12 @@
       <HintPath>..\..\packages\Microsoft.VisualStudio.LanguageServices.1.3.2\lib\net46\Microsoft.VisualStudio.LanguageServices.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SixtenLabs.Spawn, Version=1.0.71.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\..\packages\SixtenLabs.Spawn.1.0.71\lib\net461\SixtenLabs.Spawn.dll</HintPath>
+    <Reference Include="SixtenLabs.Spawn, Version=1.0.81.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\..\packages\SixtenLabs.Spawn.1.0.81\lib\net461\SixtenLabs.Spawn.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SixtenLabs.Spawn.CSharp, Version=1.0.71.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\..\packages\SixtenLabs.Spawn.CSharp.1.0.71\lib\net461\SixtenLabs.Spawn.CSharp.dll</HintPath>
+    <Reference Include="SixtenLabs.Spawn.CSharp, Version=1.0.81.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\..\packages\SixtenLabs.Spawn.CSharp.1.0.81\lib\net461\SixtenLabs.Spawn.CSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -191,6 +191,7 @@
     <Compile Include="Mappers\RegistryTypeMapper.cs" />
     <Compile Include="Mappers\SpecTypeMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resolvers\DefinitionNameTypeConverter.cs" />
     <Compile Include="Spec\VkApiRequire.cs" />
     <Compile Include="Spec\VkApiRequireMember.cs" />
     <Compile Include="Spec\VkCommand.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="VulkanGenerator.cs" />
     <Compile Include="VulkanSettings.cs" />
     <Compile Include="VulkanSpec.cs" />
+    <Compile Include="VulkanSpecMapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

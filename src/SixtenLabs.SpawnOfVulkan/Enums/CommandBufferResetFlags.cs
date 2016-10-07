@@ -6,8 +6,8 @@ namespace SixtenLabs.SpawnOfVulkan
     public enum CommandBufferResetFlags : int
     {
         /// <summary>
-                /// Release resources owned by the buffer
-                /// </summary>
+        /// Release resources owned by the buffer
+        /// </summary>
         CommandBufferResetReleaseResourcesBit = 0x1
     }
 }

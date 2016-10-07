@@ -20,7 +20,7 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 
 			foreach (var structDefinition in Definitions)
 			{
-				structDefinition.Name.TranslatedName = VulkanSpec.GetTranslatedName(structDefinition.Name.OriginalName);
+				structDefinition.Name.Translated = VulkanSpec.DefinitionDictionary.GetTranslatedName(structDefinition.Name.Original);
 
 				if (structDefinition.NeedsMarshalling)
 				{
@@ -35,7 +35,7 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 				{
 					fieldDefinition.WithModifier(SyntaxKindDto.InternalKeyword);
 
-					if (fieldDefinition.ReturnTypeIsArray && structDefinition.Name.OriginalName != "VkImageBlit" && structDefinition.Name.OriginalName != "VkPhysicalDeviceMemoryProperties")
+					if (fieldDefinition.ReturnTypeIsArray && structDefinition.Name.Original != "VkImageBlit" && structDefinition.Name.Original != "VkPhysicalDeviceMemoryProperties")
 					{
 						fieldDefinition.WithModifiers(SyntaxKindDto.UnsafeKeyword, SyntaxKindDto.FixedKeyword);
 
@@ -53,13 +53,13 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 							arraySize = fieldDefinition.Tag;
 						}
 
-						fieldDefinition.ReturnType.TranslatedName = VulkanSpec.GetTranslatedName(fieldDefinition.ReturnType.OriginalName);
-						fieldDefinition.Name.TranslatedName = $"{fieldDefinition.Name.OriginalName}[{arraySize}]";
+						fieldDefinition.ReturnType.Translated = VulkanSpec.DefinitionDictionary.GetTranslatedName(fieldDefinition.ReturnType.Original);
+						fieldDefinition.Name.Translated = $"{fieldDefinition.Name.Original}[{arraySize}]";
 					}
 					else
 					{
-						fieldDefinition.ReturnType.TranslatedName = VulkanSpec.GetTranslatedName(fieldDefinition.ReturnType.OriginalName);
-						fieldDefinition.Name.TranslatedName = VulkanSpec.GetTranslatedChildName(structDefinition.Name.OriginalName, fieldDefinition.Name.OriginalName);
+						fieldDefinition.ReturnType.Translated = VulkanSpec.DefinitionDictionary.GetTranslatedName(fieldDefinition.ReturnType.Original);
+						fieldDefinition.Name.Translated = VulkanSpec.DefinitionDictionary.GetTranslatedChildName(structDefinition.Name.Original, fieldDefinition.Name.Original);
 					}
 				}
 
@@ -88,7 +88,7 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 
 			foreach (var structDefinition in Definitions)
 			{
-				var output = new OutputDefinition() { FileName = structDefinition.Name.TranslatedName };
+				var output = new OutputDefinition() { FileName = structDefinition.Name.Translated };
 				output.TargetSolution = TargetSolution;
         output.Extension = "cs";
 

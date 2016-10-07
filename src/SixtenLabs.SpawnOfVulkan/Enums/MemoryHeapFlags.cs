@@ -6,8 +6,8 @@ namespace SixtenLabs.SpawnOfVulkan
     public enum MemoryHeapFlags : int
     {
         /// <summary>
-                /// If set, heap represents device memory
-                /// </summary>
+        /// If set, heap represents device memory
+        /// </summary>
         MemoryHeapDeviceLocalBit = 0x1
     }
 }

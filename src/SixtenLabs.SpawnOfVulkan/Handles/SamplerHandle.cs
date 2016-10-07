@@ -9,7 +9,7 @@ namespace SixtenLabs.SpawnOfVulkan
         [FieldOffset(0)]
         public IntPtr nativePointer;
         public readonly static SamplerHandle Null = new SamplerHandle(IntPtr.Zero);
-        private SamplerHandle(IntPtr @nativePointer)
+        private SamplerHandle(IntPtr nativePointer)
         {
             this.nativePointer = nativePointer;
         }

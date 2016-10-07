@@ -20,7 +20,7 @@ namespace SixtenLabs.Spawn.Vulkan
 
 			foreach (var structDefinition in Definitions)
 			{
-				structDefinition.Name.TranslatedName = VulkanSpec.GetTranslatedName(structDefinition.Name.OriginalName);
+				structDefinition.Name.Translated = VulkanSpec.DefinitionDictionary.GetTranslatedName(structDefinition.Name.Original);
 
 				structDefinition.WithAttribute("StructLayout", "LayoutKind.Explicit");
 
@@ -30,14 +30,14 @@ namespace SixtenLabs.Spawn.Vulkan
 
 					if (fieldDefinition.ReturnTypeIsArray)
 					{
-						var translatedName = VulkanSpec.GetTranslatedChildName(structDefinition.Name.OriginalName, fieldDefinition.Name.OriginalName);
-						fieldDefinition.Name.TranslatedName = $"{translatedName}[{fieldDefinition.Tag}]";
-						fieldDefinition.ReturnType.TranslatedName = VulkanSpec.GetTranslatedName(fieldDefinition.ReturnType.OriginalName);
+						var translatedName = VulkanSpec.DefinitionDictionary.GetTranslatedChildName(structDefinition.Name.Original, fieldDefinition.Name.Original);
+						fieldDefinition.Name.Translated = $"{translatedName}[{fieldDefinition.Tag}]";
+						fieldDefinition.ReturnType.Translated = VulkanSpec.DefinitionDictionary.GetTranslatedName(fieldDefinition.ReturnType.Original);
 						fieldDefinition.WithModifiers(SyntaxKindDto.InternalKeyword, SyntaxKindDto.UnsafeKeyword, SyntaxKindDto.FixedKeyword);
 					}
 					else
 					{
-						fieldDefinition.ReturnType.TranslatedName = VulkanSpec.GetTranslatedName(fieldDefinition.ReturnType.OriginalName);
+						fieldDefinition.ReturnType.Translated = VulkanSpec.DefinitionDictionary.GetTranslatedName(fieldDefinition.ReturnType.Original);
 						fieldDefinition.WithModifier(SyntaxKindDto.InternalKeyword);
 					}
 				}
@@ -67,7 +67,7 @@ namespace SixtenLabs.Spawn.Vulkan
 
 			foreach (var structDefinition in Definitions)
 			{
-				var output = new OutputDefinition() { FileName = structDefinition.Name.Code };
+				var output = new OutputDefinition() { FileName = structDefinition.Name.Output };
 				output.TargetSolution = TargetSolution;
 				output.AddNamespace(TargetNamespace);
 				output.OutputDirectory = "Unions";

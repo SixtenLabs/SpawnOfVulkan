@@ -9,7 +9,7 @@ namespace SixtenLabs.SpawnOfVulkan
         [FieldOffset(0)]
         public IntPtr nativePointer;
         public readonly static ImageHandle Null = new ImageHandle(IntPtr.Zero);
-        private ImageHandle(IntPtr @nativePointer)
+        private ImageHandle(IntPtr nativePointer)
         {
             this.nativePointer = nativePointer;
         }

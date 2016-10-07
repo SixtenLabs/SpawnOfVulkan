@@ -52,7 +52,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			var map = Fixture.SpecMapper.Map<StructDefinition>(type);
 
-			map.Name.OriginalName.Should().Be("VkInstance");
+			map.Name.Original.Should().Be("VkInstance");
 			map.SpecDerivedType.Should().BeNull();
 		}
 
@@ -65,7 +65,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 		//	var map = AMapper.Map<StructDefinition>(type);
 
-		//	map.Name.OriginalName.Should().Be("VkInstance");
+		//	map.Name.Original.Should().Be("VkInstance");
 		//	map.SpecDerivedType.Should().BeNull();
 		//}
 
@@ -78,7 +78,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			var map = Fixture.SpecMapper.Map<StructDefinition>(type);
 
-			map.Name.OriginalName.Should().Be("VkCommandBuffer");
+			map.Name.Original.Should().Be("VkCommandBuffer");
 			map.SpecDerivedType.Should().Be("VkCommandPool");
 		}
 	}

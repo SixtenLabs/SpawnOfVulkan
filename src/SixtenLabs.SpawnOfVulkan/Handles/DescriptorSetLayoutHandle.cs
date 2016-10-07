@@ -9,7 +9,7 @@ namespace SixtenLabs.SpawnOfVulkan
         [FieldOffset(0)]
         public IntPtr nativePointer;
         public readonly static DescriptorSetLayoutHandle Null = new DescriptorSetLayoutHandle(IntPtr.Zero);
-        private DescriptorSetLayoutHandle(IntPtr @nativePointer)
+        private DescriptorSetLayoutHandle(IntPtr nativePointer)
         {
             this.nativePointer = nativePointer;
         }

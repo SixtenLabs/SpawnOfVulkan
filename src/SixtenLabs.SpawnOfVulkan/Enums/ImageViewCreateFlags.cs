@@ -1,5 +1,5 @@
 ﻿/// <summary>
-/// vkFlag
+/// 
 /// </summary>
 namespace SixtenLabs.SpawnOfVulkan
 {

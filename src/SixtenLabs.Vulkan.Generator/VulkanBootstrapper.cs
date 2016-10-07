@@ -23,7 +23,9 @@ namespace SixtenLabs.Vulkan.Generator
 
 			var config = new MapperConfiguration(cfg =>
 			{
-				foreach (var profile in profileTypeInstances)
+        cfg.CreateMap<string, DefinitionName>().ConvertUsing<DefinitionNameTypeConverter>();
+
+        foreach (var profile in profileTypeInstances)
 				{
 					cfg.AddProfile(profile);
 				}
@@ -46,8 +48,11 @@ namespace SixtenLabs.Vulkan.Generator
 			SimpleContainer.RegisterSingleton<ISpawnSpec<VkRegistry>, VulkanSpec>();
 			SimpleContainer.RegisterSingleton<ICodeGenerator, CSharpGenerator>();
 			SimpleContainer.RegisterSingleton<IWebClientFactory, WebClientFactory>();
+      SimpleContainer.RegisterSingleton<DefinitionNameTypeConverter>();
+      SimpleContainer.RegisterSingleton<ISpecMapper<VkRegistry>, VulkanSpecMapper>();
+      SimpleContainer.RegisterSingleton<IDefinitionDictionary, DefinitionDictionary>();
 
-			var creatorTypes = SimpleContainer.GetTypesToRegister(typeof(ICreator), Assemblies);
+      var creatorTypes = SimpleContainer.GetTypesToRegister(typeof(ICreator), Assemblies);
 
 			foreach (var creatorType in creatorTypes)
 			{

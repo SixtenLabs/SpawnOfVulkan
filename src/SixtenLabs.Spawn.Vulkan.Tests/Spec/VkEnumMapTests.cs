@@ -17,7 +17,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests.Spec
 		{
 			var subject = Fixture.VkRegistry;
 
-			subject.Enums.Should().HaveCount(74);
+			subject.Enums.Should().HaveCount(77);
 		}
 
 		[Theory]

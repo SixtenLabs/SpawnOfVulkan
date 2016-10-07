@@ -6,8 +6,8 @@ namespace SixtenLabs.SpawnOfVulkan
     public enum DependencyFlags : int
     {
         /// <summary>
-                /// Dependency is per pixel region 
-                /// </summary>
+        /// Dependency is per pixel region 
+        /// </summary>
         DependencyByRegionBit = 0x1
     }
 }

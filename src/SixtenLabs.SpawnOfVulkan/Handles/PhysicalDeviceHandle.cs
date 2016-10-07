@@ -9,7 +9,7 @@ namespace SixtenLabs.SpawnOfVulkan
         [FieldOffset(0)]
         public IntPtr nativePointer;
         public readonly static PhysicalDeviceHandle Null = new PhysicalDeviceHandle(IntPtr.Zero);
-        private PhysicalDeviceHandle(IntPtr @nativePointer)
+        private PhysicalDeviceHandle(IntPtr nativePointer)
         {
             this.nativePointer = nativePointer;
         }

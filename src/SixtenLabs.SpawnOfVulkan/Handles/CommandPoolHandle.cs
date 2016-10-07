@@ -9,7 +9,7 @@ namespace SixtenLabs.SpawnOfVulkan
         [FieldOffset(0)]
         public IntPtr nativePointer;
         public readonly static CommandPoolHandle Null = new CommandPoolHandle(IntPtr.Zero);
-        private CommandPoolHandle(IntPtr @nativePointer)
+        private CommandPoolHandle(IntPtr nativePointer)
         {
             this.nativePointer = nativePointer;
         }

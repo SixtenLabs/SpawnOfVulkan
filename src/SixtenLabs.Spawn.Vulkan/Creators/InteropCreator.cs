@@ -32,13 +32,13 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 
 			foreach (var methodDefinition in Definitions)
 			{
-				methodDefinition.Name.TranslatedName = VulkanSpec.GetTranslatedName(methodDefinition.Name.OriginalName);
-				methodDefinition.ReturnType.TranslatedName = VulkanSpec.GetTranslatedName(methodDefinition.ReturnType.OriginalName);
+				methodDefinition.Name.Translated = VulkanSpec.DefinitionDictionary.GetTranslatedName(methodDefinition.Name.Original);
+				methodDefinition.ReturnType.Translated = VulkanSpec.DefinitionDictionary.GetTranslatedName(methodDefinition.ReturnType.Original);
 				methodDefinition.WithModifiers(SyntaxKindDto.InternalKeyword, SyntaxKindDto.StaticKeyword, SyntaxKindDto.UnsafeKeyword, SyntaxKindDto.ExternKeyword);
 	
 				foreach(var parameter in methodDefinition.ParameterDefinitions)
 				{
-					parameter.ParameterType.TranslatedName = VulkanSpec.GetTranslatedName(parameter.ParameterType.OriginalName);
+					parameter.ParameterType.Translated = VulkanSpec.DefinitionDictionary.GetTranslatedName(parameter.ParameterType.Original);
 				}
 
         methodDefinition.WithAttribute("DllImport", "VulkanLibrary", "CallingConvention = CallingConvention.StdCall");
@@ -65,7 +65,7 @@ namespace SixtenLabs.Spawn.Vulkan.Creators
 			}
 
 			var classDefinition = new ClassDefinition("NativeMethods");
-			classDefinition.Name.TranslatedName = "NativeMethods";
+			classDefinition.Name.Translated = "NativeMethods";
 			classDefinition.WithModifiers(SyntaxKindDto.InternalKeyword, SyntaxKindDto.StaticKeyword);
 
       classDefinition.AddField("VulkanLibrary")

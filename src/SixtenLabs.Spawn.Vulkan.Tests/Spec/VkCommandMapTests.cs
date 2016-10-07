@@ -17,12 +17,12 @@ namespace SixtenLabs.Spawn.Vulkan.Tests.Spec
 		{
 			var subject = Fixture.VkRegistry;
 
-			subject.Commands.Should().HaveCount(174);
+			subject.Commands.Should().HaveCount(178);
 		}
 
 		[Theory]
 		[InlineData("vkCreateInstance", "VkResult", "VK_SUCCESS", "VK_ERROR_OUT_OF_HOST_MEMORY,VK_ERROR_OUT_OF_DEVICE_MEMORY,VK_ERROR_INITIALIZATION_FAILED,VK_ERROR_LAYER_NOT_PRESENT,VK_ERROR_EXTENSION_NOT_PRESENT,VK_ERROR_INCOMPATIBLE_DRIVER", 3, 0)]
-		[InlineData("vkDestroyInstance", "void", null, null, 2, 3)]
+		[InlineData("vkDestroyInstance", "void", null, null, 2, 0)]
 		public void VkRegistry_VkCommands_MappedCorrectly(string name, string type, string successCodes, string errorCodes, int parametersCount, int validityCount)
 		{
 			var subject = Fixture.VkRegistry.Commands.Where(x => x.Name == name).FirstOrDefault();

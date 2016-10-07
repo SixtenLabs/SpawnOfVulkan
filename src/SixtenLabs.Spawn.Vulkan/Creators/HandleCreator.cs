@@ -12,44 +12,46 @@ namespace SixtenLabs.Spawn.Vulkan
 		{
 		}
 
-		public override int Rewrite()
+    public override int Build(IMapper mapper)
+    {
+      var registryHandles = VulkanSpec.SpecTree.Handles;
+
+      foreach (var registryHandle in registryHandles)
+      {
+        var structDefinition = mapper.Map<VkTypeHandle, StructDefinition>(registryHandle);
+        Definitions.Add(structDefinition);
+      }
+
+      return Definitions.Count;
+    }
+
+    public override int Rewrite()
 		{
 			int count = 0;
 
 			foreach(var definition in Definitions)
 			{
-				definition.Name.TranslatedName = VulkanSpec.GetTranslatedName(definition.Name.OriginalName);
-				definition.DerivedType = VulkanSpec.GetTranslatedName(definition.Name.OriginalName);
-
-        definition.AddField("nativePointer").WithReturnType("IntPtr").WithAttribute("FieldOffset", "0").WithModifier(SyntaxKindDto.PublicKeyword);
+        definition
+          .AddField("nativePointer")
+          .WithReturnType("IntPtr")
+          .WithAttribute("FieldOffset", "0")
+          .WithModifier(SyntaxKindDto.PublicKeyword);
 
         definition.AddField("Null")
-          .WithReturnType(definition.Name.TranslatedName)
-          .WithDefaultValue(definition.Name.TranslatedName, typeof(string), SyntaxKindDto.ObjectCreationExpression, "IntPtr.Zero")
+          .WithReturnType(definition.Name.Output)
+          .WithDefaultValue(definition.Name.Output, typeof(string), SyntaxKindDto.ObjectCreationExpression, "IntPtr.Zero")
           .WithModifiers(SyntaxKindDto.PublicKeyword, SyntaxKindDto.ReadOnlyKeyword, SyntaxKindDto.StaticKeyword);
 
-        definition.AddConstructor(definition.Name.Code)
+        definition.AddConstructor(definition.Name.Output)
           .WithModifier(SyntaxKindDto.PrivateKeyword)
           .WithParameter("nativePointer", "IntPtr")
-          .WithBlock("this.nativePointer = nativePointer;");
+          .AddBlock("body")
+          .WithStatement("this.nativePointer = nativePointer;");
 
         count++;
 			}
 			
-			return 0;
-		}
-
-		public override int Build(IMapper mapper)
-		{
-			var registryHandles = VulkanSpec.SpecTree.Handles;
-
-			foreach (var registryHandle in registryHandles)
-			{
-				var structDefinition = mapper.Map<VkTypeHandle, StructDefinition>(registryHandle);
-				Definitions.Add(structDefinition);
-			}
-
-			return Definitions.Count;
+			return count;
 		}
 
 		public override int Create()
@@ -58,7 +60,7 @@ namespace SixtenLabs.Spawn.Vulkan
 
 			foreach (var structDefinition in Definitions)
 			{
-				var output = new OutputDefinition() { FileName = structDefinition.Name.TranslatedName };
+				var output = new OutputDefinition() { FileName = structDefinition.Name.Output };
 				output.TargetSolution = TargetSolution;
 				output.AddNamespace(TargetNamespace);
 				output.AddStandardUsingDirective("System");

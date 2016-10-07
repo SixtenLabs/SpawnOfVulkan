@@ -283,7 +283,7 @@ namespace SixtenLabs.Spawn.Vulkan
 		{
 			CreateMap<XElement, VkConstant>()
 				.ForMember(dest => dest.Name, opt => opt.MapFrom(m => MapAttribute(m, "name")))
-				.ForMember(dest => dest.Values, opt => opt.MapFrom(m => m.Descendants("enum")));
+				.ForMember(dest => dest.Values, opt => opt.MapFrom(m => m.Elements("enum")));
 		}
 
 		private void ConfigureConstantsValues()
@@ -448,27 +448,27 @@ namespace SixtenLabs.Spawn.Vulkan
 		{
 			CreateMap<XElement, VkFeatureRequire>()
 				.ForMember(dest => dest.Comment, opt => opt.MapFrom(m => MapAttribute(m, "comment")))
-				.ForMember(dest => dest.Types, opt => opt.MapFrom(m => m.Descendants("type")))
-				.ForMember(dest => dest.Enums, opt => opt.MapFrom(m => m.Descendants("enum")))
-				.ForMember(dest => dest.Commands, opt => opt.MapFrom(m => m.Descendants("command")));
+				.ForMember(dest => dest.Types, opt => opt.MapFrom(m => m.Elements("type")))
+				.ForMember(dest => dest.Enums, opt => opt.MapFrom(m => m.Elements("enum")))
+				.ForMember(dest => dest.Commands, opt => opt.MapFrom(m => m.Elements("command")));
 		}
 
 		private void ConfigureVkFeatureRequireTypes()
 		{
 			CreateMap<XElement, VkFeatureRequireType>()
-				.ForMember(dest => dest.Name, opt => opt.MapFrom(m => m.Value));
+				.ForMember(dest => dest.Name, opt => opt.MapFrom(m => MapAttribute(m, "name")));
 		}
 
 		private void ConfigureVkFeatureRequireEnums()
 		{
 			CreateMap<XElement, VkFeatureRequireEnum>()
-				.ForMember(dest => dest.Name, opt => opt.MapFrom(m => m.Value));
+				.ForMember(dest => dest.Name, opt => opt.MapFrom(m => MapAttribute(m, "name")));
 		}
 
 		private void ConfigureVkFeatureRequireCommands()
 		{
 			CreateMap<XElement, VkFeatureRequireCommand>()
-				.ForMember(dest => dest.Name, opt => opt.MapFrom(m => m.Value));
+				.ForMember(dest => dest.Name, opt => opt.MapFrom(m => MapAttribute(m, "name")));
 		}
 
 		#endregion

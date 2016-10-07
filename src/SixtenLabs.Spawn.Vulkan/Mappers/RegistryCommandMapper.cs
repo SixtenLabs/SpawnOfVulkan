@@ -14,8 +14,8 @@ namespace SixtenLabs.Spawn.Vulkan
 		private void ConfigureMaps()
 		{
 			CreateMap<VkCommand, MethodDefinition>()
-				.ForMember(dest => dest.Name, opt => opt.MapFrom(m => new DefinitionName() { OriginalName = m.Name }))
-				.ForMember(dest => dest.ReturnType, opt => opt.MapFrom(m => new DefinitionName() { OriginalName = m.Type }))
+        .ForMember(dest => dest.Name, opt => opt.MapFrom(m => m.Name))
+        .ForMember(dest => dest.ReturnType, opt => opt.MapFrom(m => m.Type))
 				.ForMember(dest => dest.ParameterDefinitions, opt => opt.MapFrom(m => m.Parameters))
 				.ForMember(dest => dest.AttributeDefinitions, opt => opt.Ignore())
 				.ForMember(dest => dest.BlockDefinition, opt => opt.Ignore())
@@ -23,23 +23,10 @@ namespace SixtenLabs.Spawn.Vulkan
 				.ForMember(dest => dest.Tag, opt => opt.Ignore());
 
 			CreateMap<VkCommandParameter, ParameterDefinition>()
-				.ForMember(dest => dest.Name, opt => opt.MapFrom(m => new DefinitionName() { OriginalName = m.Name }))
+				.ForMember(dest => dest.Name, opt => opt.MapFrom(m => m.Name))
 				.ForMember(dest => dest.IsPointer, opt => opt.MapFrom(m => m.PointerRank > 0))
-        .ForMember(dest => dest.ParameterType, opt => opt.MapFrom(m => new DefinitionName() { OriginalName = m.ReturnType }))
+        .ForMember(dest => dest.ParameterType, opt => opt.MapFrom(m => m.ReturnType))
         .ForMember(dest => dest.Tag, opt => opt.Ignore());
-		}
-
-		private string MapReturnType(string returnType)
-		{
-			if(returnType == "char")
-			{
-				return "string";
-			}
-			else
-			{
-				return returnType;
-			}
-
 		}
 	}
 }

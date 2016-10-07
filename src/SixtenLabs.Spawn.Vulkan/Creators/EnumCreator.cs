@@ -52,7 +52,7 @@ namespace SixtenLabs.Spawn.Vulkan
 
 		private void GetExtensions(EnumDefinition enumDef)
 		{
-			var extEnumValues = VulkanSpec.SpecTree.Extensions.SelectMany(x => x.Enums).Where(x => x.Extends == enumDef.Name.OriginalName);
+			var extEnumValues = VulkanSpec.SpecTree.Extensions.SelectMany(x => x.Enums).Where(x => x.Extends == enumDef.Name.Original);
 			
 			foreach(var enumValue in extEnumValues)
 			{
@@ -77,11 +77,9 @@ namespace SixtenLabs.Spawn.Vulkan
 
 			var vkFlagsEnums = VulkanSpec.SpecTree.Bitmasks.Where(x => x.Type == "VkFlags");
 
-			VulkanSpec.AddSpecTypeDefinition(new SpecTypeDefinition() { SpecName = "None", TranslatedName = "None" });
-
 			foreach (var vkFlagsEnum in vkFlagsEnums)
 			{
-        var isEnum = Definitions.Any(x => x.Name.OriginalName == vkFlagsEnum.Requires);
+        var isEnum = Definitions.Any(x => x.Name.Original == vkFlagsEnum.Requires);
 
         if (!isEnum)
         {
@@ -114,18 +112,12 @@ namespace SixtenLabs.Spawn.Vulkan
 
 			foreach (var enumDefinition in Definitions)
 			{
-				enumDefinition.Name.TranslatedName = VulkanSpec.GetTranslatedName(enumDefinition.Name.OriginalName);
 				SetBaseType(enumDefinition);
 
         if(enumDefinition.HasFlags)
         {
           enumDefinition.WithFlagsAttribute();
         }
-
-				foreach (var valueDefinition in enumDefinition.Members)
-				{
-					valueDefinition.Name.TranslatedName = VulkanSpec.GetTranslatedName(valueDefinition.Name.OriginalName);
-				}
 
 				count++;
 			}
@@ -139,7 +131,7 @@ namespace SixtenLabs.Spawn.Vulkan
 
 			foreach (var enumDefinition in Definitions)
 			{
-				var output = new OutputDefinition() { FileName = enumDefinition.Name.Code };
+				var output = new OutputDefinition() { FileName = enumDefinition.Name.Output };
 				output.TargetSolution = TargetSolution;
 				output.AddNamespace(TargetNamespace);
 				output.OutputDirectory = "Enums";

@@ -9,7 +9,7 @@ namespace SixtenLabs.SpawnOfVulkan
         [FieldOffset(0)]
         public IntPtr nativePointer;
         public readonly static InstanceHandle Null = new InstanceHandle(IntPtr.Zero);
-        private InstanceHandle(IntPtr @nativePointer)
+        private InstanceHandle(IntPtr nativePointer)
         {
             this.nativePointer = nativePointer;
         }

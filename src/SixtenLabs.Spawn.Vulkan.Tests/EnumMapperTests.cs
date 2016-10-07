@@ -9,87 +9,87 @@ using SixtenLabs.Spawn.Vulkan.Spec;
 
 namespace SixtenLabs.Spawn.Vulkan.Tests
 {
-	public class EnumMapperTests : IClassFixture<SpecFixture>
-	{
-		public EnumMapperTests(SpecFixture fixture)
-		{
-			Fixture = fixture;
-		}
+  public class EnumMapperTests : IClassFixture<SpecFixture>
+  {
+    public EnumMapperTests(SpecFixture fixture)
+    {
+      Fixture = fixture;
+    }
 
-		private SpecFixture Fixture { get; set; }
+    private SpecFixture Fixture { get; set; }
 
-		private VkRegistry SubjectUnderTest()
-		{
-			return Fixture.VkRegistry;
-		}
-
-		[Fact]
-		public void MapAllEnums()
-		{
-			var vk = SubjectUnderTest();
-
-			var types = vk.Enums;
-
-			types.Should().HaveCount(74);
-
-			var maps = new List<EnumDefinition>();
-
-			foreach (var type in types)
-			{
-				var map = Fixture.SpecMapper.Map<EnumDefinition>(type);
-				maps.Add(map);
-			}
-
-			maps.Should().HaveCount(74);
-		}
+    private VkRegistry SubjectUnderTest()
+    {
+      return Fixture.VkRegistry;
+    }
 
     [Fact]
-		public void MapNonFlagsEnum()
-		{
-			var vk = SubjectUnderTest();
+    public void MapAllEnums()
+    {
+      var vk = SubjectUnderTest();
 
-			var type = vk.Enums.Where(x => x.Name == "VkImageLayout").FirstOrDefault();
+      var types = vk.Enums;
 
-			var map = Fixture.SpecMapper.Map<EnumDefinition>(type);
+      types.Should().HaveCount(77);
 
-			map.Name.OriginalName.Should().Be("VkImageLayout");
-			//map.TranslatedName.Should().Be("ImageLayout");
-			map.HasFlags.Should().BeFalse();
-			map.Members.Should().HaveCount(9);
-		}
+      var maps = new List<EnumDefinition>();
 
-		[Fact]
-		public void MapFlagsEnum()
-		{
-			var vk = SubjectUnderTest();
+      foreach (var type in types)
+      {
+        var map = Fixture.SpecMapper.Map<EnumDefinition>(type);
+        maps.Add(map);
+      }
 
-			var type = vk.Enums.Where(x => x.Name == "VkQueueFlagBits").FirstOrDefault();
+      maps.Should().HaveCount(77);
+    }
 
-			var map = Fixture.SpecMapper.Map<EnumDefinition>(type);
+    [Fact]
+    public void MapNonFlagsEnum()
+    {
+      var vk = SubjectUnderTest();
 
-			map.Name.OriginalName.Should().Be("VkQueueFlagBits");
-			//map.TranslatedName.Should().Be("QueueFlags");
-			map.HasFlags.Should().BeTrue();
-			map.Members.Should().HaveCount(4);
-		}
+      var type = vk.Enums.Where(x => x.Name == "VkImageLayout").FirstOrDefault();
 
-		[Fact]
-		public void MapAccessFlagsEnum()
-		{
-			var vk = SubjectUnderTest();
+      var map = Fixture.SpecMapper.Map<EnumDefinition>(type);
 
-			var type = vk.Enums.Where(x => x.Name == "VkAccessFlagBits").FirstOrDefault();
+      map.Name.Original.Should().Be("VkImageLayout");
+      //map.Translated.Should().Be("ImageLayout");
+      map.HasFlags.Should().BeFalse();
+      map.Members.Should().HaveCount(9);
+    }
 
-			var map = Fixture.SpecMapper.Map<EnumDefinition>(type);
+    [Fact]
+    public void MapFlagsEnum()
+    {
+      var vk = SubjectUnderTest();
 
-			map.Name.OriginalName.Should().Be("VkAccessFlagBits");
-			//map.TranslatedName.Should().Be("QueueFlags");
-			map.HasFlags.Should().BeTrue();
-			map.Members.Should().HaveCount(17);
+      var type = vk.Enums.Where(x => x.Name == "VkQueueFlagBits").FirstOrDefault();
 
-			map.Members[0].Value.Should().Be("0x1");
-			map.Members[1].Value.Should().Be("0x2");
-		}
+      var map = Fixture.SpecMapper.Map<EnumDefinition>(type);
+
+      map.Name.Original.Should().Be("VkQueueFlagBits");
+      //map.Translated.Should().Be("QueueFlags");
+      map.HasFlags.Should().BeTrue();
+      map.Members.Should().HaveCount(4);
+    }
+
+    [Fact]
+    public void MapAccessFlagsEnum()
+    {
+      var vk = SubjectUnderTest();
+
+      var type = vk.Enums.Where(x => x.Name == "VkAccessFlagBits").FirstOrDefault();
+
+      var map = Fixture.SpecMapper.Map<EnumDefinition>(type);
+
+      map.Name.Original.Should().Be("VkAccessFlagBits");
+      //map.Translated.Should().Be("QueueFlags");
+      map.HasFlags.Should().BeTrue();
+      map.Members.Should().HaveCount(17);
+
+      map.Members[0].Value.Should().Be("0x1");
+      map.Members[1].Value.Should().Be("0x2");
+    }
 
     [Fact]
     public void MapCullModeFlagEnum()
@@ -100,7 +100,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
       var map = Fixture.SpecMapper.Map<EnumDefinition>(type);
 
-      map.Name.OriginalName.Should().Be("VkCullModeFlagBits");
+      map.Name.Original.Should().Be("VkCullModeFlagBits");
       map.HasFlags.Should().BeTrue();
       map.Members.Should().HaveCount(4);
 

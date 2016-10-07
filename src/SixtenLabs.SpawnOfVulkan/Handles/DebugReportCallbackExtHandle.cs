@@ -9,7 +9,7 @@ namespace SixtenLabs.SpawnOfVulkan
         [FieldOffset(0)]
         public IntPtr nativePointer;
         public readonly static DebugReportCallbackExtHandle Null = new DebugReportCallbackExtHandle(IntPtr.Zero);
-        private DebugReportCallbackExtHandle(IntPtr @nativePointer)
+        private DebugReportCallbackExtHandle(IntPtr nativePointer)
         {
             this.nativePointer = nativePointer;
         }

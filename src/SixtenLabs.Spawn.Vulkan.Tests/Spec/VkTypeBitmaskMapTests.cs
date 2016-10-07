@@ -15,7 +15,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests.Spec
 		{
 			var subject = Fixture.VkRegistry;
 
-			subject.Bitmasks.Should().HaveCount(71);
+			subject.Bitmasks.Should().HaveCount(73);
 		}
 
 		[Theory]

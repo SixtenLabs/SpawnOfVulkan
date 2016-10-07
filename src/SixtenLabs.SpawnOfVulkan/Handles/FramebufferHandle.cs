@@ -9,7 +9,7 @@ namespace SixtenLabs.SpawnOfVulkan
         [FieldOffset(0)]
         public IntPtr nativePointer;
         public readonly static FramebufferHandle Null = new FramebufferHandle(IntPtr.Zero);
-        private FramebufferHandle(IntPtr @nativePointer)
+        private FramebufferHandle(IntPtr nativePointer)
         {
             this.nativePointer = nativePointer;
         }

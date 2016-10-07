@@ -17,12 +17,12 @@ namespace SixtenLabs.Spawn.Vulkan.Tests.Spec
 		{
 			var subject = Fixture.VkRegistry;
 
-			subject.TypeStructs.Should().HaveCount(132);
+			subject.TypeStructs.Should().HaveCount(139);
 		}
 
 		[Theory]
 		[InlineData("VkOffset2D", false, 2, 0)]
-		[InlineData("VkViewport", false, 6, 7)]
+		[InlineData("VkViewport", false, 6, 0)]
 		[InlineData("VkPhysicalDeviceProperties", true, 9, 0)]
 		public void VkRegistry_TypesStructs_MappedCorrectly(string structName, bool isReturnedOnly, int memberCount, int validityCount)
 		{

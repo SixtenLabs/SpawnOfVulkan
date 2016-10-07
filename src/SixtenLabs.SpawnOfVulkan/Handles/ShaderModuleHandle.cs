@@ -9,7 +9,7 @@ namespace SixtenLabs.SpawnOfVulkan
         [FieldOffset(0)]
         public IntPtr nativePointer;
         public readonly static ShaderModuleHandle Null = new ShaderModuleHandle(IntPtr.Zero);
-        private ShaderModuleHandle(IntPtr @nativePointer)
+        private ShaderModuleHandle(IntPtr nativePointer)
         {
             this.nativePointer = nativePointer;
         }

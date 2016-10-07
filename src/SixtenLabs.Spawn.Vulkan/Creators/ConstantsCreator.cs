@@ -11,6 +11,7 @@ namespace SixtenLabs.Spawn.Vulkan
 		public ConstantsCreator(ICodeGenerator generator, ISpawnSpec<VkRegistry> spawnSpec)
 			: base(generator, spawnSpec, "Constants Creator", 9)
 		{
+      Off = true;
 		}
 
 		private void AddExtensions(ClassDefinition classDefinition)
@@ -32,10 +33,10 @@ namespace SixtenLabs.Spawn.Vulkan
 			var classDefinition = mapper.Map<VkConstant, ClassDefinition>(VulkanSpec.SpecTree.Constants);
 
 			classDefinition.WithModifiers(SyntaxKindDto.PublicKeyword, SyntaxKindDto.StaticKeyword);
-			classDefinition.Name.OriginalName = VulkanSpec.SpecTree.Constants.Name;
+			classDefinition.Name.Original = VulkanSpec.SpecTree.Constants.Name;
 			
 			// This is hardcoded for this single enum exception.
-			classDefinition.Name.TranslatedName = "ApiConstants";
+			classDefinition.Name.Translated = "ApiConstants";
 
 			AddExtensions(classDefinition);
 
@@ -52,12 +53,11 @@ namespace SixtenLabs.Spawn.Vulkan
 			{
 				foreach(var fieldDefinition in classDefinition.FieldDefinitions)
 				{
-					fieldDefinition.Name.TranslatedName = VulkanSpec.GetTranslatedName(fieldDefinition.Name.OriginalName);
 					fieldDefinition.WithModifiers(SyntaxKindDto.PublicKeyword, SyntaxKindDto.ConstKeyword);
 
-					if(fieldDefinition.ReturnType.TranslatedName == null)
+					if(fieldDefinition.ReturnType.Translated == null)
 					{
-						fieldDefinition.ReturnType.TranslatedName = fieldDefinition.ReturnType.OriginalName;
+						fieldDefinition.ReturnType.Translated = fieldDefinition.ReturnType.Original;
 					}
 				}
 
@@ -73,7 +73,7 @@ namespace SixtenLabs.Spawn.Vulkan
 
 			foreach (var classDefintion in Definitions)
 			{
-				var output = new OutputDefinition() { FileName = classDefintion.Name.TranslatedName };
+				var output = new OutputDefinition() { FileName = classDefintion.Name.Translated };
 				output.TargetSolution = TargetSolution;
 				output.AddNamespace(TargetNamespace);
 				output.OutputDirectory = "Constants";
@@ -91,7 +91,7 @@ namespace SixtenLabs.Spawn.Vulkan
 
 				output.AddStandardUsingDirective("System");
 
-				var results = classDefintion.FieldDefinitions.Where(x => x.ReturnType.TranslatedName == null);
+				var results = classDefintion.FieldDefinitions.Where(x => x.ReturnType.Translated == null);
         // One of the literals is null. figure out which one.
 				(Generator as CSharpGenerator).GenerateClass(output, classDefintion);
 				count++;

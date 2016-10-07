@@ -37,8 +37,8 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		//	var maps = GetMapsFromTypes(types);
 
 		//	maps.Should().HaveCount(377);
-		//	var nullTranslatedNameMaps = maps.Where(x => x.TranslatedName == null);
-		//	nullTranslatedNameMaps.Count(x => x.TranslatedName == null).Should().Be(0);
+		//	var nullTranslatedNameMaps = maps.Where(x => x.Translated == null);
+		//	nullTranslatedNameMaps.Count(x => x.Translated == null).Should().Be(0);
 
 		//	var nullSpecNameMaps = maps.Where(x => x.SpecName == null);
 		//	nullSpecNameMaps.Count(x => x.SpecName == null).Should().Be(0);
@@ -93,11 +93,11 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			var types = vk.Bitmasks;
 
-			types.Should().HaveCount(71);
+			types.Should().HaveCount(73);
 
 			var maps = GetMapsFromTypes(types);
 
-			maps.Should().HaveCount(71);
+			maps.Should().HaveCount(73);
 		}
 
 		[Fact]
@@ -121,11 +121,11 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			var types = vk.TypeEnums;
 
-			types.Should().HaveCount(95);
+			types.Should().HaveCount(98);
 
 			var maps = GetMapsFromTypes(types);
 
-			maps.Should().HaveCount(95);
+			maps.Should().HaveCount(98);
 		}
 
 		[Fact]
@@ -149,11 +149,11 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			var types = vk.TypeStructs;
 
-			types.Should().HaveCount(132);
+			types.Should().HaveCount(139);
 
 			var maps = GetMapsFromTypes(types);
 
-			maps.Should().HaveCount(132);
+			maps.Should().HaveCount(139);
 		}
 
 		//[Fact]
@@ -168,7 +168,7 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 		//	var typeDef = maps.Where(x => x.SpecName == "VkDebugMarkerObjectNameInfoEXT").FirstOrDefault();
 
 		//	typeDef.SpecName.Should().Be("VkDebugMarkerObjectNameInfoEXT");
-		//	typeDef.TranslatedName.Should().Be("DebugMarkerObjectNameInfoExt");
+		//	typeDef.Translated.Should().Be("DebugMarkerObjectNameInfoExt");
 		//	typeDef.Children.Should().HaveCount(5);
 
 		//	maps.Should().HaveCount(129);
@@ -222,11 +222,11 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 			var vk = SubjectUnderTest();
 
 			var types = vk.Enums.SelectMany(x => x.Values);
-			types.Should().HaveCount(624);
+			types.Should().HaveCount(632);
 
 			var maps = GetMapsFromTypes(types);
 
-			maps.Should().HaveCount(624);
+			maps.Should().HaveCount(632);
 		}
 
 		[Fact]
@@ -236,11 +236,11 @@ namespace SixtenLabs.Spawn.Vulkan.Tests
 
 			var types = vk.Commands;
 
-			types.Should().HaveCount(174);
+			types.Should().HaveCount(178);
 
 			var maps = GetMapsFromTypes(types);
 
-			maps.Should().HaveCount(174);
+			maps.Should().HaveCount(178);
 		}
 
 		private IList<SpecTypeDefinition> GetMapsFromTypes<T>(IEnumerable<T> types) where T : class

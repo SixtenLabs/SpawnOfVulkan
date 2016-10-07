@@ -6,8 +6,8 @@ namespace SixtenLabs.SpawnOfVulkan
     public enum SparseMemoryBindFlags : int
     {
         /// <summary>
-                /// Operation binds resource metadata to memory
-                /// </summary>
+        /// Operation binds resource metadata to memory
+        /// </summary>
         SparseMemoryBindMetadataBit = 0x1
     }
 }

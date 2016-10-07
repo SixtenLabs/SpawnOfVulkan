@@ -6,8 +6,8 @@ namespace SixtenLabs.SpawnOfVulkan
     public enum QueryControlFlags : int
     {
         /// <summary>
-                /// Require precise results to be collected by the query
-                /// </summary>
+        /// Require precise results to be collected by the query
+        /// </summary>
         QueryControlPreciseBit = 0x1
     }
 }

@@ -9,7 +9,7 @@ namespace SixtenLabs.SpawnOfVulkan
         [FieldOffset(0)]
         public IntPtr nativePointer;
         public readonly static SemaphoreHandle Null = new SemaphoreHandle(IntPtr.Zero);
-        private SemaphoreHandle(IntPtr @nativePointer)
+        private SemaphoreHandle(IntPtr nativePointer)
         {
             this.nativePointer = nativePointer;
         }
